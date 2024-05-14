@@ -1,0 +1,5 @@
+{
+    "networkOptions": [
+        { "value": "Axelar", "label": "Axelar", "image": "/network/axelar.png" }
+    ]
+}
