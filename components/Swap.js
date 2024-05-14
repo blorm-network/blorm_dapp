@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from '../styles/Interface.module.css';
+import styles from '../styles/Swap.module.css';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Select from 'react-select';
 // import { text } from 'stream/consumers';
@@ -64,15 +64,11 @@ const customStyles = {
     }),
 };
 
-const currencyOptions2 = [
-    { value: 'BTC', label: 'BTC' },
-    { value: 'ETH', label: 'ETH' },
-    { value: 'LTC', label: 'LTC' },
-];
-
 let networkOptions = [];
 
-const Interface = () => {
+let tokenOptions = [];
+
+const Swap = () => {
     const [menuPortalTarget, setMenuPortalTarget] = useState(null);
     const [selection1, setSelection1] = useState(null);
     const [selection2, setSelection2] = useState(null);
@@ -86,6 +82,15 @@ const Interface = () => {
                 networkOptions = data.networkOptions;
                 setSelection1(networkOptions[0]);
                 setSelection3(networkOptions[0]);
+            })
+            .catch(error => console.error('Error:', error));
+        
+        fetch('/token/tokenList.json')
+            .then(response => response.json())
+            .then(data => {
+                tokenOptions = data.tokenOptions;
+                setSelection1(tokenOptions[0]);
+                setSelection3(tokenOptions[0]);
             })
             .catch(error => console.error('Error:', error));
 
@@ -130,7 +135,7 @@ const Interface = () => {
                         components={{ MenuList: SelectNetwork }}
                     />
                     <Select
-                        options={currencyOptions2}
+                        options={tokenOptions}
                         className={styles.currency_dropdown}
                         styles={customStyles}
                         menuPortalTarget={menuPortalTarget}
@@ -162,7 +167,7 @@ const Interface = () => {
                         components={{ MenuList: SelectNetwork }}
                     />
                     <Select
-                        options={currencyOptions2}
+                        options={tokenOptions}
                         className={styles.currency_dropdown}
                         styles={customStyles}
                         menuPortalTarget={menuPortalTarget}
@@ -185,4 +190,4 @@ const Interface = () => {
     );
 };
 
-export default Interface;
+export default Swap;

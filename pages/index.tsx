@@ -3,7 +3,7 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import { useState, useEffect } from 'react';
 import React from 'react';
-import Interface from '../components/Interface';
+import Swap from '../components/Swap';
 
 const Home: NextPage = () => {
   return (
@@ -14,9 +14,9 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-
+      
       <div className={styles.interface}>
-        <Interface />
+        <Swap />
       </div>
     </div>
   );

@@ -1,0 +1,5 @@
+{
+    "tokenOptions": [
+        { "value": "ETH", "label": "ETH", "image": "/network/axelar.png" }
+    ]
+}
