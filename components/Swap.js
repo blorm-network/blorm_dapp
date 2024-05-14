@@ -5,6 +5,9 @@ import Select from 'react-select';
 // import { text } from 'stream/consumers';
 import { components } from 'react-select';
 import Image from 'next/image';
+import { IBCClientProvider } from '../context/IBCClientContext';
+import { IBCTransferButton } from '../components/IBCTransferButton';
+import { useAccount } from 'wagmi';
 
 const formatOptionLabel = ({ value, label, image }) => (
     <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -84,7 +87,7 @@ const Swap = () => {
                 setSelection3(networkOptions[0]);
             })
             .catch(error => console.error('Error:', error));
-        
+
         fetch('/token/tokenList.json')
             .then(response => response.json())
             .then(data => {
@@ -113,80 +116,82 @@ const Swap = () => {
 
 
     return (
-        <div className={styles.container}>
-            <div className={styles.section_from}>
-                <span>From:</span>
-                <div>
-                    <button>tx history</button>
-                    <button>settings</button>
+        <IBCClientProvider>
+            <div className={styles.container}>
+                <div className={styles.section_from}>
+                    <span>From:</span>
+                    <div>
+                        <button>tx history</button>
+                        <button>settings</button>
+                    </div>
+                </div>
+                <div className={styles.section_from_currency}>
+                    <div className={styles.currency_dropdown_container}>
+                        <Select
+                            options={networkOptions}
+                            className={styles.currency_dropdown}
+                            styles={customStyles}
+                            menuPortalTarget={menuPortalTarget}
+                            defaultValue={selection1}
+                            onChange={setSelection1}
+                            menuPosition="fixed"
+                            formatOptionLabel={formatOptionLabel}
+                            components={{ MenuList: SelectNetwork }}
+                        />
+                        <Select
+                            options={tokenOptions}
+                            className={styles.currency_dropdown}
+                            styles={customStyles}
+                            menuPortalTarget={menuPortalTarget}
+                            defaultValue={selection2}
+                            onChange={setSelection2}
+                            menuPosition="fixed"
+                            formatOptionLabel={formatOptionLabel}
+                            components={{ MenuList: SelectToken }}
+                        />
+                    </div>
+                    <div className={styles.balance}>
+                        <span>0</span>
+                    </div>
+                </div>
+                <div className={styles.section_to}>
+                    <span>To:</span>
+                </div>
+                <div className={styles.section_to_currency}>
+                    <div className={styles.currency_dropdown_container}>
+                        <Select
+                            options={networkOptions}
+                            className={styles.currency_dropdown}
+                            styles={customStyles}
+                            menuPortalTarget={menuPortalTarget}
+                            defaultValue={selection3}
+                            onChange={setSelection3}
+                            menuPosition="fixed"
+                            formatOptionLabel={formatOptionLabel}
+                            components={{ MenuList: SelectNetwork }}
+                        />
+                        <Select
+                            options={tokenOptions}
+                            className={styles.currency_dropdown}
+                            styles={customStyles}
+                            menuPortalTarget={menuPortalTarget}
+                            defaultValue={selection4}
+                            onChange={setSelection4}
+                            menuPosition="fixed"
+                            formatOptionLabel={formatOptionLabel}
+                            components={{ MenuList: SelectToken }}
+                        />
+                    </div>
+                    <div className={styles.balance}>
+                        <span>0</span>
+                    </div>
+                </div>
+                <div className={styles.section_trade_button}>
+                    <ConnectButton />
+                    <IBCTransferButton/>
                 </div>
             </div>
-            <div className={styles.section_from_currency}>
-                <div className={styles.currency_dropdown_container}>
-                    <Select
-                        options={networkOptions}
-                        className={styles.currency_dropdown}
-                        styles={customStyles}
-                        menuPortalTarget={menuPortalTarget}
-                        defaultValue={selection1}
-                        onChange={setSelection1}
-                        menuPosition="fixed"
-                        formatOptionLabel={formatOptionLabel}
-                        components={{ MenuList: SelectNetwork }}
-                    />
-                    <Select
-                        options={tokenOptions}
-                        className={styles.currency_dropdown}
-                        styles={customStyles}
-                        menuPortalTarget={menuPortalTarget}
-                        defaultValue={selection2}
-                        onChange={setSelection2}
-                        menuPosition="fixed"
-                        formatOptionLabel={formatOptionLabel}
-                        components={{ MenuList: SelectToken }}
-                    />
-                </div>
-                <div className={styles.balance}>
-                    <span>0</span>
-                </div>
-            </div>
-            <div className={styles.section_to}>
-                <span>To:</span>
-            </div>
-            <div className={styles.section_to_currency}>
-                <div className={styles.currency_dropdown_container}>
-                    <Select
-                        options={networkOptions}
-                        className={styles.currency_dropdown}
-                        styles={customStyles}
-                        menuPortalTarget={menuPortalTarget}
-                        defaultValue={selection3}
-                        onChange={setSelection3}
-                        menuPosition="fixed"
-                        formatOptionLabel={formatOptionLabel}
-                        components={{ MenuList: SelectNetwork }}
-                    />
-                    <Select
-                        options={tokenOptions}
-                        className={styles.currency_dropdown}
-                        styles={customStyles}
-                        menuPortalTarget={menuPortalTarget}
-                        defaultValue={selection4}
-                        onChange={setSelection4}
-                        menuPosition="fixed"
-                        formatOptionLabel={formatOptionLabel}
-                        components={{ MenuList: SelectToken }}
-                    />
-                </div>
-                <div className={styles.balance}>
-                    <span>0</span>
-                </div>
-            </div>
-            <div className={styles.section_trade_button}>
-                <ConnectButton />
-            </div>
-
-        </div>
+        </IBCClientProvider>
     );
 };
 

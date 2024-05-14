@@ -9,14 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@cosmjs/launchpad": "^0.27.1",
+    "@cosmjs/stargate": "^0.32.3",
     "@rainbow-me/rainbowkit": "^2.0.7",
     "@tanstack/react-query": "^5.28.4",
+    "ethers": "^6.12.1",
     "next": "^14.2.3",
+    "rainbowkit": "^0.0.1",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
     "react-select": "^5.8.0",
     "viem": "^2.8.12",
-    "wagmi": "^2.5.11"
+    "wagmi": "^2.8.7"
   },
   "devDependencies": {
     "@types/node": "^18.19.3",

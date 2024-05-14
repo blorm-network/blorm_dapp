@@ -30,6 +30,24 @@ const config = getDefaultConfig({
   ssr: true,
 });
 
+const baseMainnet = {
+  id: 8453,
+  name: 'Base Mainnet',
+  network: 'base-mainnet',
+  nativeCurrency: {
+    name: 'Ethereum',
+    symbol: 'ETH',
+    decimals: 18,
+  },
+  rpcUrls: {
+    default: 'https://mainnet.base.org',
+  },
+  blockExplorers: {
+    default: { name: 'Basescan', url: 'https://basescan.org' },
+  },
+  testnet: false,
+};
+
 const client = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
