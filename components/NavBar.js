@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styles from '../styles/NavBar.module.css';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 export default function NavBar() {
 return (
@@ -12,6 +13,7 @@ return (
             <Link href="/">Home</Link>
             <Link href="/about">About</Link>
             <Link href="/contact">Contact</Link>
+            <ConnectButton />
         </div>
     </nav>
 );

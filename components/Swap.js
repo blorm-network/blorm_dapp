@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from '../styles/Swap.module.css';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Select from 'react-select';
-// import { text } from 'stream/consumers';
 import { components } from 'react-select';
 import Image from 'next/image';
-import { IBCClientProvider } from '../context/IBCClientContext';
-import { IBCTransferButton } from '../components/IBCTransferButton';
 import { useAccount } from 'wagmi';
+import HopProtocol from '../lib/hopprotocol';
+import { chains as chainOptions } from '../lib/chains';
+import { tokens as tokenOptions } from '../lib/tokens';
 
 const formatOptionLabel = ({ value, label, image }) => (
     <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -67,42 +67,56 @@ const customStyles = {
     }),
 };
 
-let networkOptions = [];
 
-let tokenOptions = [];
 
 const Swap = () => {
-    const [menuPortalTarget, setMenuPortalTarget] = useState(null);
-    const [selection1, setSelection1] = useState(null);
-    const [selection2, setSelection2] = useState(null);
-    const [selection3, setSelection3] = useState(null);
-    const [selection4, setSelection4] = useState(null);
+    const chainOptionsArray = chainOptions.map(chain => ({
+        value: chain.id,
+        label: chain.name,
+        image: chain.image,
+        rpcUrl: chain.rpcUrl,
+        denom: chain.denom,
+        symbol: chain.symbol,
+        decimals: chain.decimals
+    }));
+
+    const tokenOptionsArray = Object.values(tokenOptions).map(token => ({
+        value: token.symbol,
+        image: token.image,
+        chainId: token.chainId,
+        decimals: token.decimals
+    }));
 
     useEffect(() => {
-        fetch('/network/networkList.json')
-            .then(response => response.json())
-            .then(data => {
-                networkOptions = data.networkOptions;
-                setSelection1(networkOptions[0]);
-                setSelection3(networkOptions[0]);
-            })
-            .catch(error => console.error('Error:', error));
-
-        fetch('/token/tokenList.json')
-            .then(response => response.json())
-            .then(data => {
-                tokenOptions = data.tokenOptions;
-                setSelection1(tokenOptions[0]);
-                setSelection3(tokenOptions[0]);
-            })
-            .catch(error => console.error('Error:', error));
-
-        setMenuPortalTarget(document.body);
+        setChain1(chainOptions[0]);
+        setChain2(chainOptions[0]);
     }, []);
 
-    const SelectNetwork = (props) => (
+    useEffect(() => {
+        setToken1(Object.values(tokenOptions)[0]);
+        setToken2(Object.values(tokenOptions)[0]);
+    }, []);
+
+    const [menuPortalTarget, setMenuPortalTarget] = useState(null);
+    const [chain1, setChain1] = useState(chainOptionsArray[0]);
+    const [token1, setToken1] = useState(tokenOptionsArray[0]);
+    const [chain2, setChain2] = useState(chainOptionsArray[1]);
+    const [token2, setToken2] = useState(tokenOptionsArray[1]);
+    const [token1Balance, setToken1Balance] = useState('0');
+    const [token2Balance, setToken2Balance] = useState('0');
+
+    const handleToken1BalanceChange = (event) => {
+        setToken1Balance(event.target.value);
+    };
+
+    const handleToken2BalanceChange = (event) => {
+        setToken2Balance(event.target.value);
+    };
+
+
+    const SelectChain = (props) => (
         <components.MenuList {...props}>
-            <div style={{ textAlign: 'center', width: '100%', padding: '10px', fontWeight: 'bold' }}>Select Network</div>
+            <div style={{ textAlign: 'center', width: '100%', padding: '10px', fontWeight: 'bold' }}>Select Chain</div>
             {props.children}
         </components.MenuList>
     );
@@ -113,85 +127,107 @@ const Swap = () => {
             {props.children}
         </components.MenuList>
     );
+    const [recipient, setRecipient] = useState('0x0c778e66efa266b5011c552C4A7BDA63Ad24C37B');
 
+    const handleRecipientUpdate = (event) => {
+        setRecipient(event.target.value);
+    }
+
+    const hopProtocolRef = useRef();
+
+    const handleSwap = () => {
+        // log the state variables
+        console.log('chain1:', chain1);
+        console.log('chain2:', chain2);
+        console.log('token1:', token1);
+        console.log('token1Balance:', token1Balance);
+
+        // check if chain1 and chain2 are set to valid chain names
+        if (chain1.value && chain2.value && hopProtocolRef.current) {
+            hopProtocolRef.current.sendTransaction();
+        } else {
+            console.error('Please select valid chains before swapping.');
+        }
+    };
 
     return (
-        <IBCClientProvider>
-            <div className={styles.container}>
-                <div className={styles.section_from}>
-                    <span>From:</span>
-                    <div>
-                        <button>tx history</button>
-                        <button>settings</button>
-                    </div>
-                </div>
-                <div className={styles.section_from_currency}>
-                    <div className={styles.currency_dropdown_container}>
-                        <Select
-                            options={networkOptions}
-                            className={styles.currency_dropdown}
-                            styles={customStyles}
-                            menuPortalTarget={menuPortalTarget}
-                            defaultValue={selection1}
-                            onChange={setSelection1}
-                            menuPosition="fixed"
-                            formatOptionLabel={formatOptionLabel}
-                            components={{ MenuList: SelectNetwork }}
-                        />
-                        <Select
-                            options={tokenOptions}
-                            className={styles.currency_dropdown}
-                            styles={customStyles}
-                            menuPortalTarget={menuPortalTarget}
-                            defaultValue={selection2}
-                            onChange={setSelection2}
-                            menuPosition="fixed"
-                            formatOptionLabel={formatOptionLabel}
-                            components={{ MenuList: SelectToken }}
-                        />
-                    </div>
-                    <div className={styles.balance}>
-                        <span>0</span>
-                    </div>
-                </div>
-                <div className={styles.section_to}>
-                    <span>To:</span>
-                </div>
-                <div className={styles.section_to_currency}>
-                    <div className={styles.currency_dropdown_container}>
-                        <Select
-                            options={networkOptions}
-                            className={styles.currency_dropdown}
-                            styles={customStyles}
-                            menuPortalTarget={menuPortalTarget}
-                            defaultValue={selection3}
-                            onChange={setSelection3}
-                            menuPosition="fixed"
-                            formatOptionLabel={formatOptionLabel}
-                            components={{ MenuList: SelectNetwork }}
-                        />
-                        <Select
-                            options={tokenOptions}
-                            className={styles.currency_dropdown}
-                            styles={customStyles}
-                            menuPortalTarget={menuPortalTarget}
-                            defaultValue={selection4}
-                            onChange={setSelection4}
-                            menuPosition="fixed"
-                            formatOptionLabel={formatOptionLabel}
-                            components={{ MenuList: SelectToken }}
-                        />
-                    </div>
-                    <div className={styles.balance}>
-                        <span>0</span>
-                    </div>
-                </div>
-                <div className={styles.section_trade_button}>
-                    <ConnectButton />
-                    <IBCTransferButton/>
+        <div className={styles.container}>
+            <div className={styles.section_from}>
+                <span>From:</span>
+                <div>
+                    <button>tx history</button>
+                    <button>settings</button>
                 </div>
             </div>
-        </IBCClientProvider>
+            <div className={styles.section_from_currency}>
+                <div className={styles.currency_dropdown_container}>
+                    <Select
+                        options={chainOptionsArray.map(chain => ({ value: chain.value }))}
+                        className={styles.currency_dropdown}
+                        styles={customStyles}
+                        menuPortalTarget={menuPortalTarget}
+                        defaultValue={chain1.value}
+                        onChange={setChain1}
+                        menuPosition="fixed"
+                        formatOptionLabel={formatOptionLabel}
+                        components={{ MenuList: SelectChain }}
+                    />
+                    <Select
+                        options={tokenOptionsArray.map(token => ({ value: token.value }))}
+                        className={styles.currency_dropdown}
+                        styles={customStyles}
+                        menuPortalTarget={menuPortalTarget}
+                        defaultValue={token1.value}
+                        onChange={setToken1}
+                        menuPosition="fixed"
+                        formatOptionLabel={formatOptionLabel}
+                        components={{ MenuList: SelectToken }}
+                    />
+                </div>
+                <div className={styles.balance}>
+                    <textarea value={token1Balance} onChange={handleToken1BalanceChange} />
+                </div>
+            </div>
+            <div className={styles.section_to}>
+                <span>To:</span>
+            </div>
+            <div className={styles.section_to_currency}>
+                <div className={styles.currency_dropdown_container}>
+                    <Select
+                        options={chainOptionsArray.map(chain => ({ value: chain.value }))}
+                        className={styles.currency_dropdown}
+                        styles={customStyles}
+                        menuPortalTarget={menuPortalTarget}
+                        defaultValue={chain2.value}
+                        onChange={setChain2}
+                        menuPosition="fixed"
+                        formatOptionLabel={formatOptionLabel}
+                        components={{ MenuList: SelectChain }}
+                    />
+                    <Select
+                        options={tokenOptionsArray.map(token => ({ value: token.value }))}
+                        className={styles.currency_dropdown}
+                        styles={customStyles}
+                        menuPortalTarget={menuPortalTarget}
+                        defaultValue={token2.value}
+                        onChange={setToken2}
+                        menuPosition="fixed"
+                        formatOptionLabel={formatOptionLabel}
+                        components={{ MenuList: SelectToken }}
+                    />
+                </div>
+                <div className={styles.balance}>
+                    <textarea value={token2Balance} onChange={handleToken2BalanceChange} />
+                </div>
+            </div>
+            <div className={styles.section_recipient}>
+                <textarea placeholder="Recipient" onChange={handleRecipientUpdate}/>
+            </div>
+            <div className={styles.section_trade_button}>
+                <button onClick={handleSwap}>Swap</button>
+                <HopProtocol ref={hopProtocolRef} fromChain={chain1.value} toChain={chain2.value} token={token1.value} amount={token1Balance} recipient={recipient}/>
+            </div>
+        </div>
     );
 };
 
