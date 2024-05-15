@@ -1,0 +1,3183 @@
+[
+    {
+        "chainName": "Polygon-testnet",
+        "chainID": "80001",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": false
+        },
+        "supportsMemo": false,
+        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/polygonmumbai/info/logo.png",
+        "bech32Prefix": "",
+        "feeAssets": [],
+        "chainType": "evm",
+        "isTestnet": true
+    },
+    {
+        "chainName": "ununifi",
+        "chainID": "ununifi-beta-v1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/cosmos/chain-registry/master/ununifi/images/ununifi.png",
+        "bech32Prefix": "ununifi",
+        "feeAssets": [],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "carbon",
+        "chainID": "carbon-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/carbon/chain.png",
+        "bech32Prefix": "swth",
+        "feeAssets": [
+            {
+                "denom": "ibc/2B58B8C147E8718EECCB3713271DF46DEE8A3A00A27242628604E31C2F370EF5",
+                "gasPrice": {
+                    "low": "0.001666666667",
+                    "average": "0.001666666667",
+                    "high": "0.001666666667"
+                }
+            },
+            {
+                "denom": "busd.1.6.754a80",
+                "gasPrice": {
+                    "low": "3333333333.33334",
+                    "average": "3333333333.33334",
+                    "high": "3333333333.33334"
+                }
+            },
+            {
+                "denom": "ibc/92E974290AF9E2BC3AEEEC35305C8FD76AC5A22A74CF8D91270FDF5A1C41E861",
+                "gasPrice": {
+                    "low": "6666666666.66667",
+                    "average": "6666666666.66667",
+                    "high": "6666666666.66667"
+                }
+            },
+            {
+                "denom": "ibc/A4DB47A9D3CF9A068D454513891B526702455D3EF08FB9EB558C561F9DC2B701",
+                "gasPrice": {
+                    "low": "0.000333333334",
+                    "average": "0.000333333334",
+                    "high": "0.000333333334"
+                }
+            },
+            {
+                "denom": "ibc/35E771B8682D828173F4B795F6C307780F96DC64D6F914FAE4CC9B4666F66364",
+                "gasPrice": {
+                    "low": "10000000000",
+                    "average": "10000000000",
+                    "high": "10000000000"
+                }
+            },
+            {
+                "denom": "ibc/B7864B03E1B9FD4F049243E92ABD691586F682137037A9F3FCA5222815620B3C",
+                "gasPrice": {
+                    "low": "0.000333333334",
+                    "average": "0.000333333334",
+                    "high": "0.000333333334"
+                }
+            },
+            {
+                "denom": "cglp.1.19.1698d3",
+                "gasPrice": {
+                    "low": "3333333333.33334",
+                    "average": "3333333333.33334",
+                    "high": "3333333333.33334"
+                }
+            },
+            {
+                "denom": "ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518",
+                "gasPrice": {
+                    "low": "0.005",
+                    "average": "0.005",
+                    "high": "0.005"
+                }
+            },
+            {
+                "denom": "cgt/1",
+                "gasPrice": {
+                    "low": "3333333333.33334",
+                    "average": "3333333333.33334",
+                    "high": "3333333333.33334"
+                }
+            },
+            {
+                "denom": "ibc/75249A18DEFBEFE55F83B1C70CAD234DF164F174C6BC51682EE92C2C81C18C93",
+                "gasPrice": {
+                    "low": "0.005",
+                    "average": "0.005",
+                    "high": "0.005"
+                }
+            },
+            {
+                "denom": "ibc/4E06CF24FEBFB3F5AF645377DCC0B70AA6183BAF6B918B8B6243FCDEB7D38118",
+                "gasPrice": {
+                    "low": "0.02",
+                    "average": "0.02",
+                    "high": "0.02"
+                }
+            },
+            {
+                "denom": "eth.1.19.c3b805",
+                "gasPrice": {
+                    "low": "3333333.33333334",
+                    "average": "3333333.33333334",
+                    "high": "3333333.33333334"
+                }
+            },
+            {
+                "denom": "bnb.1.6.773edb",
+                "gasPrice": {
+                    "low": "33333333.3333334",
+                    "average": "33333333.3333334",
+                    "high": "33333333.3333334"
+                }
+            },
+            {
+                "denom": "zil.1.18.1a4a06",
+                "gasPrice": {
+                    "low": "200000",
+                    "average": "200000",
+                    "high": "200000"
+                }
+            },
+            {
+                "denom": "usc",
+                "gasPrice": {
+                    "low": "0.003333333334",
+                    "average": "0.003333333334",
+                    "high": "0.003333333334"
+                }
+            },
+            {
+                "denom": "usdc.1.2.343151",
+                "gasPrice": {
+                    "low": "0.00333333333333334",
+                    "average": "0.00333333333333334",
+                    "high": "0.00333333333333334"
+                }
+            },
+            {
+                "denom": "eth.1.2.942d87",
+                "gasPrice": {
+                    "low": "3333333.33333334",
+                    "average": "3333333.33333334",
+                    "high": "3333333.33333334"
+                }
+            },
+            {
+                "denom": "ibc/662914D0C1CEBCB070C68F061D035E8B10A07C79AB286E7342C85F3BE74612C5",
+                "gasPrice": {
+                    "low": "0.005",
+                    "average": "0.005",
+                    "high": "0.005"
+                }
+            },
+            {
+                "denom": "usdc.1.6.53ff75",
+                "gasPrice": {
+                    "low": "3333333333.33334",
+                    "average": "3333333333.33334",
+                    "high": "3333333333.33334"
+                }
+            },
+            {
+                "denom": "ibc/07FA7831E1920D0C87C9388F86B0108677F6ED0C9DE7E4063F05ED675192405C",
+                "gasPrice": {
+                    "low": "0.116666666667",
+                    "average": "0.116666666667",
+                    "high": "0.116666666667"
+                }
+            },
+            {
+                "denom": "swth",
+                "gasPrice": {
+                    "low": "100",
+                    "average": "100",
+                    "high": "100"
+                }
+            },
+            {
+                "denom": "ibc/3552CECB7BCE1891DB6070D37EC6E954C972B1400141308FCD85FD148BD06DE5",
+                "gasPrice": {
+                    "low": "0.010666666667",
+                    "average": "0.010666666667",
+                    "high": "0.010666666667"
+                }
+            },
+            {
+                "denom": "bneo.1.14.e2e5f6",
+                "gasPrice": {
+                    "low": "0.05",
+                    "average": "0.05",
+                    "high": "0.05"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "assetmantle",
+        "chainID": "mantle-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/mantle/chain.png",
+        "bech32Prefix": "mantle",
+        "feeAssets": [
+            {
+                "denom": "umntl",
+                "gasPrice": {
+                    "low": "0.01",
+                    "average": "0.025",
+                    "high": "0.04"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "kujira",
+        "chainID": "kaiyo-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/kaiyo/chain.png",
+        "bech32Prefix": "kujira",
+        "feeAssets": [
+            {
+                "denom": "ibc/EFF323CC632EC4F747C61BCE238A758EFDB7699C3226565F7C20DA06509D59A5",
+                "gasPrice": null
+            },
+            {
+                "denom": "ukuji",
+                "gasPrice": null
+            },
+            {
+                "denom": "ibc/47BD209179859CDE4A2806763D7189B6E6FE13A17880FE2B42DE1E6C1E329E23",
+                "gasPrice": null
+            },
+            {
+                "denom": "ibc/1B38805B1C75352B28169284F96DF56BDEBD9E8FAC005BDCC8CF0378C82AA8E7",
+                "gasPrice": null
+            },
+            {
+                "denom": "ibc/A358D7F19237777AF6D8AD0E0F53268F8B18AE8A53ED318095C14D6D7F3B2DB5",
+                "gasPrice": null
+            },
+            {
+                "denom": "ibc/4F393C3FCA4190C0A6756CE7F6D897D5D1BE57D6CCB80D0BC87393566A7B6602",
+                "gasPrice": null
+            },
+            {
+                "denom": "ibc/F3AA7EF362EC5E791FE78A0F4CCC69FEE1F9A7485EB1A8CAB3F6601C00522F10",
+                "gasPrice": null
+            },
+            {
+                "denom": "ibc/295548A78785A1007F232DE286149A6FF512F180AF5657780FC89C009E2C348F",
+                "gasPrice": null
+            },
+            {
+                "denom": "ibc/004EBF085BBED1029326D56BE8A2E67C08CECE670A94AC1947DF413EF5130EB2",
+                "gasPrice": null
+            },
+            {
+                "denom": "factory/kujira1643jxg8wasy5cfcn7xm8rd742yeazcksqlg4d7/umnta",
+                "gasPrice": null
+            },
+            {
+                "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2",
+                "gasPrice": null
+            },
+            {
+                "denom": "factory/kujira1qk00h5atutpsv900x202pxx42npjr9thg58dnqpa72f2p7m2luase444a7/uusk",
+                "gasPrice": null
+            },
+            {
+                "denom": "ibc/3607EB5B5E64DD1C0E12E07F077FF470D5BC4706AFCBC98FE1BA960E5AE4CE07",
+                "gasPrice": null
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "Base",
+        "chainID": "8453",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": false
+        },
+        "supportsMemo": false,
+        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/base/info/logo.png",
+        "bech32Prefix": "",
+        "feeAssets": [],
+        "chainType": "evm",
+        "isTestnet": false
+    },
+    {
+        "chainName": "axelar-testnet",
+        "chainID": "axelar-testnet-lisbon-3",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/axelar-chain-logo.png",
+        "bech32Prefix": "axelar",
+        "feeAssets": [
+            {
+                "denom": "uaxl",
+                "gasPrice": {
+                    "low": "0.007",
+                    "average": "0.007",
+                    "high": "0.01"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": true
+    },
+    {
+        "chainName": "Linea",
+        "chainID": "59144",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": false
+        },
+        "supportsMemo": false,
+        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/linea/info/logo.png",
+        "bech32Prefix": "",
+        "feeAssets": [],
+        "chainType": "evm",
+        "isTestnet": false
+    },
+    {
+        "chainName": "lum",
+        "chainID": "lum-network-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/lum-network/chain.png",
+        "bech32Prefix": "lum",
+        "feeAssets": [
+            {
+                "denom": "ulum",
+                "gasPrice": {
+                    "low": "0.01",
+                    "average": "0.025",
+                    "high": "0.04"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "evmos",
+        "chainID": "evmos_9001-2",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/evmos_9001/chain.png",
+        "bech32Prefix": "evmos",
+        "feeAssets": [
+            {
+                "denom": "aevmos",
+                "gasPrice": {
+                    "low": "80000000000",
+                    "average": "80000000000",
+                    "high": "80000000000"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "oraichain",
+        "chainID": "Oraichain",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/Oraichain/chain.png",
+        "bech32Prefix": "orai",
+        "feeAssets": [
+            {
+                "denom": "orai",
+                "gasPrice": {
+                    "low": "0.003",
+                    "average": "0.005",
+                    "high": "0.007"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "Avalanche",
+        "chainID": "43114",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": false
+        },
+        "supportsMemo": false,
+        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/avalanchec/info/logo.png",
+        "bech32Prefix": "",
+        "feeAssets": [],
+        "chainType": "evm",
+        "isTestnet": false
+    },
+    {
+        "chainName": "stargaze-testnet",
+        "chainID": "elgafar-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/stargaze/chain.png",
+        "bech32Prefix": "stars",
+        "feeAssets": [
+            {
+                "denom": "ustars",
+                "gasPrice": null
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": true
+    },
+    {
+        "chainName": "secret",
+        "chainID": "secret-4",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/secret/chain.png",
+        "bech32Prefix": "secret",
+        "feeAssets": [
+            {
+                "denom": "uscrt",
+                "gasPrice": {
+                    "low": "0.05",
+                    "average": "0.1",
+                    "high": "0.25"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "migaloo",
+        "chainID": "migaloo-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/migaloo/chain.png",
+        "bech32Prefix": "migaloo",
+        "feeAssets": [
+            {
+                "denom": "uwhale",
+                "gasPrice": {
+                    "low": "1",
+                    "average": "1.2",
+                    "high": "1.4"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "stride",
+        "chainID": "stride-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/stride/chain.png",
+        "bech32Prefix": "stride",
+        "feeAssets": [
+            {
+                "denom": "ibc/4B322204B4F59D770680FE4D7A565DDC3F37BFF035474B717476C66A4F83DD72",
+                "gasPrice": {
+                    "low": "20000000000",
+                    "average": "20000000000",
+                    "high": "20000000000"
+                }
+            },
+            {
+                "denom": "stutia",
+                "gasPrice": {
+                    "low": "0.01",
+                    "average": "0.01",
+                    "high": "0.01"
+                }
+            },
+            {
+                "denom": "staevmos",
+                "gasPrice": {
+                    "low": "20000000000",
+                    "average": "20000000000",
+                    "high": "20000000000"
+                }
+            },
+            {
+                "denom": "stuatom",
+                "gasPrice": {
+                    "low": "0.0001",
+                    "average": "0.001",
+                    "high": "0.01"
+                }
+            },
+            {
+                "denom": "ibc/E1C22332C083574F3418481359733BA8887D171E76C80AD9237422AEABB66018",
+                "gasPrice": {
+                    "low": "15000000000",
+                    "average": "15000000000",
+                    "high": "50000000000"
+                }
+            },
+            {
+                "denom": "ibc/520D9C4509027DE66C737A1D6A6021915A3071E30DBA8F758B46532B060D7AA5",
+                "gasPrice": {
+                    "low": "0.01",
+                    "average": "0.01",
+                    "high": "0.01"
+                }
+            },
+            {
+                "denom": "ibc/A7454562FF29FE068F42F9DE4805ABEF54F599D1720B345D6518D9B5C64EA6D2",
+                "gasPrice": {
+                    "low": "500000000",
+                    "average": "500000000",
+                    "high": "500000000"
+                }
+            },
+            {
+                "denom": "stadydx",
+                "gasPrice": {
+                    "low": "15000000000",
+                    "average": "15000000000",
+                    "high": "15000000000"
+                }
+            },
+            {
+                "denom": "stinj",
+                "gasPrice": {
+                    "low": "500000000",
+                    "average": "500000000",
+                    "high": "500000000"
+                }
+            },
+            {
+                "denom": "ibc/D24B4564BCD51D3D02D9987D92571EAC5915676A9BD6D9B0C1D0254CB8A5EA34",
+                "gasPrice": {
+                    "low": "0.001",
+                    "average": "0.01",
+                    "high": "0.1"
+                }
+            },
+            {
+                "denom": "stusaga",
+                "gasPrice": {
+                    "low": "0.01",
+                    "average": "0.01",
+                    "high": "0.01"
+                }
+            },
+            {
+                "denom": "ibc/561C70B20188A047BFDE6F9946BDDC5D8AC172B9BE04FF868DFABF819E5A9CCE",
+                "gasPrice": {
+                    "low": "15000000000",
+                    "average": "15000000000",
+                    "high": "15000000000"
+                }
+            },
+            {
+                "denom": "stuosmo",
+                "gasPrice": {
+                    "low": "0.001",
+                    "average": "0.01",
+                    "high": "0.1"
+                }
+            },
+            {
+                "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2",
+                "gasPrice": {
+                    "low": "0.0001",
+                    "average": "0.001",
+                    "high": "0.01"
+                }
+            },
+            {
+                "denom": "ibc/BF3B4F53F3694B66E13C23107C84B6485BD2B96296BB7EC680EA77BBA75B4801",
+                "gasPrice": {
+                    "low": "0.01",
+                    "average": "0.01",
+                    "high": "0.01"
+                }
+            },
+            {
+                "denom": "ustrd",
+                "gasPrice": {
+                    "low": "0.0005",
+                    "average": "0.005",
+                    "high": "0.05"
+                }
+            },
+            {
+                "denom": "stadym",
+                "gasPrice": {
+                    "low": "15000000000",
+                    "average": "15000000000",
+                    "high": "50000000000"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "aura",
+        "chainID": "xstaxy-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/xstaxy/chain.png",
+        "bech32Prefix": "aura",
+        "feeAssets": [
+            {
+                "denom": "uaura",
+                "gasPrice": {
+                    "low": "0.001",
+                    "average": "0.0025",
+                    "high": "0.004"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "sifchain",
+        "chainID": "sifchain-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/sifchain/chain.png",
+        "bech32Prefix": "sif",
+        "feeAssets": [
+            {
+                "denom": "rowan",
+                "gasPrice": {
+                    "low": "1000000000000",
+                    "average": "1500000000000",
+                    "high": "2000000000000"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "cheqd",
+        "chainID": "cheqd-mainnet-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/cheqd-mainnet/chain.png",
+        "bech32Prefix": "cheqd",
+        "feeAssets": [
+            {
+                "denom": "ncheq",
+                "gasPrice": {
+                    "low": "25",
+                    "average": "50",
+                    "high": "100"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "Blast",
+        "chainID": "81457",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": false
+        },
+        "supportsMemo": false,
+        "logoURI": "https://avatars.githubusercontent.com/u/146996960",
+        "bech32Prefix": "",
+        "feeAssets": [],
+        "chainType": "evm",
+        "isTestnet": false
+    },
+    {
+        "chainName": "jackal",
+        "chainID": "jackal-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/jackal/chain.png",
+        "bech32Prefix": "jkl",
+        "feeAssets": [
+            {
+                "denom": "ujkl",
+                "gasPrice": {
+                    "low": "0.002",
+                    "average": "0.002",
+                    "high": "0.02"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "doravota",
+        "chainID": "vota-ash",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "bech32Prefix": "dora",
+        "feeAssets": [],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "quasar",
+        "chainID": "quasar-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/quasar/chain.png",
+        "bech32Prefix": "quasar",
+        "feeAssets": [
+            {
+                "denom": "ibc/FA7775734CC73176B7425910DE001A1D2AD9B6D9E93129A5D0750EAD13E4E63A",
+                "gasPrice": {
+                    "low": "0.01",
+                    "average": "0.01",
+                    "high": "0.02"
+                }
+            },
+            {
+                "denom": "uqsr",
+                "gasPrice": {
+                    "low": "0.1",
+                    "average": "0.1",
+                    "high": "0.2"
+                }
+            },
+            {
+                "denom": "ibc/0471F1C4E7AFD3F07702BEF6DC365268D64570F7C1FDC98EA6098DD6DE59817B",
+                "gasPrice": {
+                    "low": "0.01",
+                    "average": "0.01",
+                    "high": "0.02"
+                }
+            },
+            {
+                "denom": "ibc/FA0006F056DB6719B8C16C551FC392B62F5729978FC0B125AC9A432DBB2AA1A5",
+                "gasPrice": {
+                    "low": "0.01",
+                    "average": "0.01",
+                    "high": "0.02"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "stride-testnet",
+        "chainID": "stride-internal-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/stride-internal/chain.png",
+        "bech32Prefix": "stride",
+        "feeAssets": [
+            {
+                "denom": "ibc/1A7653323C1A9E267FF7BEBF40B3EEA8065E8F069F47F2493ABC3E0B621BF793",
+                "gasPrice": {
+                    "low": "0.01",
+                    "average": "0.01",
+                    "high": "0.01"
+                }
+            },
+            {
+                "denom": "ustrd",
+                "gasPrice": {
+                    "low": "0.0005",
+                    "average": "0.005",
+                    "high": "0.05"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": true
+    },
+    {
+        "chainName": "comdex",
+        "chainID": "comdex-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": false
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/comdex/chain.png",
+        "bech32Prefix": "comdex",
+        "feeAssets": [
+            {
+                "denom": "ucmdx",
+                "gasPrice": {
+                    "low": "2",
+                    "average": "3",
+                    "high": "4"
+                }
+            },
+            {
+                "denom": "ibc/D031367F58DFD5EED54A49ADCB4EFB44AD9ECCAE383708BFDCCACF3CF463B77C",
+                "gasPrice": {
+                    "low": "0.0002",
+                    "average": "0.0005",
+                    "high": "0.0008"
+                }
+            },
+            {
+                "denom": "ibc/961FA3E54F5DCCA639F37A7C45F7BBE41815579EF1513B5AFBEFCFEB8F256352",
+                "gasPrice": {
+                    "low": "0.0001",
+                    "average": "0.001",
+                    "high": "0.01"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "nolus",
+        "chainID": "pirin-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/pirin/nolus.png",
+        "bech32Prefix": "nolus",
+        "feeAssets": [
+            {
+                "denom": "unls",
+                "gasPrice": {
+                    "low": "0.01",
+                    "average": "0.025",
+                    "high": "0.05"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "fetchhub",
+        "chainID": "fetchhub-4",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": false,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/fetchhub/fet.png",
+        "bech32Prefix": "fetch",
+        "feeAssets": [
+            {
+                "denom": "afet",
+                "gasPrice": {
+                    "low": "0.025",
+                    "average": "0.025",
+                    "high": "0.035"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "umee",
+        "chainID": "umee-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/umee/chain.png",
+        "bech32Prefix": "umee",
+        "feeAssets": [
+            {
+                "denom": "uumee",
+                "gasPrice": {
+                    "low": "0.06",
+                    "average": "0.1",
+                    "high": "0.14"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "minimove",
+        "chainID": "minimove-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/initia-labs/initia-registry/main/testnets/minimove/images/minimove.png",
+        "bech32Prefix": "init",
+        "feeAssets": [],
+        "chainType": "cosmos",
+        "isTestnet": true
+    },
+    {
+        "chainName": "nyx",
+        "chainID": "nyx",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/nyx/chain.png",
+        "bech32Prefix": "n",
+        "feeAssets": [
+            {
+                "denom": "unym",
+                "gasPrice": {
+                    "low": "0.025",
+                    "average": "0.025",
+                    "high": "0.04"
+                }
+            },
+            {
+                "denom": "unyx",
+                "gasPrice": {
+                    "low": "0.025",
+                    "average": "0.025",
+                    "high": "0.04"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "akash",
+        "chainID": "akashnet-2",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/akashnet/chain.png",
+        "bech32Prefix": "akash",
+        "feeAssets": [
+            {
+                "denom": "uakt",
+                "gasPrice": null
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "gitopia",
+        "chainID": "gitopia",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/gitopia/chain.png",
+        "bech32Prefix": "gitopia",
+        "feeAssets": [
+            {
+                "denom": "ulore",
+                "gasPrice": {
+                    "low": "0.0012",
+                    "average": "0.0016",
+                    "high": "0.0024"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "saga",
+        "chainID": "ssc-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/ssc/chain.png",
+        "bech32Prefix": "saga",
+        "feeAssets": [
+            {
+                "denom": "usaga",
+                "gasPrice": {
+                    "low": "0.01",
+                    "average": "0.025",
+                    "high": "0.04"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "gravitybridge",
+        "chainID": "gravity-bridge-3",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": false
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/gravity-bridge/chain.png",
+        "bech32Prefix": "gravity",
+        "feeAssets": [
+            {
+                "denom": "gravity0xA0b73E1Ff0B80914AB6fe0444E65848C4C34450b",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0xdAC17F958D2ee523a2206206994597C13D831ec7",
+                "gasPrice": {
+                    "low": "0.0002",
+                    "average": "0.0005",
+                    "high": "0.0008"
+                }
+            },
+            {
+                "denom": "gravity0x892A6f9dF0147e5f079b0993F486F9acA3c87881",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0x60e683C6514Edd5F758A55b6f393BeBBAfaA8d5e",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0x01e0E2e61f554eCAaeC0cC933E739Ad90f24a86d",
+                "gasPrice": null
+            },
+            {
+                "denom": "ibc/00F2B62EB069321A454B708876476AFCD9C23C8C9C4A5A206DDF1CD96B645057",
+                "gasPrice": null
+            },
+            {
+                "denom": "ibc/048BE20AE2E6BFD4142C547E04F17E5F94363003A12B7B6C084E08101BFCF7D1",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0xaea46A60368A7bD060eec7DF8CBa43b7EF41Ad85",
+                "gasPrice": null
+            },
+            {
+                "denom": "ibc/D157AD8A50DAB0FC4EB95BBE1D9407A590FA2CDEE04C90A76C005089BF76E519",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0xa47c8bf37f92aBed4A126BDA807A7b7498661acD",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0xa693B19d2931d498c5B318dF961919BB4aee87a5",
+                "gasPrice": null
+            },
+            {
+                "denom": "ibc/29A7122D024B5B8FA8A2EFBB4FA47272C25C8926AA005A96807127208082DAB3",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0x2C5Bcad9Ade17428874855913Def0A02D8bE2324",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0x4f6103BAd230295baCF30f914FDa7D4273B7F585",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0x07baC35846e5eD502aA91AdF6A9e7aA210F2DcbE",
+                "gasPrice": null
+            },
+            {
+                "denom": "ibc/2E5D0AC026AC1AFA65A23023BA4F24BB8DDF94F118EDC0BAD6F625BFC557CDED",
+                "gasPrice": null
+            },
+            {
+                "denom": "ibc/5012B1C96F286E8A6604A87037CE51241C6F1CA195B71D1E261FCACB69FB6BC2",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0x35a532d376FFd9a705d0Bb319532837337A398E7",
+                "gasPrice": null
+            },
+            {
+                "denom": "ugraviton",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0xB64ef51C888972c908CFacf59B47C1AfBC0Ab8aC",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0xa670d7237398238DE01267472C6f13e5B8010FD1",
+                "gasPrice": null
+            },
+            {
+                "denom": "ibc/0C273962C274B2C05B22D9474BFE5B84D6A6FCAD198CB9B0ACD35EA521A36606",
+                "gasPrice": null
+            },
+            {
+                "denom": "ibc/4F393C3FCA4190C0A6756CE7F6D897D5D1BE57D6CCB80D0BC87393566A7B6602",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0x147faF8De9d8D8DAAE129B187F0D02D819126750",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0xc0a4Df35568F116C370E6a6A6022Ceb908eedDaC",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0xBA11D00c5f74255f56a5E366F4F77f5A186d7f55",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0x467719aD09025FcC6cF6F8311755809d45a5E5f3",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0x8a854288a5976036A725879164Ca3e91d30c6A1B",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0x853d955aCEf822Db058eb8505911ED77F175b99e",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0x817bbDbC3e8A1204f3691d14bB44992841e3dB35",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0x45804880De22913dAFE09f4980848ECE6EcbAf78",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0x93581991f68DBaE1eA105233b67f7FA0D6BDeE7b",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0x514910771AF9Ca656af840dff83E8264EcF986CA",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+                "gasPrice": {
+                    "low": "0.0002",
+                    "average": "0.0005",
+                    "high": "0.0008"
+                }
+            },
+            {
+                "denom": "gravity0x2B89bF8ba858cd2FCee1faDa378D5cd6936968Be",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0x30D20208d987713f46DFD34EF128Bb16C404D10f",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0x6B175474E89094C44Da98b954EedeAC495271d0F",
+                "gasPrice": null
+            },
+            {
+                "denom": "gravity0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
+                "gasPrice": null
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "Polygon",
+        "chainID": "137",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": false
+        },
+        "supportsMemo": false,
+        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/polygon/info/logo.png",
+        "bech32Prefix": "",
+        "feeAssets": [],
+        "chainType": "evm",
+        "isTestnet": false
+    },
+    {
+        "chainName": "cryptoorgchain",
+        "chainID": "crypto-org-chain-mainnet-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/crypto-org-chain-mainnet/chain.png",
+        "bech32Prefix": "cro",
+        "feeAssets": [
+            {
+                "denom": "basecro",
+                "gasPrice": {
+                    "low": "0.025",
+                    "average": "0.03",
+                    "high": "0.04"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "axelar",
+        "chainID": "axelar-dojo-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/axelar-dojo/chain.png",
+        "bech32Prefix": "axelar",
+        "feeAssets": [
+            {
+                "denom": "uaxl",
+                "gasPrice": {
+                    "low": "0.007",
+                    "average": "0.007",
+                    "high": "0.01"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "Optimism",
+        "chainID": "10",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": false
+        },
+        "supportsMemo": false,
+        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/optimism/info/logo.png",
+        "bech32Prefix": "",
+        "feeAssets": [],
+        "chainType": "evm",
+        "isTestnet": false
+    },
+    {
+        "chainName": "sentinel",
+        "chainID": "sentinelhub-2",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/sentinelhub/chain.png",
+        "bech32Prefix": "sent",
+        "feeAssets": [
+            {
+                "denom": "udvpn",
+                "gasPrice": {
+                    "low": "0.1",
+                    "average": "0.25",
+                    "high": "0.4"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "celestia",
+        "chainID": "celestia",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/celestia/chain.png",
+        "bech32Prefix": "celestia",
+        "feeAssets": [
+            {
+                "denom": "utia",
+                "gasPrice": {
+                    "low": "0.01",
+                    "average": "0.02",
+                    "high": "0.1"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "juno",
+        "chainID": "juno-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/juno/chain.png",
+        "bech32Prefix": "juno",
+        "feeAssets": [
+            {
+                "denom": "ujuno",
+                "gasPrice": {
+                    "low": "0.075",
+                    "average": "0.075",
+                    "high": "0.075"
+                }
+            },
+            {
+                "denom": "ibc/C4CFF46FD6DE35CA4CF4CE031E643C8FDC9BA4B99AE598E9B0ED98FE3A2319F9",
+                "gasPrice": {
+                    "low": "0.003",
+                    "average": "0.003",
+                    "high": "0.003"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "dymension",
+        "chainID": "dymension_1100-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/dymension_1100/chain.png",
+        "bech32Prefix": "dym",
+        "feeAssets": [
+            {
+                "denom": "adym",
+                "gasPrice": {
+                    "low": "20000000000",
+                    "average": "20000000000",
+                    "high": "20000000000"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "Filecoin",
+        "chainID": "314",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": false
+        },
+        "supportsMemo": false,
+        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/filecoin/info/logo.png",
+        "bech32Prefix": "",
+        "feeAssets": [],
+        "chainType": "evm",
+        "isTestnet": false
+    },
+    {
+        "chainName": "Solana",
+        "chainID": "solana",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": false
+        },
+        "supportsMemo": false,
+        "logoURI": "https://raw.githubusercontent.com/skip-mev/skip-api-registry/main/chains/solana/logo.svg",
+        "bech32Prefix": "",
+        "feeAssets": [],
+        "chainType": "svm",
+        "isTestnet": false
+    },
+    {
+        "chainName": "nois",
+        "chainID": "nois-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/nois/chain.png",
+        "bech32Prefix": "nois",
+        "feeAssets": [
+            {
+                "denom": "unois",
+                "gasPrice": {
+                    "low": "0.05",
+                    "average": "0.05",
+                    "high": "0.1"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "planq",
+        "chainID": "planq_7070-2",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/planq_7070/chain.png",
+        "bech32Prefix": "plq",
+        "feeAssets": [
+            {
+                "denom": "aplanq",
+                "gasPrice": {
+                    "low": "30000000000",
+                    "average": "35000000000",
+                    "high": "40000000000"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "optimism-sepolia-testnet",
+        "chainID": "11155420",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": false
+        },
+        "supportsMemo": false,
+        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/optimism/info/logo.png",
+        "bech32Prefix": "",
+        "feeAssets": [],
+        "chainType": "evm",
+        "isTestnet": true
+    },
+    {
+        "chainName": "dydx",
+        "chainID": "dydx-mainnet-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/dydx-mainnet/adydx.png",
+        "bech32Prefix": "dydx",
+        "feeAssets": [
+            {
+                "denom": "ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5",
+                "gasPrice": {
+                    "low": "0.025",
+                    "average": "0.025",
+                    "high": "0.03"
+                }
+            },
+            {
+                "denom": "adydx",
+                "gasPrice": {
+                    "low": "12500000000",
+                    "average": "12500000000",
+                    "high": "20000000000"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "ethereum-sepolia-testnet",
+        "chainID": "11155111",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": false
+        },
+        "supportsMemo": false,
+        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/sepolia/info/logo.png",
+        "bech32Prefix": "",
+        "feeAssets": [],
+        "chainType": "evm",
+        "isTestnet": true
+    },
+    {
+        "chainName": "noon",
+        "chainID": "burrito-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/initia-labs/initia-registry/main/testnets/noon/images/NOON.png",
+        "bech32Prefix": "init",
+        "feeAssets": [],
+        "chainType": "cosmos",
+        "isTestnet": true
+    },
+    {
+        "chainName": "Fantom",
+        "chainID": "250",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": false
+        },
+        "supportsMemo": false,
+        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/fantom/info/logo.png",
+        "bech32Prefix": "",
+        "feeAssets": [],
+        "chainType": "evm",
+        "isTestnet": false
+    },
+    {
+        "chainName": "osmosis",
+        "chainID": "osmosis-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": false
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/osmosis/chain.png",
+        "bech32Prefix": "osmo",
+        "feeAssets": [
+            {
+                "denom": "uosmo",
+                "gasPrice": {
+                    "low": "0.0025",
+                    "average": "0.025",
+                    "high": "0.04"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "canto",
+        "chainID": "canto_7700-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": false,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/canto_7700/chain.png",
+        "bech32Prefix": "canto",
+        "feeAssets": [
+            {
+                "denom": "acanto",
+                "gasPrice": {
+                    "low": "1250000000000",
+                    "average": "2500000000000",
+                    "high": "3750000000000"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "arbitrum-sepolia-testnet",
+        "chainID": "421614",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": false
+        },
+        "supportsMemo": false,
+        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/arbitrum/info/logo.png",
+        "bech32Prefix": "",
+        "feeAssets": [],
+        "chainType": "evm",
+        "isTestnet": true
+    },
+    {
+        "chainName": "tucana",
+        "chainID": "birdee-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/initia-labs/initia-registry/main/testnets/tucana/images/TUCANA.png",
+        "bech32Prefix": "init",
+        "feeAssets": [],
+        "chainType": "cosmos",
+        "isTestnet": true
+    },
+    {
+        "chainName": "initia",
+        "chainID": "initiation-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/initia-labs/initia-registry/main/testnets/initia/images/INIT.png",
+        "bech32Prefix": "init",
+        "feeAssets": [],
+        "chainType": "cosmos",
+        "isTestnet": true
+    },
+    {
+        "chainName": "composable",
+        "chainID": "centauri-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/centauri/chain.png",
+        "bech32Prefix": "pica",
+        "feeAssets": [
+            {
+                "denom": "ppica",
+                "gasPrice": {
+                    "low": "0",
+                    "average": "0",
+                    "high": "0"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "stargaze",
+        "chainID": "stargaze-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/stargaze/chain.png",
+        "bech32Prefix": "stars",
+        "feeAssets": [
+            {
+                "denom": "ustars",
+                "gasPrice": {
+                    "low": "1",
+                    "average": "1.1",
+                    "high": "1.2"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "osmosis-testnet",
+        "chainID": "osmo-test-5",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": false
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/osmosis/chain.png",
+        "bech32Prefix": "osmo",
+        "feeAssets": [
+            {
+                "denom": "uosmo",
+                "gasPrice": {
+                    "low": "0.0025",
+                    "average": "0.025",
+                    "high": "0.04"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": true
+    },
+    {
+        "chainName": "chihuahua",
+        "chainID": "chihuahua-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/chihuahua/chain.png",
+        "bech32Prefix": "chihuahua",
+        "feeAssets": [
+            {
+                "denom": "uhuahua",
+                "gasPrice": {
+                    "low": "500",
+                    "average": "1250",
+                    "high": "2000"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "regen",
+        "chainID": "regen-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/regen/chain.png",
+        "bech32Prefix": "regen",
+        "feeAssets": [
+            {
+                "denom": "uregen",
+                "gasPrice": {
+                    "low": "0.015",
+                    "average": "0.025",
+                    "high": "0.04"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "Solana Devnet",
+        "chainID": "solana-devnet",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": false
+        },
+        "supportsMemo": false,
+        "logoURI": "https://raw.githubusercontent.com/skip-mev/skip-api-registry/main/chains/solana-devnet/logo.svg",
+        "bech32Prefix": "",
+        "feeAssets": [],
+        "chainType": "svm",
+        "isTestnet": true
+    },
+    {
+        "chainName": "neutron-testnet",
+        "chainID": "pion-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/neutron/chain.png",
+        "bech32Prefix": "neutron",
+        "feeAssets": [
+            {
+                "denom": "untrn",
+                "gasPrice": {
+                    "low": "0.02",
+                    "average": "0.02",
+                    "high": "0.02"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": true
+    },
+    {
+        "chainName": "noble-testnet",
+        "chainID": "grand-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/grand/chain.png",
+        "bech32Prefix": "noble",
+        "feeAssets": [
+            {
+                "denom": "uusdc",
+                "gasPrice": {
+                    "low": "0.1",
+                    "average": "0.1",
+                    "high": "0.2"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": true
+    },
+    {
+        "chainName": "manta-pacific",
+        "chainID": "169",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": false
+        },
+        "supportsMemo": false,
+        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/manta/info/logo.png",
+        "bech32Prefix": "",
+        "feeAssets": [],
+        "chainType": "evm",
+        "isTestnet": false
+    },
+    {
+        "chainName": "haqq",
+        "chainID": "haqq_11235-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/haqq_11235/chain.png",
+        "bech32Prefix": "haqq",
+        "feeAssets": [
+            {
+                "denom": "aISLM",
+                "gasPrice": {
+                    "low": "20000000000",
+                    "average": "25000000000",
+                    "high": "40000000000"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "mars",
+        "chainID": "mars-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/mars/chain.png",
+        "bech32Prefix": "mars",
+        "feeAssets": [
+            {
+                "denom": "umars",
+                "gasPrice": {
+                    "low": "0",
+                    "average": "0",
+                    "high": "0.01"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "kava",
+        "chainID": "kava_2222-10",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": false
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/kava_2222/chain.png",
+        "bech32Prefix": "kava",
+        "feeAssets": [
+            {
+                "denom": "ukava",
+                "gasPrice": {
+                    "low": "0.05",
+                    "average": "0.1",
+                    "high": "0.25"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "passage",
+        "chainID": "passage-2",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/passage/chain.png",
+        "bech32Prefix": "pasg",
+        "feeAssets": [
+            {
+                "denom": "upasg",
+                "gasPrice": null
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "finschia-testnet",
+        "chainID": "ebony-2",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/ebony/chain.png",
+        "bech32Prefix": "tlink",
+        "feeAssets": [
+            {
+                "denom": "tcony",
+                "gasPrice": {
+                    "low": "0.015",
+                    "average": "0.015",
+                    "high": "0.015"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": true
+    },
+    {
+        "chainName": "bitsong",
+        "chainID": "bitsong-2b",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitsong/images/btsg.png",
+        "bech32Prefix": "bitsong",
+        "feeAssets": [],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "noble",
+        "chainID": "noble-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/noble/chain.png",
+        "bech32Prefix": "noble",
+        "feeAssets": [
+            {
+                "denom": "uusdc",
+                "gasPrice": {
+                    "low": "0.1",
+                    "average": "0.1",
+                    "high": "0.2"
+                }
+            },
+            {
+                "denom": "ibc/EF48E6B1A1A19F47ECAEA62F5670C37C0580E86A9E88498B7E393EB6F49F33C0",
+                "gasPrice": {
+                    "low": "0.01",
+                    "average": "0.01",
+                    "high": "0.02"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "celestia-testnet",
+        "chainID": "mocha-4",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/mocha/chain.png",
+        "bech32Prefix": "celestia",
+        "feeAssets": [
+            {
+                "denom": "utia",
+                "gasPrice": {
+                    "low": "0.01",
+                    "average": "0.02",
+                    "high": "0.1"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": true
+    },
+    {
+        "chainName": "empowerchain",
+        "chainID": "empowerchain-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "bech32Prefix": "empower",
+        "feeAssets": [],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "quicksilver",
+        "chainID": "quicksilver-2",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/quicksilver/chain.png",
+        "bech32Prefix": "quick",
+        "feeAssets": [
+            {
+                "denom": "uqck",
+                "gasPrice": {
+                    "low": "0.0001",
+                    "average": "0.0001",
+                    "high": "0.00025"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "neutron",
+        "chainID": "neutron-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/neutron/chain.png",
+        "bech32Prefix": "neutron",
+        "feeAssets": [
+            {
+                "denom": "ibc/C4CFF46FD6DE35CA4CF4CE031E643C8FDC9BA4B99AE598E9B0ED98FE3A2319F9",
+                "gasPrice": {
+                    "low": "0.0008",
+                    "average": "0.0008",
+                    "high": "0.0008"
+                }
+            },
+            {
+                "denom": "ibc/B7864B03E1B9FD4F049243E92ABD691586F682137037A9F3FCA5222815620B3C",
+                "gasPrice": {
+                    "low": "0.0006",
+                    "average": "0.0006",
+                    "high": "0.0006"
+                }
+            },
+            {
+                "denom": "ibc/2CB87BCE0937B1D1DFCEE79BE4501AAF3C265E923509AEAC410AD85D27F35130",
+                "gasPrice": {
+                    "low": "2564102564.1026",
+                    "average": "2564102564.1026",
+                    "high": "2564102564.1026"
+                }
+            },
+            {
+                "denom": "factory/neutron1ug740qrkquxzrk2hh29qrlx3sktkfml3je7juusc2te7xmvsscns0n2wry/wstETH",
+                "gasPrice": {
+                    "low": "2903231.6597",
+                    "average": "2903231.6597",
+                    "high": "2903231.6597"
+                }
+            },
+            {
+                "denom": "untrn",
+                "gasPrice": {
+                    "low": "0.0053",
+                    "average": "0.0053",
+                    "high": "0.0053"
+                }
+            },
+            {
+                "denom": "ibc/773B4D0A3CD667B2275D5A4A7A2F0909C0BA0F4059C0B9181E680DDF4965DCC7",
+                "gasPrice": {
+                    "low": "0.0004",
+                    "average": "0.0004",
+                    "high": "0.0004"
+                }
+            },
+            {
+                "denom": "ibc/F082B65C88E4B6D5EF1DB243CDA1D331D002759E938A0F5CD3FFDC5D53B3E349",
+                "gasPrice": {
+                    "low": "0.008",
+                    "average": "0.008",
+                    "high": "0.008"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "blackwing",
+        "chainID": "tomcat-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/initia-labs/initia-registry/main/testnets/blackwing/images/BLACKWING.png",
+        "bech32Prefix": "init",
+        "feeAssets": [],
+        "chainType": "cosmos",
+        "isTestnet": true
+    },
+    {
+        "chainName": "crescent",
+        "chainID": "crescent-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/crescent/chain.png",
+        "bech32Prefix": "cre",
+        "feeAssets": [
+            {
+                "denom": "ibc/5A76568E079A31FA12165E4559BA9F1E9D4C97F9C2060B538C84DCD503815E30",
+                "gasPrice": {
+                    "low": "3350000000",
+                    "average": "8375000000",
+                    "high": "10050000000"
+                }
+            },
+            {
+                "denom": "ibc/C814F0B662234E24248AE3B2FE2C1B54BBAF12934B757F6E7BC5AEC119963895",
+                "gasPrice": {
+                    "low": "0.000568",
+                    "average": "0.00142",
+                    "high": "0.001704"
+                }
+            },
+            {
+                "denom": "ibc/9EC8A1701813BB7B73BFED2496009ABB2C8BF187E6CDFA788D77F68E08BC05CD",
+                "gasPrice": {
+                    "low": "0.000842",
+                    "average": "0.002105",
+                    "high": "0.002526"
+                }
+            },
+            {
+                "denom": "ibc/D64F87FAE0B35C1954DD7921BA7A2939705DE77CBF72B8002F2E3552EDE4DE52",
+                "gasPrice": {
+                    "low": "0.00006",
+                    "average": "0.00015",
+                    "high": "0.00018"
+                }
+            },
+            {
+                "denom": "ibc/0634D0993744740D675AD01E81156EAC945AEAAE17C074918DC7FF52F41B263E",
+                "gasPrice": {
+                    "low": "0.0014",
+                    "average": "0.0035",
+                    "high": "0.0042"
+                }
+            },
+            {
+                "denom": "ibc/764D1629980B02BAFF3D25BEE4FB1E0C5E350AFA252FDF66E68E10D2179A826A",
+                "gasPrice": {
+                    "low": "200000000",
+                    "average": "500000000",
+                    "high": "600000000"
+                }
+            },
+            {
+                "denom": "ibc/61DF64ADF65230540C14C63D64897BE08A3DC9A516A91425913F01240E2F432F",
+                "gasPrice": {
+                    "low": "0.008146",
+                    "average": "0.020365",
+                    "high": "0.024438"
+                }
+            },
+            {
+                "denom": "ucre",
+                "gasPrice": {
+                    "low": "0.01",
+                    "average": "0.025",
+                    "high": "0.03"
+                }
+            },
+            {
+                "denom": "ibc/CD01034D6749F20AAC5330EF4FD8B8CA7C40F7527AB8C4A302FBD2A070852EE1",
+                "gasPrice": {
+                    "low": "0.000842",
+                    "average": "0.002105",
+                    "high": "0.002526"
+                }
+            },
+            {
+                "denom": "ibc/8F865D9760B482FF6254EDFEC1FF2F1273B9AB6873A7DE484F89639795D73D75",
+                "gasPrice": {
+                    "low": "0.0004",
+                    "average": "0.001",
+                    "high": "0.0012"
+                }
+            },
+            {
+                "denom": "ibc/C4CFF46FD6DE35CA4CF4CE031E643C8FDC9BA4B99AE598E9B0ED98FE3A2319F9",
+                "gasPrice": {
+                    "low": "0.000063",
+                    "average": "0.0001575",
+                    "high": "0.000189"
+                }
+            },
+            {
+                "denom": "ibc/11F940BCDFD7CFBFD7EDA13F25DA95D308286D441209D780C9863FD4271514EB",
+                "gasPrice": {
+                    "low": "0.002",
+                    "average": "0.005",
+                    "high": "0.006"
+                }
+            },
+            {
+                "denom": "ibc/C950356239AD2A205DE09FDF066B1F9FF19A7CA7145EA48A5B19B76EE47E52F7",
+                "gasPrice": {
+                    "low": "0.065405",
+                    "average": "0.1635125",
+                    "high": "0.196215"
+                }
+            },
+            {
+                "denom": "ibc/BFF0D3805B50D93E2FA5C0B2DDF7E0B30A631076CD80BC12A48C0E95404B4A41",
+                "gasPrice": {
+                    "low": "0.000842",
+                    "average": "0.002105",
+                    "high": "0.002526"
+                }
+            },
+            {
+                "denom": "ubcre",
+                "gasPrice": {
+                    "low": "0.0083",
+                    "average": "0.02075",
+                    "high": "0.0249"
+                }
+            },
+            {
+                "denom": "ibc/CA1261224952DF089EFD363D8DBB30A8AB6D8CD181E60EE9E68E432F8DE14FE3",
+                "gasPrice": {
+                    "low": "0.000842",
+                    "average": "0.002105",
+                    "high": "0.002526"
+                }
+            },
+            {
+                "denom": "ibc/4627AD2524E3E0523047E35BB76CC90E37D9D57ACF14F0FCBCEB2480705F3CB8",
+                "gasPrice": {
+                    "low": "5",
+                    "average": "12.5",
+                    "high": "15"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "gateway",
+        "chainID": "wormchain",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/wormchain/chain.png",
+        "bech32Prefix": "wormhole",
+        "feeAssets": [
+            {
+                "denom": "utest",
+                "gasPrice": {
+                    "low": "1",
+                    "average": "1",
+                    "high": "1"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "cronos",
+        "chainID": "cronosmainnet_25-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": true
+        },
+        "supportsMemo": false,
+        "logoURI": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cronos/images/cronos.png",
+        "bech32Prefix": "crc",
+        "feeAssets": [],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "omniflixhub",
+        "chainID": "omniflixhub-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/omniflixhub/chain.png",
+        "bech32Prefix": "omniflix",
+        "feeAssets": [
+            {
+                "denom": "uflix",
+                "gasPrice": {
+                    "low": "0.001",
+                    "average": "0.0025",
+                    "high": "0.025"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "Binance",
+        "chainID": "56",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": false
+        },
+        "supportsMemo": false,
+        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/binance/info/logo.png",
+        "bech32Prefix": "",
+        "feeAssets": [],
+        "chainType": "evm",
+        "isTestnet": false
+    },
+    {
+        "chainName": "provenance",
+        "chainID": "pio-mainnet-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/pio-mainnet/chain.png",
+        "bech32Prefix": "pb",
+        "feeAssets": [
+            {
+                "denom": "nhash",
+                "gasPrice": {
+                    "low": "1905",
+                    "average": "1905",
+                    "high": "2500"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "sagatestnet",
+        "chainID": "ssc-testnet-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/ssc-testnet/chain.png",
+        "bech32Prefix": "saga",
+        "feeAssets": [
+            {
+                "denom": "utsaga",
+                "gasPrice": {
+                    "low": "0.0025",
+                    "average": "0.025",
+                    "high": "0.04"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": true
+    },
+    {
+        "chainName": "teritori",
+        "chainID": "teritori-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/teritori/chain.png",
+        "bech32Prefix": "tori",
+        "feeAssets": [
+            {
+                "denom": "utori",
+                "gasPrice": {
+                    "low": "0",
+                    "average": "0.025",
+                    "high": "0.04"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "miniwasm",
+        "chainID": "miniwasm-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/initia-labs/initia-registry/main/testnets/miniwasm/images/miniwasm.png",
+        "bech32Prefix": "init",
+        "feeAssets": [],
+        "chainType": "cosmos",
+        "isTestnet": true
+    },
+    {
+        "chainName": "passage",
+        "chainID": "passage-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": false
+        },
+        "supportsMemo": false,
+        "bech32Prefix": "",
+        "feeAssets": [],
+        "chainType": "",
+        "isTestnet": false
+    },
+    {
+        "chainName": "injective",
+        "chainID": "injective-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/injective/chain.png",
+        "bech32Prefix": "inj",
+        "feeAssets": [
+            {
+                "denom": "inj",
+                "gasPrice": {
+                    "low": "500000000",
+                    "average": "1000000000",
+                    "high": "1500000000"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "base-sepolia-testnet",
+        "chainID": "84532",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": false
+        },
+        "supportsMemo": false,
+        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/base/info/logo.png",
+        "bech32Prefix": "",
+        "feeAssets": [],
+        "chainType": "evm",
+        "isTestnet": true
+    },
+    {
+        "chainName": "Celo",
+        "chainID": "42220",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": false
+        },
+        "supportsMemo": false,
+        "bech32Prefix": "",
+        "feeAssets": [],
+        "chainType": "evm",
+        "isTestnet": false
+    },
+    {
+        "chainName": "nibiru",
+        "chainID": "cataclysm-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/cataclysm/chain.png",
+        "bech32Prefix": "nibi",
+        "feeAssets": [
+            {
+                "denom": "unibi",
+                "gasPrice": {
+                    "low": "0.025",
+                    "average": "0.05",
+                    "high": "0.1"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "sei",
+        "chainID": "pacific-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": false,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/pacific/chain.png",
+        "bech32Prefix": "sei",
+        "feeAssets": [
+            {
+                "denom": "usei",
+                "gasPrice": {
+                    "low": "0.1",
+                    "average": "0.2",
+                    "high": "0.3"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "agoric",
+        "chainID": "agoric-3",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/agoric/chain.png",
+        "bech32Prefix": "agoric",
+        "feeAssets": [
+            {
+                "denom": "ubld",
+                "gasPrice": {
+                    "low": "0.03",
+                    "average": "0.05",
+                    "high": "0.07"
+                }
+            },
+            {
+                "denom": "uist",
+                "gasPrice": {
+                    "low": "0.0034",
+                    "average": "0.007",
+                    "high": "0.02"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "archway",
+        "chainID": "archway-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/archway/chain.png",
+        "bech32Prefix": "archway",
+        "feeAssets": [
+            {
+                "denom": "aarch",
+                "gasPrice": {
+                    "low": "140000000000",
+                    "average": "196000000000",
+                    "high": "225400000000"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "terra2",
+        "chainID": "phoenix-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/phoenix/chain.png",
+        "bech32Prefix": "terra",
+        "feeAssets": [
+            {
+                "denom": "ibc/2C962DAB9F57FE0921435426AE75196009FAA1981BF86991203C8411F8980FDB",
+                "gasPrice": {
+                    "low": "0.018",
+                    "average": "0.02",
+                    "high": "0.04"
+                }
+            },
+            {
+                "denom": "uluna",
+                "gasPrice": {
+                    "low": "0.015",
+                    "average": "0.02",
+                    "high": "0.04"
+                }
+            },
+            {
+                "denom": "ibc/B3504E092456BA618CC28AC671A71FB08C6CA0FD0BE7C8A5B5A3E2DD933CC9E4",
+                "gasPrice": {
+                    "low": "0.018",
+                    "average": "0.02",
+                    "high": "0.04"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "odin",
+        "chainID": "odin-mainnet-freya",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/cosmos/chain-registry/master/odin/images/odin.png",
+        "bech32Prefix": "odin",
+        "feeAssets": [],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "shentu",
+        "chainID": "shentu-2.2",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/cosmos/chain-registry/master/shentu/images/ctk.png",
+        "bech32Prefix": "shentu",
+        "feeAssets": [],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "Arbitrum",
+        "chainID": "42161",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": false
+        },
+        "supportsMemo": false,
+        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/arbitrum/info/logo.png",
+        "bech32Prefix": "",
+        "feeAssets": [],
+        "chainType": "evm",
+        "isTestnet": false
+    },
+    {
+        "chainName": "coreum",
+        "chainID": "coreum-mainnet-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/coreum-mainnet/chain.png",
+        "bech32Prefix": "core",
+        "feeAssets": [
+            {
+                "denom": "ucore",
+                "gasPrice": {
+                    "low": "0.0625",
+                    "average": "0.0625",
+                    "high": "0.0625"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "persistence",
+        "chainID": "core-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/core/chain.png",
+        "bech32Prefix": "persistence",
+        "feeAssets": [
+            {
+                "denom": "ibc/C8A74ABBE2AF892E15680D916A7C22130585CE5704F9B17A10F184A90D53BECA",
+                "gasPrice": {
+                    "low": "0.0001",
+                    "average": "0.001",
+                    "high": "0.01"
+                }
+            },
+            {
+                "denom": "ibc/646315E3B0461F5FA4C5C8968A88FC45D4D5D04A45B98F1B8294DD82F386DD85",
+                "gasPrice": {
+                    "low": "0.0001",
+                    "average": "0.001",
+                    "high": "0.01"
+                }
+            },
+            {
+                "denom": "ibc/23DC3FF0E4CBB53A1915E4C62507CB7796956E84C68CA49707787CB8BDE90A1E",
+                "gasPrice": {
+                    "low": "15000000000",
+                    "average": "15000000000",
+                    "high": "15000000000"
+                }
+            },
+            {
+                "denom": "stk/uosmo",
+                "gasPrice": {
+                    "low": "0.0001",
+                    "average": "0.001",
+                    "high": "0.01"
+                }
+            },
+            {
+                "denom": "stk/uatom",
+                "gasPrice": {
+                    "low": "0.0001",
+                    "average": "0.001",
+                    "high": "0.01"
+                }
+            },
+            {
+                "denom": "ibc/A6E3AF63B3C906416A9AF7A556C59EA4BD50E617EFFE6299B99700CCB780E444",
+                "gasPrice": {
+                    "low": "100000000",
+                    "average": "1000000000",
+                    "high": "10000000000"
+                }
+            },
+            {
+                "denom": "stk/adydx",
+                "gasPrice": {
+                    "low": "15000000000",
+                    "average": "15000000000",
+                    "high": "15000000000"
+                }
+            },
+            {
+                "denom": "uxprt",
+                "gasPrice": {
+                    "low": "0",
+                    "average": "0.025",
+                    "high": "0.04"
+                }
+            },
+            {
+                "denom": "ibc/B3792E4A62DF4A934EF2DF5968556DB56F5776ED25BDE11188A4F58A7DD406F0",
+                "gasPrice": {
+                    "low": "0.01",
+                    "average": "0.05",
+                    "high": "0.1"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "ethereum-2-testnet",
+        "chainID": "5",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": false
+        },
+        "supportsMemo": false,
+        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/goerlitestnet/info/logo.png",
+        "bech32Prefix": "",
+        "feeAssets": [],
+        "chainType": "evm",
+        "isTestnet": true
+    },
+    {
+        "chainName": "andromeda",
+        "chainID": "andromeda-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/andromeda/andromeda.png",
+        "bech32Prefix": "andr",
+        "feeAssets": [
+            {
+                "denom": "uandr",
+                "gasPrice": {
+                    "low": "0.03",
+                    "average": "0.05",
+                    "high": "0.075"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "pryzmtestnet",
+        "chainID": "indigo-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/cosmos/chain-registry/master/testnets/pryzmtestnet/images/pryzm-logo.png",
+        "bech32Prefix": "pryzm",
+        "feeAssets": [],
+        "chainType": "cosmos",
+        "isTestnet": true
+    },
+    {
+        "chainName": "xpla",
+        "chainID": "dimension_37-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/dimension_37/chain.png",
+        "bech32Prefix": "xpla",
+        "feeAssets": [
+            {
+                "denom": "axpla",
+                "gasPrice": {
+                    "low": "850000000000",
+                    "average": "1147500000000",
+                    "high": "1487500000000"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "Moonbeam",
+        "chainID": "1284",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": false
+        },
+        "supportsMemo": false,
+        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/moonbeam/info/logo.png",
+        "bech32Prefix": "",
+        "feeAssets": [],
+        "chainType": "evm",
+        "isTestnet": false
+    },
+    {
+        "chainName": "kyve",
+        "chainID": "kyve-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/kyve/chain.png",
+        "bech32Prefix": "kyve",
+        "feeAssets": [
+            {
+                "denom": "ukyve",
+                "gasPrice": {
+                    "low": "0.02",
+                    "average": "0.03",
+                    "high": "0.06"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "init_ai",
+        "chainID": "init-ai-1",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/initia-labs/initia-registry/main/testnets/init_ai/images/init_ai.png",
+        "bech32Prefix": "init",
+        "feeAssets": [],
+        "chainType": "cosmos",
+        "isTestnet": true
+    },
+    {
+        "chainName": "sommelier",
+        "chainID": "sommelier-3",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/sommelier/chain.png",
+        "bech32Prefix": "somm",
+        "feeAssets": [
+            {
+                "denom": "usomm",
+                "gasPrice": null
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "cosmoshub",
+        "chainID": "cosmoshub-4",
+        "pfmEnabled": true,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/cosmoshub/chain.png",
+        "bech32Prefix": "cosmos",
+        "feeAssets": [
+            {
+                "denom": "uatom",
+                "gasPrice": {
+                    "low": "0.005",
+                    "average": "0.025",
+                    "high": "0.03"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "Ethereum",
+        "chainID": "1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": false
+        },
+        "supportsMemo": false,
+        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/info/logo.png",
+        "bech32Prefix": "",
+        "feeAssets": [],
+        "chainType": "evm",
+        "isTestnet": false
+    },
+    {
+        "chainName": "humans",
+        "chainID": "humans_1089-1",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": true,
+            "feegrant": true
+        },
+        "supportsMemo": true,
+        "logoURI": "https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/humans_1089/logo.png",
+        "bech32Prefix": "human",
+        "feeAssets": [
+            {
+                "denom": "aheart",
+                "gasPrice": {
+                    "low": "80000000000",
+                    "average": "120000000000",
+                    "high": "160000000000"
+                }
+            }
+        ],
+        "chainType": "cosmos",
+        "isTestnet": false
+    },
+    {
+        "chainName": "avalanche-fuji-testnet",
+        "chainID": "43113",
+        "pfmEnabled": false,
+        "cosmosModuleSupport": {
+            "authz": false,
+            "feegrant": false
+        },
+        "supportsMemo": false,
+        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/avalanchec/info/logo.png",
+        "bech32Prefix": "",
+        "feeAssets": [],
+        "chainType": "evm",
+        "isTestnet": true
+    }
+]

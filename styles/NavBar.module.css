@@ -5,10 +5,10 @@
     padding: 2%;
     height: 7.5vh;
     background-color: transparent;
-    position: fixed; 
+    position: fixed;
     top: 0;
-    width: 100%; 
-  }
+    width: 100%;
+}
 
 .logo {
     display: flex;
@@ -20,8 +20,24 @@
     margin-right: 10px;
 }
 
-.links a {
-    margin-left: 20px;
+.links {
     text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
     color: black;
+    display: flex;
+    align-items: center;
+    padding-top: 2.5vh;
+    width: 40vw;
+    margin-right: 1.5vw;
+}
+
+.navBarLink {
+    margin-left: 1.5vw;
+    margin-right: 1.5vw;
+
+}
+
+.connectButton {
+    height: 50vh;
 }

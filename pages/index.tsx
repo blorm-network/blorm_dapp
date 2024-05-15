@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css';
 import { useState, useEffect } from 'react';
 import React from 'react';
 import Swap from '../components/Swap';
+import AssetTransfer from '../components/AssetTransfer';
 
 const Home: NextPage = () => {
   return (
@@ -16,7 +17,8 @@ const Home: NextPage = () => {
 
       
       <div className={styles.interface}>
-        <Swap />
+        {/* <Swap /> */}
+        <AssetTransfer />
       </div>
     </div>
   );

@@ -10,10 +10,10 @@ return (
             <h1>blorm</h1>
         </div>
         <div className={styles.links}>
-            <Link href="/">Home</Link>
-            <Link href="/about">About</Link>
-            <Link href="/contact">Contact</Link>
-            <ConnectButton />
+            <Link href="/" className={styles.navBarLink}>Home</Link>
+            <Link href="/about" className={styles.navBarLink}>About</Link>
+            <Link href="/contact" className={styles.navBarLink}>Contact</Link>
+            <ConnectButton className={styles.connectButton}/>
         </div>
     </nav>
 );
