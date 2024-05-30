@@ -4,7 +4,18 @@
 
 ## Getting Started
 
-First, run the web app:
+First, clone the repo
+```bash
+git clone https://github.com/blorm-network/blorm_dapp
+```
+
+Then, install the dependencies.
+
+```bash
+npm install
+```
+
+Now, run the web app:
 
 ```bash
 npm run dev
