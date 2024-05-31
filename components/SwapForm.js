@@ -1,6 +1,7 @@
 // components/SwapForm.js
 
 import { useState } from 'react';
+import styles from '../styles/SwapForm.module.css';
 
 export default function SwapForm() {
   const [sourceAssetDenom, setSourceAssetDenom] = useState('');
@@ -71,69 +72,75 @@ export default function SwapForm() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSetMnemonic}>
+    <div className={styles.container}>
+      {/* ENTER MNEMONIC FORM
+      <form onSubmit={handleSetMnemonic} className={styles.form}>
         <label>
           Mnemonic:
           <input
             type="text"
             value={mnemonic}
-            placeholder='Enter your mnemonic here...'
+            placeholder="Enter your mnemonic here..."
             onChange={(e) => setMnemonic(e.target.value)}
           />
         </label>
         <button type="submit">Set Mnemonic</button>
       </form>
-      <form onSubmit={handleFindRoute}>
+      */}
+      <form onSubmit={handleFindRoute} className={styles.form}>
         <label>
           Source Asset Denom:
-          <input
-            type="text"
-            value={sourceAssetDenom}
-            placeholder='uusdc'
-            onChange={(e) => setSourceAssetDenom(e.target.value)}
-          />
+          <select value={sourceAssetDenom} onChange={(e) => setSourceAssetDenom(e.target.value)}>
+            <option value="" disabled>Select Source Asset Denom</option>
+            <option value="uusdc">uusdc</option>
+            <option value="uatom">uatom</option>
+            <option value="uluna">uluna</option>
+            {/* Add more options as needed */}
+          </select>
         </label>
         <label>
           Source Asset Chain ID:
-          <input
-            type="text"
-            value={sourceAssetChainID}
-            placeholder='noble-1'
-            onChange={(e) => setSourceAssetChainID(e.target.value)}
-          />
+          <select value={sourceAssetChainID} onChange={(e) => setSourceAssetChainID(e.target.value)}>
+            <option value="" disabled>Select Source Chain ID</option>
+            <option value="noble-1">noble-1</option>
+            <option value="cosmoshub-4">cosmoshub-4</option>
+            <option value="osmosis-1">osmosis-1</option>
+            {/* Add more options as needed */}
+          </select>
         </label>
         <label>
           Destination Asset Denom:
-          <input
-            type="text"
-            value={destAssetDenom}
-            placeholder='utia'
-            onChange={(e) => setDestAssetDenom(e.target.value)}
-          />
+          <select value={destAssetDenom} onChange={(e) => setDestAssetDenom(e.target.value)}>
+            <option value="" disabled>Select Destination Asset Denom</option>
+            <option value="utia">utia</option>
+            <option value="uosmo">uosmo</option>
+            <option value="uluna">uluna</option>
+            {/* Add more options as needed */}
+          </select>
         </label>
         <label>
           Destination Asset Chain ID:
-          <input
-            type="text"
-            value={destAssetChainID}
-            placeholder='celestia'
-            onChange={(e) => setDestAssetChainID(e.target.value)}
-          />
+          <select value={destAssetChainID} onChange={(e) => setDestAssetChainID(e.target.value)}>
+            <option value="" disabled>Select Destination Chain ID</option>
+            <option value="celestia">celestia</option>
+            <option value="cosmoshub-4">cosmoshub-4</option>
+            <option value="osmosis-1">osmosis-1</option>
+            {/* Add more options as needed */}
+          </select>
         </label>
         <label>
           Amount In:
           <input
             type="text"
             value={amountIn}
-            placeholder='1000000'
+            placeholder="1000000"
             onChange={(e) => setAmountIn(e.target.value)}
           />
         </label>
         <button type="submit">Find Route</button>
       </form>
       {route && (
-        <div>
+        <div className={styles.results}>
           <h2>Route Details</h2>
           <pre>{JSON.stringify(route, null, 2)}</pre>
           <button onClick={handleExecuteRoute}>Execute Route</button>
