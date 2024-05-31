@@ -5,8 +5,7 @@
     flex-direction: column;
     align-items: center;
     background: linear-gradient(to bottom, lightgrey, grey);
-    /* Full Yellow to Sun Shower */
-    padding: 3rem;
+    padding: 3rem 3rem 1rem 3rem;
     border-radius: 50px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     width: 60vw;;
@@ -14,7 +13,6 @@
 
 .form {
     background-color: white;
-    /* Sun Shower to Full Yellow */
     padding: 2rem;
     border-radius: 30px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -60,13 +58,13 @@
 
 .results {
     background-color: white;
-    /* Sun Shower to Full Yellow */
     padding: 2rem;
     border-radius: 30px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 100%;
     text-align: left;
     font-size: smaller;
+    height: fit-content;
 }
 
 .results pre {
