@@ -15,6 +15,10 @@ export default function Home() {
         <p className={styles.description}>
          Blorm facilitates seamless token transfers across 50+ chains.</p>
         <SwapForm />
+        <h1 className={styles.mainHeading}>More Text</h1>
+        <h2 className={styles.subHeading}>Here </h2>
+        <p className={styles.description}>
+         More text here</p>
       </main>
     </div>
   );
