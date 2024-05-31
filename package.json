@@ -2,6 +2,7 @@
   "name": "blorm",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,8 +10,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@cosmjs/cosmwasm-stargate": "^0.32.3",
+    "@cosmjs/crypto": "^0.32.3",
     "@cosmjs/proto-signing": "^0.32.3",
-    "@skip-router/core": "^3.0.1",
+    "@skip-router/core": "^3.0.2",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18"
