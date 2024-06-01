@@ -171,7 +171,6 @@ export default function SwapForm() {
 
   return (
     <div className={styles.container}>
-      <button onClick={connectKeplr} className={styles.connectButton}>Connect Keplr Wallet</button>
       <form onSubmit={handleFindRoute} className={styles.form}>
         <div className={styles.formGroup}>
           <label>Source Token:</label>
@@ -235,6 +234,7 @@ export default function SwapForm() {
           <button onClick={handleExecuteRoute}>Execute Route</button>
         </div>
       )}
+      <button onClick={connectKeplr} className={styles.connectButton}>Connect Keplr Wallet</button>
     </div>
   );
 }
