@@ -13,6 +13,7 @@
 }
 
 .mainHeading {
+    margin-top: 4vh;
     font-size: 3rem;
     color: #101019;
     /* Indigo Noir */
@@ -28,4 +29,6 @@
     font-size: 1.2rem;
     margin: 1.5rem 0;
     color: #666;
+    align-items: center;
+    text-align: center;
 }

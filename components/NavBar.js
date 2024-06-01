@@ -16,13 +16,13 @@ const NavBar = () => {
             </Link>
             <nav style={{ marginLeft: 'auto', paddingRight: '1rem', alignItems: "center", display: "flex" }}>
                 <Link href="/transfer" style={{ color: 'white', textDecoration: 'none', fontSize: '1rem', marginLeft: '2vw'}}>
-                    Transfer
+                    BLORMSPACE
                 </Link>
                 <Link href="/about" style={{ color: 'white', textDecoration: 'none', fontSize: '1rem', marginLeft: '2vw'}}>
-                    About
+                    PHILOSOPHY
                 </Link>
                 <Link href="/contact" style={{ color: 'white', textDecoration: 'none', fontSize: '1rem', marginLeft: '2vw' }}>
-                    Contact
+                    CONTACT
                 </Link>
             </nav>
         </div>
