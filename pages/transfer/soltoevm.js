@@ -13,11 +13,6 @@ export default function SolToEvm() {
         <h2 className={styles.subHeading}> Swap USDC between Solana and EVM Chains.</h2>
         <p className={styles.description}> </p>
         <SolanaEthForm />
-        <h1 className={styles.mainHeading}>More Text</h1>
-        <h2 className={styles.subHeading}>Here </h2>
-        <p className={styles.description}>
-          More text here
-        </p>
       </div>
   );
 }

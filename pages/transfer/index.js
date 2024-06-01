@@ -13,20 +13,15 @@ export default function Transfer() {
       <div className="flex justify-evenly mx-auto w-4/5">
         <div className="w-7/20 h-1/4 p-4 bg-white rounded shadow">
           <Link href="/transfer/cosmos" className="block w-full px-4 py-2 text-center text-white bg-black rounded hover:bg-gray-800">
-              Transfer Between<br/>Cosmos
+              Transfer Tokens Within<br/>Cosmos
           </Link>
         </div>
         <div className="w-7/20 h-1/4 p-4 bg-white rounded shadow">
           <Link href="/transfer/soltoevm" className="block w-full px-4 py-2 text-center text-white bg-black rounded hover:bg-gray-800">
-              Transfer Between<br/>Solana and Ethereum
+              Transfer USDC Between<br/>Solana and Ethereum
           </Link>
         </div>
       </div>
-      <h1 className={styles.mainHeading}>More Text</h1>
-      <h2 className={styles.subHeading}>Here </h2>
-      <p className={styles.description}>
-        More text here
-      </p>
     </div>
   );
 }

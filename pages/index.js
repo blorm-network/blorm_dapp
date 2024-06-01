@@ -5,9 +5,9 @@ export default function Home() {
   return (
     <div className={styles.container}>
         <h1 className={styles.mainHeading}>Introducing Blorm</h1>
-        <h2 className={styles.subHeading}>Text Here </h2>
+        <h2 className={styles.subHeading}>go to blormspace in the navbar to check it out </h2>
         <p className={styles.description}>
-          More text here
+          text here
         </p>
       </div>
   );
