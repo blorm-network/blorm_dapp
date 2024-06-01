@@ -93,3 +93,23 @@
     background: linear-gradient(135deg, #333, #101019);
     /* Dark Grey to Indigo Noir */
 }
+
+.connectButton {
+    display: block;
+    width: 40%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #101019, #333);
+    /* Indigo Noir to Dark Grey */
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin: 2rem 0;
+}
+
+.connectButton:hover {
+    background: linear-gradient(135deg, #333, #101019);
+    /* Dark Grey to Indigo Noir */
+}

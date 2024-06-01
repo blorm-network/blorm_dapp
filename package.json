@@ -10,9 +10,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chain-registry/keplr": "^1.66.8",
     "@cosmjs/cosmwasm-stargate": "^0.32.3",
     "@cosmjs/crypto": "^0.32.3",
     "@cosmjs/proto-signing": "^0.32.3",
+    "@keplr-wallet/cosmos": "^0.12.96",
+    "@keplr-wallet/stores": "^0.12.96",
+    "@keplr-wallet/types": "^0.12.96",
     "@skip-router/core": "^3.0.2",
     "next": "14.2.3",
     "react": "^18",
