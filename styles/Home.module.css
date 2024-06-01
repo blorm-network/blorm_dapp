@@ -9,7 +9,7 @@
 
 .header {
     width: 100%;
-    padding-left: 2rem;
+    padding-left: 1rem;
     padding-top: .5rem;
     padding-bottom: .5rem;
     background-color: #101019;
@@ -17,6 +17,16 @@
     color: white;
     text-align: left;
     font-size: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    margin-right: 1rem;
+
 }
 
 .main {
