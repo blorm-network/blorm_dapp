@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chain-registry/client": "^1.46.9",
     "@chain-registry/keplr": "^1.66.8",
     "@cosmjs/cosmwasm-stargate": "^0.32.3",
     "@cosmjs/crypto": "^0.32.3",
@@ -20,7 +21,8 @@
     "@skip-router/core": "^3.0.2",
     "next": "14.2.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-select": "^5.8.0"
   },
   "devDependencies": {
     "@types/node": "^20",

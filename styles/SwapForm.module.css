@@ -27,13 +27,21 @@
 
 .form input,
 .form select {
-    width: calc(100% - 20px);
+    width: calc(40%);
     padding: 0.5rem;
     margin-bottom: 1rem;
     border: 1px solid #ddd;
     border-radius: 4px;
     background: linear-gradient(135deg, #FFFFFF, #EAEAEA);
     /* White to Light Grey */
+}
+
+.form select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url('data:image/svg+xml;base64,PHN2ZyB...') no-repeat right #EAEAEA;
+    background-position-x: 95%;
 }
 
 .form button {
