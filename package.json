@@ -12,7 +12,7 @@
   "dependencies": {
     "@api/skip-ibc-api": "file:.api/apis/skip-ibc-api",
     "@chain-registry/client": "^1.46.9",
-    "@chain-registry/keplr": "^1.66.8",
+    "@chain-registry/keplr": "^1.66.9",
     "@cosmjs/cosmwasm-stargate": "^0.32.3",
     "@cosmjs/crypto": "^0.32.3",
     "@cosmjs/proto-signing": "^0.32.3",
