@@ -12,6 +12,8 @@ const SolanaEthForm = () => {
   const [amount, setAmount] = useState('');
   const [isSolToEth, setIsSolToEth] = useState(true);
   const [routeData, setRouteData] = useState(null);
+  const [transferError, setTransferError] = useState(null);
+
 
   useEffect(() => {
     // Fetch Ethereum chains from viem
@@ -56,7 +58,9 @@ const SolanaEthForm = () => {
         setRouteData(routeResponse);
         alert('Route found');
       } else {
-        console.error('Transfer error:', routeResponse.error);
+        console.error('Transfer error:', routeResponse.error + ", " + routeResponse.message);
+        setTransferError(routeResponse);
+        console.log(routeResponse);
         alert('Transfer failed');
       }
     } catch (error) {
@@ -77,6 +81,12 @@ const SolanaEthForm = () => {
       <button className={styles.connectButton} onClick={handleSwapDirection}>
         Swap to {isSolToEth ? 'Ethereum to Solana' : 'Solana to Ethereum'}
       </button>
+      {transferError && (
+        <div className="text-white m-5">
+          <h2></h2>
+          <p>Error {transferError.error}: {transferError.message}</p>
+        </div>
+      )}
       <div className={styles.form}>
         <div className={styles.formGroup}>
           <label>Amount:</label>
@@ -95,13 +105,15 @@ const SolanaEthForm = () => {
         </div>
         <button className={styles.connectButton} onClick={handleTransfer}>Transfer</button>
       </div>
-      {routeData && (
-        <div className={styles.results}>
-          <h2>Route Information</h2>
-          <pre>{JSON.stringify(routeData, null, 2)}</pre>
-        </div>
-      )}
-    </div>
+      {
+        routeData && (
+          <div className={styles.results}>
+            <h2>Route Information</h2>
+            <pre>{JSON.stringify(routeData, null, 2)}</pre>
+          </div>
+        )
+      }
+    </div >
   );
 };
 

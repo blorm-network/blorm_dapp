@@ -194,7 +194,7 @@ export default function SwapForm() {
           />
         </div>
         <div className={styles.formGroup}>
-          <label>Source Token:</label>
+          <label>Destination Token:</label>
           <Select
             className="w-full"
             value={destAssetDenom}
@@ -204,7 +204,7 @@ export default function SwapForm() {
           />
         </div>
         <div className={styles.formGroup}>
-          <label>Source Network:</label>
+          <label>Destination Network:</label>
           <Select
             className="w-full"
             value={destAssetChainID}

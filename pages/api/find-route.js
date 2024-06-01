@@ -21,6 +21,7 @@ export default async function handler(req, res) {
       res.status(200).json(route);
     } catch (error) {
       res.status(500).json({ error: error.message });
+      console.error('Error fetching route:', error);
     }
   } else {
     res.setHeader('Allow', ['POST']);

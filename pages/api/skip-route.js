@@ -19,9 +19,10 @@ export default async function handler(req, res) {
       });
 
       res.status(200).json(routeResponse);
-    } catch (error) {
-      console.error('Error fetching route:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
+    } catch (e) {
+      console.error('Error fetching route:', e);
+
+      res.status(500).json({ error: e.data.code, message: e.data.message});
     }
   } else {
     res.status(405).json({ error: 'Method Not Allowed' });
