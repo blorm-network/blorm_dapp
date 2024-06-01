@@ -88,6 +88,7 @@ export default function SwapForm() {
       </form>
       */}
       <form onSubmit={handleFindRoute} className={styles.form}>
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
         <label>
           Source Asset Denom:
           <select value={sourceAssetDenom} onChange={(e) => setSourceAssetDenom(e.target.value)}>
@@ -108,6 +109,12 @@ export default function SwapForm() {
             {/* Add more options as needed */}
           </select>
         </label>
+        </div>
+        <br />
+        <hr />
+        <br />
+        <br />
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
         <label>
           Destination Asset Denom:
           <select value={destAssetDenom} onChange={(e) => setDestAssetDenom(e.target.value)}>
@@ -128,6 +135,11 @@ export default function SwapForm() {
             {/* Add more options as needed */}
           </select>
         </label>
+        </div>
+        <br />
+        <hr />
+        <br />
+        <br />
         <label>
           Amount In:
           <input
