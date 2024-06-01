@@ -1,0 +1,116 @@
+
+/* components/SolanaEthForm.module.css */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(to bottom, black, black);
+    padding: 3rem 3rem 1rem 3rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 100vw;
+}
+
+.title {
+    color: white;
+    font-size: 2.35rem;
+    margin-bottom: 2rem;
+}
+
+.form {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    width: 40%;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.formGroup label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.formGroup input,
+.formGroup .css-yk16xz-control {
+    width: 100%;
+}
+
+.form button {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #101019, #333);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.form button:hover {
+    background: linear-gradient(135deg, #333, #101019);
+}
+
+.results {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    text-align: left;
+    font-size: smaller;
+    height: fit-content;
+}
+
+.results pre {
+    background: linear-gradient(135deg, #FFFFFF, #EAEAEA);
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.results button {
+    margin-top: 1rem;
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #101019, #333);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.results button:hover {
+    background: linear-gradient(135deg, #333, #101019);
+}
+
+.connectButton {
+    display: block;
+    width: 40%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #101019, #333);
+    color: white;
+    border: 1px solid white;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin: 2rem 0;
+}
+
+.connectButton:hover {
+    background: linear-gradient(135deg, #333, #101019);
+}

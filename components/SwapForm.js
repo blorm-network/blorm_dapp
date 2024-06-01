@@ -234,7 +234,6 @@ export default function SwapForm() {
           <button onClick={handleExecuteRoute}>Execute Route</button>
         </div>
       )}
-      <button onClick={connectKeplr} className={styles.connectButton}>Connect Keplr Wallet</button>
     </div>
   );
 }

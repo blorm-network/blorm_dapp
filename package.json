@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@api/skip-ibc-api": "file:.api/apis/skip-ibc-api",
     "@chain-registry/client": "^1.46.9",
     "@chain-registry/keplr": "^1.66.8",
     "@cosmjs/cosmwasm-stargate": "^0.32.3",
@@ -19,10 +20,14 @@
     "@keplr-wallet/stores": "^0.12.96",
     "@keplr-wallet/types": "^0.12.96",
     "@skip-router/core": "^3.0.2",
+    "@solana/wallet-adapter-phantom": "^0.9.24",
+    "@solana/wallet-adapter-react": "^0.15.35",
+    "ethers": "^6.12.1",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
-    "react-select": "^5.8.0"
+    "react-select": "^5.8.0",
+    "viem": "^2.13.3"
   },
   "devDependencies": {
     "@types/node": "^20",

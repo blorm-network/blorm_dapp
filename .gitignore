@@ -2,6 +2,7 @@
 
 
 .env
+.api/
 
 # dependencies
 /node_modules

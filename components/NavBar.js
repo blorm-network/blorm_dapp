@@ -9,7 +9,7 @@ const NavBar = () => {
             <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
                 <img
                     className={styles.logo}
-                    src="blorm-logo-white.png"
+                    src="/blorm-logo-white.png"
                     alt="blorm logo"
                 />
                 <span className={styles.logoText}>blorm</span>
