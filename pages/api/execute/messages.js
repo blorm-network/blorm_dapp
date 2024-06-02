@@ -51,7 +51,7 @@ export default async function handler(req, res) {
       delete routeFormatted.swap_price_impact_percent;
       routeFormatted.address_list = routeFormatted["addresses"]["address_list"];
       delete routeFormatted.addresses;
-      console.log('routeFormatted:', routeFormatted);
+      // console.log('routeFormatted:', routeFormatted);
       delete routeFormatted.is_c_w20;
 
       routeFormatted.slippage_tolerance_percent = "1";

@@ -3,6 +3,7 @@ import Select from 'react-select';
 import { SigningCosmosClient } from "@cosmjs/launchpad";
 import { SkipRouter } from "@skip-router/core";
 import styles from '../styles/SwapForm.module.css';
+import { OfflineSigner, SigningStargateClient, StargateClient } from '@cosmjs/stargate';
 
 export default function SwapForm() {
   const [keplr, setKeplr] = useState(null);
@@ -22,7 +23,7 @@ export default function SwapForm() {
   const [chainOptions, setChainOptions] = useState([]);
   const [displayError, setDisplayError] = useState(null);
   const [routeTxs, setRouteTxs] = useState([]);
-
+  const [keplrSigner, setKeplrSigner] = useState(null);
 
   useEffect(() => {
     const fetchChains = async () => {
@@ -51,7 +52,7 @@ export default function SwapForm() {
     if (chains) {
       setChainOptions(chains.map(chain => ({
         value: chain.chainID,
-        label: chain.chainID + " / " + chain.chainName,
+        label: chain.chainName + " (" + chain.chainID + ")",
       })));
     }
   }, [chains]);
@@ -147,6 +148,7 @@ export default function SwapForm() {
       const data = await res.json();
       setRoute(data);
       setDisplayError(null);
+
     } else {
       const errorData = await res.json();
       setDisplayError('Error finding route: ' + errorData.error);
@@ -178,11 +180,16 @@ export default function SwapForm() {
 
       const addressMap = {};
       const signers = {};
+      const chainData = {};
       for (let chainId of chainIds) {
         const offlineSigner = keplr.getOfflineSigner(chainId);
         const accounts = await offlineSigner.getAccounts();
         addressMap[chainId] = accounts[0].address;
         signers[chainId] = offlineSigner; // Store the offline signer
+        chainData[chainId] = {
+          address: accounts[0].address,
+          signer: offlineSigner
+        };
       }
 
       // console.log(addressMap, signers);
@@ -208,6 +215,10 @@ export default function SwapForm() {
         const data = await res.json();
         console.log('Fetched messages:', data);
         setRouteTxs(data.txs);
+
+
+        await handleSubmitRoute();
+
       }
       else {
         const errorData = await res.json();
@@ -220,6 +231,71 @@ export default function SwapForm() {
       // console.error(error);
     }
   };
+
+  const handleSubmitRoute = async () => {
+    if (!route) {
+      setDisplayError('Please find a route first.');
+      return;
+    } else if (!routeTxs) {
+      setDisplayError('Please request route messages first.');
+      return;
+    }
+
+    const transformedAddresses = Object.entries(addresses).map(([chainID, address]) => ({ chainID, address }));
+    // console.log(transformedAddresses);
+
+    const skipClient = new SkipRouter({
+      getCosmosSigner: getKeplrSigner,
+    });
+
+    if (!route || !transformedAddresses) {
+      console.error('Route or addresses are undefined');
+      setDisplayError('Route or addresses are undefined');
+      return;
+    }
+
+    try {
+      await skipClient.executeRoute({
+        route: route,
+        userAddresses: transformedAddresses,
+        onTransactionBroadcast: (txInfo) => {
+          console.log(`Transaction broadcasted with tx hash: ${txInfo.txHash} on chain: ${txInfo.chainID}`);
+          setDisplayError(`Transaction broadcasted with tx hash: ${txInfo.txHash} on chain: ${txInfo.chainID}`);
+        },
+        onTransactionTracked: (txInfo) => {
+          console.log(`Transaction tracked with tx hash: ${txInfo.txHash} on chain: ${txInfo.chainID}`);
+          setDisplayError(`Transaction tracked with tx hash: ${txInfo.txHash} on chain: ${txInfo.chainID}`);
+        },
+        onTransactionCompleted: (chainID, txHash, status) => {
+          console.log(`Route completed with tx hash: ${txHash} & status: ${status.state}`);
+          setDisplayError(`Route completed with tx hash: ${txHash} & status: ${status.state}`);
+        }
+      });
+    } catch (error) {
+      setDisplayError('Error executing route: ' + error.message);
+      console.error(error);
+    }
+  };
+
+  async function getKeplrSigner(chainID) {
+    // Check if Keplr is installed
+    if (!window.keplr) {
+      throw new Error("Keplr is not installed")
+    }
+
+    // Request access to the Keplr wallet
+    await window.keplr.enable(chainID);
+
+    // Get the signer from Keplr
+    const offlineSigner = window.getOfflineSigner(chainID);
+    return offlineSigner;
+  }
+
+  async function getCosmosAddress(chainID) {
+    const signer = await getKeplrSigner(chainID);
+    const accounts = await signer.getAccounts();
+    return accounts[0].address;
+  }
 
   const generateReadableRoute = (route) => {
     if (!route || !route.operations) return '';
