@@ -37,7 +37,7 @@ const SolanaEthForm = () => {
       // Convert amount to the required format (e.g., Wei for Ethereum)
       const amountInWei = (parseFloat(amount) * 1e6).toString(); // Adjust conversion as needed
 
-      const response = await fetch('/api/soleth-route', {
+      const response = await fetch('/api/route/soleth', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

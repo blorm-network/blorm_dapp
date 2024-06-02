@@ -20,31 +20,33 @@ export default function SwapForm() {
   const [assetOptionsSource, setAssetOptionsSource] = useState([]);
   const [assetOptionsDest, setAssetOptionsDest] = useState([]);
   const [chainOptions, setChainOptions] = useState([]);
+  const [displayError, setDisplayError] = useState(null);
+  const [routeTxs, setRouteTxs] = useState([]);
 
 
   useEffect(() => {
     const fetchChains = async () => {
       const skipClient = new SkipRouter();
       const resultChains = await skipClient.chains();
-      console.log("Fetched Chains:", resultChains);
+      // console.log("Fetched Chains:", resultChains);
       setChains(resultChains);
     };
     fetchChains();
 
     const fetchAssets = async () => {
-      const res = await fetch('/api/ibc-chains', {
+      const res = await fetch('/api/chains/ibc', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
       });
       const data = await res.json();
-      console.log("Fetched Assets:", data);
+      // console.log("Fetched Assets:", data);
       setAssets(data);
     };
     fetchAssets();
   }, []);
-  
+
   useEffect(() => {
     if (chains) {
       setChainOptions(chains.map(chain => ({
@@ -60,7 +62,7 @@ export default function SwapForm() {
         value: asset.denom,
         label: asset.name + " (" + asset.denom + " / " + asset.symbol + " / " + asset.origin_denom + ")",
       })));
-      console.log("Source Asset Options set:", assetOptionsSource);
+      // console.log("Source Asset Options set:", assetOptionsSource);
     }
   }, [sourceAssetChainID]);
 
@@ -70,7 +72,7 @@ export default function SwapForm() {
         value: asset.denom,
         label: asset.name + " (" + asset.denom + " / " + asset.symbol + " / " + asset.origin_denom + ")",
       })));
-      console.log("Source Asset Options set:", assetOptionsSource);
+      // console.log("Source Asset Options set:", assetOptionsSource);
     }
   }, [destAssetChainID]);
 
@@ -85,19 +87,19 @@ export default function SwapForm() {
     };
     loadKeplr();
     window.addEventListener("keplr_keystorechange", () => {
-      console.log("Key store in Keplr is changed. You may need to refetch the account info.");
+      setDisplayError("Key store in Keplr is changed. You may need to refetch the account info.");
     });
   }, []);
 
   const connectKeplr = async () => {
     if (!keplr) {
-      alert("Please install Keplr extension");
+      setDisplayError("Please install Keplr extension");
       return;
     }
     try {
       const chainIds = route?.requiredChainAddresses || [sourceAssetChainID?.value, destAssetChainID?.value].filter(Boolean);
       if (chainIds.length < 2) {
-        alert("Please select both source and destination chains or find a route first.");
+        setDisplayError("Please select both source and destination chains or find a route first.");
         return;
       }
       await keplr.enable(chainIds);
@@ -105,7 +107,7 @@ export default function SwapForm() {
       for (let chainId of chainIds) {
         const offlineSigner = keplr.getOfflineSigner(chainId);
         if (!offlineSigner) {
-          alert(`Failed to get offline signer for chain ${chainId}`);
+          setDisplayError(`Failed to get offline signer for chain ${chainId}`);
           return;
         }
         const accounts = await offlineSigner.getAccounts();
@@ -115,17 +117,17 @@ export default function SwapForm() {
       setConnected(true);
     } catch (error) {
       console.error(error);
-      alert("Failed to connect to Keplr");
+      setDisplayError("Failed to connect to Keplr");
     }
   };
 
   const handleFindRoute = async (e) => {
     e.preventDefault();
     if (!sourceAssetDenom || !sourceAssetChainID || !destAssetDenom || !destAssetChainID || !amountIn) {
-      alert('Please fill in all fields.');
+      setDisplayError('Please fill in all fields.');
       return;
     }
-    console.log('Finding route with these details:', { sourceAssetDenom, sourceAssetChainID, destAssetDenom, destAssetChainID, amountIn });
+    // console.log('Finding route with these details:', { sourceAssetDenom, sourceAssetChainID, destAssetDenom, destAssetChainID, amountIn });
     const requestBody = {
       sourceAssetDenom: sourceAssetDenom.value,
       sourceAssetChainID: sourceAssetChainID.value,
@@ -134,7 +136,7 @@ export default function SwapForm() {
       amountIn,
       smartSwapOptions: { splitRoutes: true },
     };
-    const res = await fetch('/api/ibc-route', {
+    const res = await fetch('/api/route/ibc', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -144,21 +146,32 @@ export default function SwapForm() {
     if (res.ok) {
       const data = await res.json();
       setRoute(data);
+      setDisplayError(null);
     } else {
       const errorData = await res.json();
-      alert(`Error finding route: ${errorData}`);
+      setDisplayError('Error finding route: ' + errorData.error);
     }
   };
 
-  const handleExecuteRoute = async () => {
+  useEffect(() => {
+    // Runs once the route state has been updated
+    if (route !== null) {
+      handleGetRouteMessages();
+    }
+  }, [route]);
+
+  const handleGetRouteMessages = async () => {
     if (!route) {
-      alert('Please find a route first.');
+      setDisplayError('Please find a route first.');
       return;
     }
     if (!keplr) {
-      alert("Please install Keplr extension");
+      setDisplayError("Please install Keplr extension");
       return;
     }
+
+    await connectKeplr();
+
     try {
       const chainIds = route.requiredChainAddresses;
       await keplr.enable(chainIds);
@@ -172,28 +185,39 @@ export default function SwapForm() {
         signers[chainId] = offlineSigner; // Store the offline signer
       }
 
-      console.log(addressMap, signers);
+      // console.log(addressMap, signers);
 
-      const cosmosSigners = Object.entries(signers).reduce((acc, [chainID, signer]) => {
-        acc[chainID] = new SigningCosmosClient("https://lcd-cosmoshub.keplr.app", addresses[chainID], signer);
-        return acc;
-      }, {});
-
-      // Initialize SkipRouter with the signers
-      const skipClient = new SkipRouter({ getCosmosSigner: (chainID) => cosmosSigners[chainID] });
-
-      await skipClient.executeRoute({
-        route,
-        userAddresses: Object.entries(addresses).map(([chainID, address]) => ({ chainID, address })),
-        onTransactionCompleted: (chainID, txHash, status) => {
-          console.log(`Route completed with tx hash: ${txHash} & status: ${status.state}`);
+      const routeWithAddresses = {
+        ...route,
+        addresses: {
+          addressList: Object.values(addressMap),
         },
+      };
+
+      // console.log('Route object sending to API:', routeWithAddresses);
+
+      const res = await fetch('/api/execute/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(routeWithAddresses),
       });
 
-      alert('Route executed successfully!');
-    } catch (error) {
-      console.error('Error executing route:', error);
-      // alert('Error executing route');
+      if (res.ok) {
+        const data = await res.json();
+        console.log('Fetched messages:', data);
+        setRouteTxs(data.txs);
+      }
+      else {
+        const errorData = await res.json();
+        setDisplayError('Error fetching route messages: ' + errorData.error);
+        // console.log('Error fetching route messages:', errorData.error);
+      }
+    }
+    catch (error) {
+      setDisplayError('Error executing route: ' + error.message);
+      // console.error(error);
     }
   };
 
@@ -221,7 +245,7 @@ export default function SwapForm() {
   return (
     <div className={styles.container}>
       <form onSubmit={handleFindRoute} className={styles.form}>
-      <div className={styles.formGroup}>
+        <div className={styles.formGroup}>
           <label>Source Network:</label>
           <Select
             className="w-full"
@@ -285,15 +309,35 @@ export default function SwapForm() {
           {isRawOutputVisible && (
             <pre>{JSON.stringify(route, null, 2)}</pre>
           )}
-          <button onClick={handleExecuteRoute}>Execute Route</button>
+
         </div>
       )}
-      <div className={styles.keplr}>
-        <button onClick={connectKeplr} className="text-white">Connect Keplr</button>
+      <div className={styles.displayMessage}>
+        {displayError && (
+          <div>
+            <h2>{displayError}</h2>
+          </div>
+        )}
         {connected && (
           <div>
-            <h2 className="text-white">Connected Addresses</h2>
-            <pre className="text-white">{JSON.stringify(addresses, null, 2)}</pre>
+            <h2 className="text-black text-left">Connected Addresses</h2>
+            <pre className="text-black text-left text-xs">{JSON.stringify(addresses, null, 2)}</pre>
+          </div>
+        )}
+        {routeTxs && (
+          <div>
+            <h2 className="text-black text-left">Route</h2>
+            <div className="text-black text-left text-xs">
+              {routeTxs.map((tx, index) => (
+                <div key={index} className="tx">
+                  {tx.cosmos_tx.path.map((item, index) => (
+                    <div key={index}>
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>
