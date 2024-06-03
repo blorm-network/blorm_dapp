@@ -13,7 +13,7 @@ export default function SwapForm() {
   const [destAssetChainID, setDestAssetChainID] = useState(null);
   const [amountIn, setAmountIn] = useState('');
   const [route, setRoute] = useState(null);
-  const [addresses, setAddresses] = useState({});
+  const [addresses, setAddresses] = useState(null);
   const [connected, setConnected] = useState(false);
   const [assets, setAssets] = useState([]);
   const [chains, setChains] = useState([]);
@@ -22,7 +22,7 @@ export default function SwapForm() {
   const [assetOptionsDest, setAssetOptionsDest] = useState([]);
   const [chainOptions, setChainOptions] = useState([]);
   const [displayError, setDisplayError] = useState(null);
-  const [routeTxs, setRouteTxs] = useState([]);
+  const [routeTxs, setRouteTxs] = useState(null);
   const [keplrSigner, setKeplrSigner] = useState(null);
 
   useEffect(() => {
@@ -124,6 +124,12 @@ export default function SwapForm() {
 
   const handleFindRoute = async (e) => {
     e.preventDefault();
+
+    setDisplayError(null);
+    setRoute(null);
+    setRouteTxs(null);
+    setAddresses(null);
+
     if (!sourceAssetDenom || !sourceAssetChainID || !destAssetDenom || !destAssetChainID || !amountIn) {
       setDisplayError('Please fill in all fields.');
       return;
@@ -216,9 +222,6 @@ export default function SwapForm() {
         console.log('Fetched messages:', data);
         setRouteTxs(data.txs);
 
-
-        await handleSubmitRoute();
-
       }
       else {
         const errorData = await res.json();
@@ -231,6 +234,12 @@ export default function SwapForm() {
       // console.error(error);
     }
   };
+
+  useEffect(() => {
+    if (routeTxs) {
+      handleSubmitRoute();
+    }
+  }, [routeTxs]);
 
   const handleSubmitRoute = async () => {
     if (!route) {
@@ -320,103 +329,113 @@ export default function SwapForm() {
 
   return (
     <div className={styles.container}>
-      <form onSubmit={handleFindRoute} className={styles.form}>
-        <div className={styles.formGroup}>
-          <label>Source Network:</label>
-          <Select
-            className="w-full"
-            value={sourceAssetChainID}
-            onChange={setSourceAssetChainID}
-            options={chainOptions}
-            placeholder="Search for a network ..."
-          />
-        </div>
-        <div className={styles.formGroup}>
-          <label>Source Token:</label>
-          <Select
-            className="w-full"
-            value={sourceAssetDenom}
-            onChange={setSourceAssetDenom}
-            options={assetOptionsSource}
-            placeholder="Search for a token ..."
-          />
-        </div>
-        <div className={styles.formGroup}>
-          <label>Destination Network:</label>
-          <Select
-            className="w-full"
-            value={destAssetChainID}
-            onChange={setDestAssetChainID}
-            options={chainOptions}
-            placeholder="Search for a network ..."
-          />
-        </div>
-        <div className={styles.formGroup}>
-          <label>Destination Token:</label>
-          <Select
-            className="w-full"
-            value={destAssetDenom}
-            onChange={setDestAssetDenom}
-            options={assetOptionsDest}
-            placeholder="Search for a token ..."
-          />
-        </div>
-        <div className={styles.formGroup}>
-          <label>Amount In:</label>
-          <input
-            type="text"
-            value={amountIn}
-            placeholder="1000000"
-            onChange={(e) => setAmountIn(e.target.value)}
-            className="w-full border border-gray-300 rounded p-2"
-          />
-        </div>
-        <button type="submit">Find Route</button>
-      </form>
-      {route && (
-        <div className={styles.results}>
-          <h1>We found a route!</h1>
-          <br />
-          <h2>Route Details</h2>
-          <p>{generateReadableRoute(route)}</p>
-          <button onClick={() => setIsRawOutputVisible(!isRawOutputVisible)}>
-            {isRawOutputVisible ? 'Hide' : 'Show'} Raw Output
-          </button>
-          {isRawOutputVisible && (
-            <pre>{JSON.stringify(route, null, 2)}</pre>
-          )}
-
-        </div>
-      )}
-      <div className={styles.displayMessage}>
-        {displayError && (
-          <div>
-            <h2>{displayError}</h2>
+      <div className={styles.left}>
+        <form onSubmit={handleFindRoute} className={styles.form}>
+          <div className={styles.formGroup}>
+            <label>Source Network:</label>
+            <Select
+              className="w-full"
+              value={sourceAssetChainID}
+              onChange={setSourceAssetChainID}
+              options={chainOptions}
+              placeholder="Search for a network ..."
+            />
           </div>
-        )}
-        {connected && (
-          <div>
-            <h2 className="text-black text-left">Connected Addresses</h2>
-            <pre className="text-black text-left text-xs">{JSON.stringify(addresses, null, 2)}</pre>
+          <div className={styles.formGroup}>
+            <label>Source Token:</label>
+            <Select
+              className="w-full"
+              value={sourceAssetDenom}
+              onChange={setSourceAssetDenom}
+              options={assetOptionsSource}
+              placeholder="Search for a token ..."
+            />
           </div>
-        )}
-        {routeTxs && (
-          <div>
-            <h2 className="text-black text-left">Route</h2>
-            <div className="text-black text-left text-xs">
-              {routeTxs.map((tx, index) => (
-                <div key={index} className="tx">
-                  {tx.cosmos_tx.path.map((item, index) => (
-                    <div key={index}>
-                      {item}
-                    </div>
-                  ))}
+          <div className={styles.formGroup}>
+            <label>Destination Network:</label>
+            <Select
+              className="w-full"
+              value={destAssetChainID}
+              onChange={setDestAssetChainID}
+              options={chainOptions}
+              placeholder="Search for a network ..."
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label>Destination Token:</label>
+            <Select
+              className="w-full"
+              value={destAssetDenom}
+              onChange={setDestAssetDenom}
+              options={assetOptionsDest}
+              placeholder="Search for a token ..."
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label>Amount In:</label>
+            <input
+              type="text"
+              value={amountIn}
+              placeholder="1000000"
+              onChange={(e) => setAmountIn(e.target.value)}
+              className="w-full border border-gray-300 rounded p-2"
+            />
+          </div>
+          <button type="submit">Find Route</button>
+        </form>
+      </div>
+      {(route || displayError || routeTxs) && (
+        <div className={styles.right}>
+          <div className={styles.rightInner}>
+            {route && (
+              <div className={styles.results}>
+                <h2 className="text-black text-left font-bold text-2xl">We found a route! 🙌</h2>
+                <br />
+                <p>{generateReadableRoute(route)}</p>
+                <button onClick={() => setIsRawOutputVisible(!isRawOutputVisible)}>
+                  {isRawOutputVisible ? 'Hide' : 'Show'} Raw Output
+                </button>
+                <div className="w-2/10">
+                  {isRawOutputVisible && (
+                    <span className="text-xs word-break w-9/10">{JSON.stringify(route, null, 2)}</span>
+                  )}
                 </div>
-              ))}
+              </div>
+            )}
+            <div className={styles.displayMessage}>
+              <h2 className="text-black text-left font-bold text-2xl">Details</h2>
+              {connected && addresses && (
+                <div>
+                  <h2 className="text-black text-left font-bold text-xl">Connected Addresses</h2>
+                  <span className="text-black text-left text-xs break-words">{JSON.stringify(addresses, null, 2)}</span>
+                </div>
+              )}
+              {routeTxs && (
+                <div>
+                  <h2 className="text-black text-left font-bold text-xl">Route</h2>
+                  <div className="text-black text-left text-xs">
+                    {routeTxs.map((tx, index) => (
+                      <div key={index} className="tx">
+                        {tx.cosmos_tx.path.map((item, index) => (
+                          <div key={index}>
+                            {item}
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {displayError && (
+                <div>
+                  <h2 className="text-black text-left font-bold text-xl">Error</h2>
+                  <span className={styles.errorMessage}>{displayError}</span>
+                </div>
+              )}
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

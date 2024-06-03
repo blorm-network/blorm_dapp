@@ -79,7 +79,7 @@ const SolanaEthForm = () => {
     <div className={styles.container}>
       <h1 className={styles.title}>{isSolToEth ? 'Solana to Ethereum Transfer' : 'Ethereum to Solana Transfer'}</h1>
       <button className={styles.connectButton} onClick={handleSwapDirection}>
-        Swap to {isSolToEth ? 'Ethereum to Solana' : 'Solana to Ethereum'}
+        Switch to {isSolToEth ? 'Ethereum -> Solana' : 'Solana -> Ethereum'}
       </button>
       {transferError && (
         <div className="text-white m-5">
