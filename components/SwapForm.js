@@ -372,7 +372,7 @@ export default function SwapForm() {
       <div className={styles.left}>
         <form onSubmit={handleFindRoute} className={styles.form}>
           <h1 style={{ fontSize: '1.75rem', fontWeight: 'bold', marginBottom: '10px', marginLeft: '5px' }}>From:</h1>
-          <div style={{ backgroundColor: "#222222", padding: '20px', borderRadius: '30px', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly'}}>
+          <div style={{ backgroundColor: "#222222", padding: '20px', borderRadius: '30px', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
             <div className={styles.formGroup}>
               <Select
                 styles={customStyles}
@@ -393,11 +393,16 @@ export default function SwapForm() {
               />
             </div>
           </div>
-          <div style={{ fontSize: "1.75rem", fontWeight: '800', textAlign: 'center', width: "100%", alignItems: 'center', justifyContent: 'center', padding: '10px' }}>
-            ⇵
+
+          <div style={{ display: 'flex', alignItems: 'center', width: '100%', marginTop: '1.5vh', marginBottom: '1.5vh' }}>
+            <h1 style={{ flex: 1, fontSize: '1.75rem', fontWeight: 'bold', margin: 0, textAlign: 'left' }}>To:</h1>
+            <span style={{ flex: 1, fontSize: '1.75rem', fontWeight: '800', textAlign: 'center' }}>
+              ⇵
+            </span>
+            <div style={{ flex: 1 }}></div>
           </div>
-          <h1 style={{ fontSize: '1.75rem', fontWeight: 'bold', marginBottom: '10px', marginLeft: '5px' }}>To:</h1>
-          <div style={{ backgroundColor: "#222222", padding: '20px', borderRadius: '30px', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly'}}>
+
+          <div style={{ backgroundColor: "#222222", padding: '20px', borderRadius: '30px', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
             <div className={styles.formGroup}>
               <Select
                 styles={customStyles}
