@@ -17,6 +17,13 @@ export default async function handler(req, res) {
         destAssetChainID,
         amountIn,
         smartSwapOptions,
+        cumulative_affiliate_fee_bps: '0',
+        allow_unsafe: true,
+        allow_multi_tx: true,
+        experimental_features: ['CCTP'],
+        smart_relay: true,
+        allow_swaps: true,
+        smart_swap_options: {split_routes: true}
       });
       res.status(200).json(route);
     } catch (error) {

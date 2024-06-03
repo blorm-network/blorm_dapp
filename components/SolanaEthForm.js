@@ -15,12 +15,14 @@ const SolanaEthForm = () => {
   const [transferError, setTransferError] = useState(null);
 
 
-  useEffect(() => {
+useEffect(() => {
     // Fetch Ethereum chains from viem
-    const ethChains = Object.values(chains).map(chain => ({
-      value: chain.id,
-      label: chain.name
-    }));
+    const ethChains = Object.values(chains)
+      .filter(chain => chain.id === 1 || chain.id === 8453) //filter for mainnet and base
+      .map(chain => ({
+        value: chain.id,
+        label: chain.name
+      }));
     setEthereumChains(ethChains);
   }, []);
 
@@ -37,17 +39,31 @@ const SolanaEthForm = () => {
       // Convert amount to the required format (e.g., Wei for Ethereum)
       const amountInWei = (parseFloat(amount) * 1e6).toString(); // Adjust conversion as needed
 
+      let inputSourceAssetDenom;
+      let inputSourceChainId;
+      let inputAmountIn;
+
+      if (selectedChain.id === '1') {
+        inputSourceAssetDenom = '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'; // USDC on Ethereum
+        inputSourceChainId = '1';
+        inputAmountIn = amountInWei;
+      } else {
+        inputSourceAssetDenom = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'; // USDT on Base
+        inputSourceChainId = '8453';
+        inputAmountIn = amountInWei;
+      }
+
       const response = await fetch('/api/route/soleth', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          amountIn: amountInWei,
-          sourceAssetDenom: isSolToEth ? 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v' : '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', // USDC on Solana or Ethereum
-          sourceAssetChainId: isSolToEth ? 'solana' : '1',
-          destAssetDenom: isSolToEth ? '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48' : 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', // USDC on Ethereum or Solana
-          destAssetChainId: isSolToEth ? selectedChain.value.toString() : 'solana',
+          amountIn: inputAmountIn,
+          sourceAssetDenom: isSolToEth ? 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v' : inputSourceAssetDenom, // USDC on Solana or Ethereum
+          sourceAssetChainId: isSolToEth ? 'solana' : inputSourceChainId,
+          destAssetDenom: isSolToEth ? inputSourceAssetDenom : 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', // USDC on Ethereum or Solana
+          destAssetChainId: isSolToEth ? inputSourceChainId : 'solana',
         }),
       });
 

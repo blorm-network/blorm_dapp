@@ -5,6 +5,8 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { amountIn, sourceAssetDenom, sourceAssetChainId, destAssetDenom, destAssetChainId } = req.body;
 
+    console.log('Request body:', req.body);
+
     try {
       const routeResponse = await sdk.getRouteV2({
         amount_in: amountIn,
@@ -15,14 +17,17 @@ export default async function handler(req, res) {
         cumulative_affiliate_fee_bps: '0',
         allow_unsafe: true,
         allow_multi_tx: true,
-        experimental_features: ['CCTP']
+        experimental_features: ['CCTP'],
+        smart_relay: true,
+        allow_swaps: true,
+        smart_swap_options: {split_routes: true}
       });
 
+      console.log('Route response:', routeResponse);
       res.status(200).json(routeResponse);
     } catch (e) {
       console.error('Error fetching route:', e);
-
-      res.status(500).json({ error: e.data.code, message: e.data.message});
+      res.status(500).json({ error: e.data.code, message: e.data.message });
     }
   } else {
     res.status(405).json({ error: 'Method Not Allowed' });

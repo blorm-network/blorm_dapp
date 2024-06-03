@@ -15,14 +15,16 @@ const NavBar = () => {
                 <span className={styles.logoText}>blorm</span>
             </Link>
             <nav style={{ marginLeft: 'auto', paddingRight: '1rem', alignItems: "center", display: "flex" }}>
-                <Link href="/transfer" style={{ color: 'white', textDecoration: 'none', fontSize: '1rem', marginLeft: '2vw'}}>
-                    BLORMSPACE
-                </Link>
                 <Link href="/about" style={{ color: 'white', textDecoration: 'none', fontSize: '1rem', marginLeft: '2vw'}}>
                     PHILOSOPHY
                 </Link>
-                <Link href="/contact" style={{ color: 'white', textDecoration: 'none', fontSize: '1rem', marginLeft: '2vw' }}>
-                    CONTACT
+                <Link href="/twitter" style={{ color: 'white', textDecoration: 'none', fontSize: '1rem', marginLeft: '2vw' }}>
+                    TWITTER
+                </Link>
+                <Link href="/transfer" style={{ color: 'white', textDecoration: 'none', fontSize: '1rem', marginLeft: '2vw' }}>
+                    <button style={{ color: 'white', width: '12vw', backgroundColor:'#5E9865', fontSize: '1rem', padding: '.5rem', boxSizing: 'border-box', borderRadius: '20px' }}>
+                    BLORMSPACE
+                    </button>
                 </Link>
             </nav>
         </div>
