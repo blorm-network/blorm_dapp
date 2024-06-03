@@ -1,168 +1,185 @@
 /* styles/Home.module.css */
 
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: fit-content;
-    overflow:hidden;
-    background:#000;
-    transform-style: preserve-3d;
-    @include perspective(1000px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: fit-content;
+  overflow: hidden;
+  background: #000;
+  transform-style: preserve-3d;
+  @include perspective(1000px);
+}
+
+.title {
+  margin-top: 3.5vh;
+}
+
+@keyframes slideInFromTop {
+  0% {
+    transform: translateY(50%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .mainHeading {
-    font-size: 5rem;
-    text-align: center;
-    background: linear-gradient(to right, #5E9865 30%, white 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: bold;
-    margin-top: 5vh;
-    line-height: 5.5rem;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.35);
-    white-space: pre-wrap;
+  font-size: 5rem;
+  text-align: center;
+  background: linear-gradient(to right, #5E9865 30%, white 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  line-height: 5.5rem;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.35);
+  white-space: pre-wrap;
+  animation: slideInFromTop 1.25s ease-out forwards;
 }
 
 .subHeading {
-    margin-top: 5vh;
-    font-size: 2rem;
-    color: white;
-    font-weight: 500;
+  margin-top: 5vh;
+  font-size: 2rem;
+  color: white;
+  font-weight: 500;
+  animation: slideInFromTop 1.6s ease-out forwards;
 }
 
 .cardContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-top: 10vh;
-    width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 10vh;
+  width: 90%;
 }
 
 .card {
-    width: 30%;
-    height: 30vh;
-    background-color: white;
-    border-radius: 30px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: -4px 8px 20px 0 rgba(0, 0, 0, 0.5);
-    padding: 3rem;
-    color: white;
-    background: black;
+  width: 30%;
+  height: 30vh;
+  background-color: white;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 8px 20px 0 rgba(0, 0, 0, 0.5);
+  padding: 3rem;
+  color: white;
+  background: black;
 }
 
 .section2heading {
-    font-size: 4rem;
-    text-align: center;
-    font-weight: 600;
-    margin-top: 5vh;
-    background: linear-gradient(to right, #1A3F2D, #44A576);
-    -webkit-background-clip: text;
-    color: transparent;
+  font-size: 4rem;
+  text-align: center;
+  font-weight: 600;
+  margin-top: 5vh;
+  background: linear-gradient(to right, #1A3F2D, #44A576);
+  -webkit-background-clip: text;
+  color: transparent;
 
 }
 
 .section3heading {
-    font-size: 7rem;
-    text-align: center;
-    font-weight: 600;
-    margin-top: 12.5vh;
-    line-height: 1;
-    color: white;
+  font-size: 7rem;
+  text-align: center;
+  font-weight: 600;
+  margin-top: 12.5vh;
+  line-height: 1;
+  color: white;
 
 }
 
 .section3subheading {
-    margin-top: 5vh;
-    font-size: 2rem;
-    color: white;
-    font-weight: 500;
-    text-align: center;
+  margin-top: 5vh;
+  font-size: 2rem;
+  color: white;
+  font-weight: 500;
+  text-align: center;
 }
 
 .waitlistInput {
-    width: 50%;
-    height: 5vh;
-    border-radius: 30px;
-    border: none;
-    margin-top: 10vh;
-    padding: 1rem;
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: white;
-    background-color: transparent;
-    opacity: 1;
-    text-align: center;
+  width: 50%;
+  height: 5vh;
+  border-radius: 30px;
+  border: none;
+  margin-top: 10vh;
+  padding: 1rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: white;
+  background-color: transparent;
+  opacity: 1;
+  text-align: center;
 }
 
 .waitlistInput::placeholder {
-    opacity: 0.5;
-    text-align: center;
+  opacity: 0.5;
+  text-align: center;
 }
 
 .waitlistInput:focus {
-    outline: none;
+  outline: none;
 }
 
-.section3linkcontainer{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin-top: 18vh;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #FFFFFF;
+.section3linkcontainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 18vh;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #FFFFFF;
 }
 
 
 .a {
-    animation: adjustHue 2s alternate infinite;
-    background: radial-gradient(#0B853D 3px, transparent 5px, #000 7px, transparent 9px, #0B853D 11px, transparent 13px, 15px, transparent 17px, #000 19px, transparent 21px, #0B853D 23px, transparent 25px, #fff 27px, transparent 29px, #000 31px, transparent 33px);
-    background-color: #000;
-    background-size: 32px 32px;
-    overflow: hidden;
-    width: 100vw;
-    height: 100vh;
-    margin: -10px;
-    z-index: -1;
+  animation: adjustHue 2s alternate infinite;
+  background: radial-gradient(#0B853D 3px, transparent 5px, #000 7px, transparent 9px, #0B853D 11px, transparent 13px, 15px, transparent 17px, #000 19px, transparent 21px, #0B853D 23px, transparent 25px, #fff 27px, transparent 29px, #000 31px, transparent 33px);
+  background-color: #000;
+  background-size: 32px 32px;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  margin: -10px;
+  z-index: -1;
+}
+
+#circle {
+  width: 95vw;
+  height: 95vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  position: absolute;
+  background: radial-gradient(#0B853D 3px, transparent 5px, #000 7px, transparent 9px, #0B853D 11px, transparent 13px, 15px, transparent 17px, #000 19px, transparent 21px, #0B853D 23px, transparent 25px, #fff 27px, transparent 29px, #000 31px, transparent 33px);
+  background-size: 30px 30px;
+  animation: blinker 4s linear infinite;
+}
+
+@keyframes adjustHue {
+  0% {
+    filter: hue-rotate(15deg);
   }
-  
-  #circle {
-    width: 95vw;
-    height: 95vh;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    position: absolute;
-    background: radial-gradient(#0B853D 3px, transparent 5px, #000 7px, transparent 9px, #0B853D 11px, transparent 13px, 15px, transparent 17px, #000 19px, transparent 21px, #0B853D 23px, transparent 25px, #fff 27px, transparent 29px, #000 31px, transparent 33px);
-    background-size: 30px 30px;
-    animation: blinker 4s linear infinite;
+
+  50% {
+    filter: hue-rotate(30deg);
   }
-  
-  @keyframes adjustHue {
-    0% {
-      filter: hue-rotate(15deg);
-    }
-    50% {
-      filter: hue-rotate(30deg);
-    }
-    100% {
-      filter: hue-rotate(45deg);
-    }
+
+  100% {
+    filter: hue-rotate(45deg);
   }
-  
-  @keyframes blinker {
-    0% {
-      opacity: 1.0;
-    }
-    50% {
-      opacity: 0.3;
-    }
-    100% {
-      opacity: 1.0;
-    }
+}
+
+@keyframes blinker {
+  0% {
+    opacity: 1.0;
   }
-  
+
+  50% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 1.0;
+  }
+}

@@ -7,6 +7,7 @@ import axios from 'axios';
 import { auth, db } from '../lib/firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import { v4 as uuid } from 'uuid';
+import Head from 'next/head';
 
 export default function Home() {
   const [email, setEmail] = useState('');
@@ -17,16 +18,19 @@ export default function Home() {
     e.preventDefault();
 
     try {
-        await setDoc(doc(db, 'mailing-list', uuid()), {
-            email: email
-        });
-        setMessage('Subscribed successfully!');
+      await setDoc(doc(db, 'mailing-list', uuid()), {
+        email: email
+      });
+      setMessage('Subscribed successfully!');
     } catch (error) {
-        console.log(error.message);
-        setMessage('Failed to subscribe. Please try again.');
+      console.log(error.message);
+      setMessage('Failed to subscribe. Please try again.');
     }
-};
-  return (
+  };
+  return (<>
+    <Head>
+      <title>BLORM</title>
+    </Head>
     <div className={styles.container}>
       <div style={{ position: 'fixed', zIndex: '-1', opacity: '0.6', width: '100vw', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div className={styles.a}></div>
@@ -34,7 +38,11 @@ export default function Home() {
       </div>
       <div style={{ height: "100vh", width: "100vw", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", background: "transparent" }}>
         <NavBar />
-        <h1 className={styles.mainHeading}>FORM<br />BLOCKCHAIN<br />INFORMATION</h1>
+        <div className={styles.title}>
+          <h1 className={styles.mainHeading}>FORM</h1>
+          <h1 className={styles.mainHeading}>BLOCKCHAIN</h1>
+          <h1 className={styles.mainHeading}>INFORMATION</h1>
+        </div>
         <h2 className={styles.subHeading}>THE BLORM HAS BEGUN </h2>
         <div className={styles.cardContainer}>
           <div className={styles.card}>
@@ -70,7 +78,7 @@ export default function Home() {
         <form onSubmit={handleSubscribe} className={styles.waitlistInput}>
           <input className={styles.waitlistInput} value={email} onChange={(e) => setEmail(e.target.value)} required placeholder='EMAIL ADDRESS →'></input>
           <button type="submit" className="hidden flex items-center justify-center p-2 bg-blue-500 text-white rounded-full hover:bg-blue-700">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
             </svg>
           </button>
@@ -82,5 +90,7 @@ export default function Home() {
       </div>
       <Footer />
     </div>
+  </>
   );
 }
+

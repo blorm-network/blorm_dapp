@@ -18,8 +18,12 @@ const NavBar = () => {
                 <Link href="/about" style={{ color: 'white', textDecoration: 'none', fontSize: '1rem', marginLeft: '2vw'}}>
                     PHILOSOPHY
                 </Link>
-                <Link href="/twitter" style={{ color: 'white', textDecoration: 'none', fontSize: '1rem', marginLeft: '2vw' }}>
-                    TWITTER
+                <Link href="https://x.com" style={{ color: 'white', textDecoration: 'none', fontSize: '1rem', marginLeft: '2vw' }}>
+                    <img
+                            className={styles.xlogo}
+                            src="/x-logo-white.png"
+                            alt="x logo"
+                    />
                 </Link>
                 <Link href="/transfer" style={{ color: 'white', textDecoration: 'none', fontSize: '1rem', marginLeft: '2vw' }}>
                     <button style={{ color: 'white', width: '12vw', backgroundColor:'#5E9865', fontSize: '1rem', padding: '.5rem', boxSizing: 'border-box', borderRadius: '20px' }}>

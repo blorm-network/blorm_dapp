@@ -11,6 +11,7 @@
     align-items: center;
     height: 7.5vh;
     z-index: 999;
+    user-select: none;
 }
 
 .logo {
@@ -21,4 +22,10 @@
 
 .logoText {
     color: white;
+}
+
+.xlogo {
+    width: 20px;
+    height: 20px;
+    margin-right: 1rem;
 }

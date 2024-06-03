@@ -7,6 +7,7 @@ import { OfflineSigner, SigningStargateClient, StargateClient } from '@cosmjs/st
 import customStyles from '../lib/reactSelectStyles';
 import absoluteUrl from 'next-absolute-url';
 import { useRouter } from 'next/router';
+import chainsJson from '/lib/chains.json';
 
 export default function SwapForm() {
   const [keplr, setKeplr] = useState(null);
@@ -42,8 +43,10 @@ export default function SwapForm() {
     const fetchChains = async () => {
       const skipClient = new SkipRouter();
       const resultChains = await skipClient.chains();
-      // console.log("Fetched Chains:", resultChains);
-      setChains(resultChains);
+      // Merge fetched chains with the JSON chains
+      const mergedChains = [...resultChains, ...Object.values(chainsJson)];
+      console.log("Fetched Chains:", mergedChains);
+      setChains(mergedChains);
     };
     fetchChains();
 
@@ -55,7 +58,9 @@ export default function SwapForm() {
         },
       });
       const data = await res.json();
-      console.log("Fetched Assets:", data);
+      
+
+      //console.log("Fetched Assets:", data);
       setAssets(data);
     };
     fetchAssets();
@@ -118,99 +123,103 @@ export default function SwapForm() {
     }
   }, [destAssetChainID, assets, setAssetOptionsDest]);
 
-  const fetchPrice = async (coingeckoId) => {
-    const url = '/api/coinGeckoPrice';
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ id: coingeckoId }),
-    });
-    const data = await response.json();
-    if (response.ok) {
-      return data[coingeckoId].usd;
-    } else {
-      throw new Error(data.error);
+// Function to fetch USD price for a given coingeckoId
+const fetchPrice = async (coingeckoId) => {
+  const url = '/api/coinGeckoPrice';
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ id: coingeckoId }),
+  });
+  const data = await response.json();
+  if (response.ok) {
+    return data[coingeckoId].usd;
+  } else {
+    throw new Error(data.error);
+  }
+};
+
+// Fetch USD price for the source asset when amountIn or its denom/chainID changes
+useEffect(() => {
+  const updateAmountInUSD = async () => {
+    if (amountIn && sourceAssetDenom && sourceAssetChainID) {
+      try {
+        const assetInfo = assets.chain_to_assets_map[sourceAssetChainID.value].assets.find(
+          (asset) => asset.denom === sourceAssetDenom.value
+        );
+        const coingeckoId = assetInfo.coingecko_id;
+        const usdPrice = await fetchPrice(coingeckoId);
+        setAmountInUSD(usdPrice);
+        setAmountBaseUSD(amountIn * usdPrice);
+      } catch (err) {
+        console.log(err.message);
+      }
     }
   };
-  
-  // Fetch USD price for the source asset when amountIn or its denom/chainID changes
-  useEffect(() => {
-    const updateAmountInUSD = async () => {
-      if (amountIn && sourceAssetDenom && sourceAssetChainID) {
-        try {
-          const assetInfo = assets.chain_to_assets_map[sourceAssetChainID.value].assets.find(
-            (asset) => asset.denom === sourceAssetDenom.value
-          );
-          const coingeckoId = assetInfo.coingecko_id;
-          const usdPrice = await fetchPrice(coingeckoId);
-          setAmountInUSD(usdPrice);
-          setAmountBaseUSD(amountIn * usdPrice);
-        } catch (err) {
-          console.log(err.message);
-        }
-      }
-    };
-    updateAmountInUSD();
-  }, [amountIn, sourceAssetDenom, sourceAssetChainID]);
-  
-  // Fetch USD price for the destination asset when amountOut or its denom/chainID changes
-  useEffect(() => {
-    const updateAmountOutUSD = async () => {
-      if (amountOut && destAssetDenom && destAssetChainID) {
+  updateAmountInUSD();
+}, [amountIn, sourceAssetDenom, sourceAssetChainID]);
+
+// Fetch USD price for the destination asset when destAssetDenom or destAssetChainID changes
+useEffect(() => {
+  const updateAmountOutUSD = async () => {
+    if (destAssetDenom && destAssetChainID) {
+      try {
         const assetInfo = assets.chain_to_assets_map[destAssetChainID.value].assets.find(
           (asset) => asset.denom === destAssetDenom.value
         );
         const coingeckoId = assetInfo.coingecko_id;
-        try {
-          const usdPrice = await fetchPrice(coingeckoId);
-          setAmountOutUSD(usdPrice);
-          setAmountBaseUSD(amountOut * usdPrice);
-        } catch (err) {
-          console.log(err.message);
+        const usdPrice = await fetchPrice(coingeckoId);
+        setAmountOutUSD(usdPrice);
+        if (amountInUSD) {
+          // Calculate amountOut using updated USD prices
+          const convertedAmountOut = (amountIn * amountInUSD) / usdPrice;
+          setUpdatingFromAmountIn(true);  // Set flag to indicate that amountOut is being updated
+          setAmountOut(convertedAmountOut);
         }
+      } catch (err) {
+        console.log(err.message);
       }
-    };
-    updateAmountOutUSD();
-  }, [amountOut, destAssetDenom, destAssetChainID]);
-  
-  // Convert amountIn to amountOut using the fetched USD prices
-  useEffect(() => {
-    if (sourceAssetDenom && sourceAssetChainID && amountInUSD && !updatingFromAmountOut) {
-      if (amountIn && amountInUSD && amountOutUSD) {
-        const convertedAmountOut = (amountIn * amountInUSD) / amountOutUSD;
-        setUpdatingFromAmountIn(true);  // Set flag to indicate that amountOut is being updated
-        setAmountOut(convertedAmountOut);
-      }
-    } 
-  }, [amountInUSD, amountIn]);
-  
-  // Convert amountOut to amountIn using the fetched USD prices
-  useEffect(() => {
-    if (destAssetDenom && destAssetChainID && amountOutUSD && !updatingFromAmountIn) {
-      if (amountOut && amountOutUSD && amountInUSD) {
-        const convertedAmountIn = (amountOut * amountOutUSD) / amountInUSD;
-        setUpdatingFromAmountOut(true);  // Set flag to indicate that amountIn is being updated
-        setAmountIn(convertedAmountIn);
-      }
-    } 
-  }, [amountOutUSD, amountOut]);
-  
-  // Reset the updating flags after state updates
-  useEffect(() => {
-    if (updatingFromAmountIn) {
-      setUpdatingFromAmountIn(false);
     }
-  }, [amountOut]);
-  
-  useEffect(() => {
-    if (updatingFromAmountOut) {
-      setUpdatingFromAmountOut(false);
-    }
-  }, [amountIn]);
-  
+  };
+  updateAmountOutUSD();
+}, [destAssetDenom, destAssetChainID, amountInUSD]);
 
+// Convert amountIn to amountOut using the fetched USD prices
+useEffect(() => {
+  if (sourceAssetDenom && sourceAssetChainID && amountInUSD && !updatingFromAmountOut) {
+    if (amountIn && amountInUSD && amountOutUSD) {
+      const convertedAmountOut = (amountIn * amountInUSD) / amountOutUSD;
+      setUpdatingFromAmountIn(true);  // Set flag to indicate that amountOut is being updated
+      setAmountOut(convertedAmountOut);
+    }
+  }
+}, [amountInUSD, amountIn, amountOutUSD]);
+
+// Convert amountOut to amountIn using the fetched USD prices
+useEffect(() => {
+  if (destAssetDenom && destAssetChainID && amountOutUSD && !updatingFromAmountIn) {
+    if (amountOut && amountOutUSD && amountInUSD) {
+      const convertedAmountIn = (amountOut * amountOutUSD) / amountInUSD;
+      setUpdatingFromAmountOut(true);  // Set flag to indicate that amountIn is being updated
+      setAmountIn(convertedAmountIn);
+    }
+  }
+}, [amountOutUSD, amountOut, amountInUSD]);
+
+// Reset the updating flags after state updates
+useEffect(() => {
+  if (updatingFromAmountIn) {
+    setUpdatingFromAmountIn(false);
+  }
+}, [amountOut]);
+
+useEffect(() => {
+  if (updatingFromAmountOut) {
+    setUpdatingFromAmountOut(false);
+  }
+}, [amountIn]);
   // Load Keplr on page load
   useEffect(() => {
     const loadKeplr = async () => {
