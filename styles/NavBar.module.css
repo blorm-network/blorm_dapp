@@ -1,16 +1,16 @@
 .header {
     width: 100%;
-    padding-left: 1rem;
+    padding-left: 2rem;
     padding-top: .5rem;
     padding-bottom: .5rem;
-    background-color: #101019;
-    /* Indigo Noir */
     color: white;
     text-align: left;
     font-size: 2rem;
     display: flex;
     flex-direction: row;
     align-items: center;
+    height: 7.5vh;
+    z-index: 999;
 }
 
 .logo {
@@ -20,7 +20,5 @@
 }
 
 .logoText {
-    background: linear-gradient(to right, lightpink 0%, lightblue 60%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: white;
 }
