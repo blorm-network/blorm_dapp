@@ -1,7 +1,7 @@
-// components/NavBar.js
+// components/NavBarAlt.js
 
 import Link from 'next/link';
-import styles from '../styles/NavBar.module.css';
+import styles from '../styles/NavBarAlt.module.css';
 
 const NavBar = () => {
     return (
@@ -9,16 +9,16 @@ const NavBar = () => {
             <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
                 <img
                     className={styles.logo}
-                    src="/blorm-logo-white.png"
+                    src="/blorm-logo-black.png"
                     alt="blorm logo"
                 />
                 <span className={styles.logoText}>B L O R M</span>
             </Link>
             <nav style={{ marginLeft: 'auto', paddingRight: '1rem', alignItems: "center", display: "flex" }}>
-                <Link href="/about" style={{ color: 'white', textDecoration: 'none', fontSize: '1rem', marginLeft: '2vw'}}>
+                <Link href="/about" style={{ color: 'black', textDecoration: 'none', fontSize: '1rem', marginLeft: '2vw'}}>
                     PHILOSOPHY
                 </Link>
-                <Link href="/twitter" style={{ color: 'white', textDecoration: 'none', fontSize: '1rem', marginLeft: '2vw' }}>
+                <Link href="/twitter" style={{ color: 'black', textDecoration: 'none', fontSize: '1rem', marginLeft: '2vw' }}>
                     TWITTER
                 </Link>
                 <Link href="/transfer" style={{ color: 'white', textDecoration: 'none', fontSize: '1rem', marginLeft: '2vw' }}>

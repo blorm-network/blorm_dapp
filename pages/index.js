@@ -5,12 +5,12 @@ import NavBar from '@/components/NavBar';
 export default function Home() {
   return (
     <div className={styles.container}>
-      <NavBar />
       <div style={{ position: 'fixed', zIndex: '-1', opacity: '0.6', width: '100vw', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
         <div className={styles.a}></div>
         <div id={styles.circle}></div>
       </div>
-      <div className="h-screen w-screen bg-transparent flex flex-col items-center justify-start">
+      <div style={{ height: "100vh", width: "100vw", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", background: "transparent"}}>
+        <NavBar />
         <h1 className={styles.mainHeading}>FORM<br />BLOCKCHAIN<br />INFORMATION</h1>
         <h2 className={styles.subHeading}>THE BLORM HAS BEGUN </h2>
         <div className={styles.cardContainer}>

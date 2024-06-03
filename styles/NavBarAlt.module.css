@@ -3,7 +3,7 @@
     padding-left: 1rem;
     padding-top: .5rem;
     padding-bottom: .5rem;
-    color: white;
+    color: black;
     text-align: left;
     font-size: 2rem;
     display: flex;
@@ -20,5 +20,5 @@
 }
 
 .logoText {
-    color: white;
+    color: black;
 }
