@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "apis": [
+    {
+      "identifier": "skip-ibc-api",
+      "source": "@skip-ibc-api/v0.1.0#b8cwlpglws68hjh",
+      "integrity": "sha512-nO/rSsRa8l5iVvXpBz4lJufZh0vvC7oXMKxh9AXb9wp/TdtOSl3R0Cn9eb3gYajfEH6bn+DHsatB3hbJYuDTZg==",
+      "installerVersion": "6.1.1"
+    }
+  ]
+}
