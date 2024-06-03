@@ -1,10 +1,10 @@
-import styles from '../../styles/SolToEth.module.css';
+import styles from '../styles/SolToEth.module.css';
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { WalletProvider } from "@solana/wallet-adapter-react";
 import { PhantomWalletAdapter } from "@solana/wallet-adapter-phantom";
 
-const SolanaEthForm = dynamic(() => import('../../components/SolanaEthForm'), { ssr: false });
+const SolanaEthForm = dynamic(() => import('../components/SolanaEthForm'), { ssr: false });
 
 export default function SolToEvm() {
   return (

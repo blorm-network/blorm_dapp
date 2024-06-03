@@ -4,47 +4,9 @@ import { SigningCosmosClient } from "@cosmjs/launchpad";
 import { SkipRouter } from "@skip-router/core";
 import styles from '../styles/SwapForm.module.css';
 import { OfflineSigner, SigningStargateClient, StargateClient } from '@cosmjs/stargate';
-
-const customStyles = {
-  control: (baseStyles) => ({
-    ...baseStyles,
-    backgroundColor: '#222222',
-    borderRadius: '30px',
-    color: 'white',
-    borderColor: '#222222',
-    '&:hover': {
-      borderColor: '#222222',
-    },
-  }),
-  placeholder: (baseStyles) => ({
-    ...baseStyles,
-    color: 'white',
-    textAlign: 'center',
-  }),
-  singleValue: (baseStyles) => ({
-    ...baseStyles,
-    color: 'white',
-    textAlign: 'center',
-  }),
-  menu: (baseStyles) => ({
-    ...baseStyles,
-    backgroundColor: '#222222',
-    borderRadius: '30px',
-  }),
-  option: (baseStyles, state) => ({
-    ...baseStyles,
-    color: 'white',
-    textAlign: 'center',
-    backgroundColor: state.isFocused ? '#444444' : '#222222',
-    '&:hover': {
-      backgroundColor: '#444444',
-    },
-  }),
-  valueContainer: (baseStyles) => ({
-    ...baseStyles,
-    justifyContent: 'center',
-  }),
-};
+import customStyles from '../lib/reactSelectStyles';
+import absoluteUrl from 'next-absolute-url';
+import { useRouter } from 'next/router';
 
 export default function SwapForm() {
   const [keplr, setKeplr] = useState(null);
@@ -53,6 +15,12 @@ export default function SwapForm() {
   const [destAssetDenom, setDestAssetDenom] = useState(null);
   const [destAssetChainID, setDestAssetChainID] = useState(null);
   const [amountIn, setAmountIn] = useState('');
+  const [amountOut, setAmountOut] = useState('');
+  const [amountInUSD, setAmountInUSD] = useState('');
+  const [amountOutUSD, setAmountOutUSD] = useState('');
+  const [amountBaseUSD, setAmountBaseUSD] = useState('');
+  const [updatingFromAmountIn, setUpdatingFromAmountIn] = useState(false);
+  const [updatingFromAmountOut, setUpdatingFromAmountOut] = useState(false);
   const [route, setRoute] = useState(null);
   const [addresses, setAddresses] = useState(null);
   const [connected, setConnected] = useState(false);
@@ -66,6 +34,10 @@ export default function SwapForm() {
   const [routeTxs, setRouteTxs] = useState(null);
   const [keplrSigner, setKeplrSigner] = useState(null);
 
+  const router = useRouter();
+  const isServer = typeof window === 'undefined';
+
+  // Fetch chains and assets on page load
   useEffect(() => {
     const fetchChains = async () => {
       const skipClient = new SkipRouter();
@@ -83,12 +55,13 @@ export default function SwapForm() {
         },
       });
       const data = await res.json();
-      // console.log("Fetched Assets:", data);
+      console.log("Fetched Assets:", data);
       setAssets(data);
     };
     fetchAssets();
   }, []);
 
+  // Set chain options once chains are fetched
   useEffect(() => {
     if (chains) {
       setChainOptions(chains.map(chain => ({
@@ -98,26 +71,150 @@ export default function SwapForm() {
     }
   }, [chains]);
 
+  // Format asset string for dropdown display
+  const formatAssetPretty = (str) => {
+    if (str.length <= 8) {
+      return str;
+    }
+    if (str.includes('/')) {
+      const [prefix, suffix] = str.split('/');
+      return `${prefix}/${suffix.slice(0, 3)}...${suffix.slice(-5)}`;
+    } else {
+      return `${str.slice(0, 3)}...${str.slice(-5)}`;
+    }
+  };
+
+  // Set asset options for source once assets are fetched for the dropdown
   useEffect(() => {
     if (sourceAssetChainID && assets && sourceAssetChainID.value in assets.chain_to_assets_map) {
-      setAssetOptionsSource(assets.chain_to_assets_map[sourceAssetChainID.value].assets.map(asset => ({
-        value: asset.denom,
-        label: asset.name + " (" + asset.denom + " / " + asset.symbol + " / " + asset.origin_denom + ")",
-      })));
+      setAssetOptionsSource(assets.chain_to_assets_map[sourceAssetChainID.value].assets.filter(asset => asset.coingecko_id && asset.coingecko_id.trim() !== '').map(asset => {
+        const formattedDenom = formatAssetPretty(asset.denom);
+        const formattedSymbol = formatAssetPretty(asset.symbol);
+        const formattedOriginDenom = formatAssetPretty(asset.origin_denom);
+
+        return {
+          value: asset.denom,
+          label: `${asset.name} (${formattedSymbol} | ${formattedOriginDenom})`, // ${formattedDenom}
+        };
+      }));
       // console.log("Source Asset Options set:", assetOptionsSource);
     }
-  }, [sourceAssetChainID]);
+  }, [sourceAssetChainID, assets, setAssetOptionsSource]);
 
+  // Set asset options for dest once assets are fetched for the dropdown
   useEffect(() => {
     if (destAssetChainID && assets && destAssetChainID.value in assets.chain_to_assets_map) {
-      setAssetOptionsDest(assets.chain_to_assets_map[destAssetChainID.value].assets.map(asset => ({
-        value: asset.denom,
-        label: asset.name + " (" + asset.denom + " / " + asset.symbol + " / " + asset.origin_denom + ")",
-      })));
-      // console.log("Source Asset Options set:", assetOptionsSource);
-    }
-  }, [destAssetChainID]);
+      setAssetOptionsDest(assets.chain_to_assets_map[destAssetChainID.value].assets.map(asset => {
+        const formattedDenom = formatAssetPretty(asset.denom);
+        const formattedSymbol = formatAssetPretty(asset.symbol);
+        const formattedOriginDenom = formatAssetPretty(asset.origin_denom);
 
+        return {
+          value: asset.denom,
+          label: `${asset.name} (${formattedSymbol} | ${formattedOriginDenom})`, // ${formattedDenom}
+        };
+      }));
+      // console.log("Destination Asset Options set:", assetOptionsdest);
+    }
+  }, [destAssetChainID, assets, setAssetOptionsDest]);
+
+  const fetchPrice = async (coingeckoId) => {
+    const url = '/api/coinGeckoPrice';
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id: coingeckoId }),
+    });
+    const data = await response.json();
+    if (response.ok) {
+      return data[coingeckoId].usd;
+    } else {
+      throw new Error(data.error);
+    }
+  }
+  
+  // Fetch USD price for the source asset when amountIn or its denom/chainID changes
+  useEffect(() => {
+    const updateAmountInUSD = async () => {
+      if (amountIn && sourceAssetDenom && sourceAssetChainID) {
+        const assetInfo = assets.chain_to_assets_map[sourceAssetChainID.value].assets.find(
+          (asset) => asset.denom === sourceAssetDenom.value
+        );
+        const coingeckoId = assetInfo.coingecko_id;
+        try {
+          const usdPrice = await fetchPrice(coingeckoId);
+          setAmountInUSD(usdPrice);
+          setAmountBaseUSD(amountIn * usdPrice);
+        } catch (err) {
+          console.log(err.message);
+        }
+      }
+    };
+    updateAmountInUSD();
+  }, [amountIn, sourceAssetDenom, sourceAssetChainID]);
+
+  // Fetch USD price for the destination asset when amountOut or its denom/chainID changes
+  useEffect(() => {
+    const updateAmountOutUSD = async () => {
+      if (amountOut && destAssetDenom && destAssetChainID) {
+        const assetInfo = assets.chain_to_assets_map[destAssetChainID.value].assets.find(
+          (asset) => asset.denom === destAssetDenom.value
+        );
+        const coingeckoId = assetInfo.coingecko_id;
+        try {
+          const usdPrice = await fetchPrice(coingeckoId);
+          setAmountOutUSD(usdPrice);
+          setAmountBaseUSD(amountOut * usdPrice);
+        } catch (err) {
+          console.log(err.message);
+        }
+      }
+    };
+    updateAmountOutUSD();
+  }, [amountOut, destAssetDenom, destAssetChainID]);
+
+  // Convert amountIn to amountOut using the fetched USD prices
+  useEffect(() => {
+    if (sourceAssetDenom && sourceAssetChainID && amountInUSD && !updatingFromAmountOut) {
+      if (amountIn && amountInUSD && amountOutUSD) {
+        const convertedAmountOut = (amountIn * amountInUSD) / amountOutUSD;
+        // console.log('Converted amountOut:', convertedAmountOut)
+        setUpdatingFromAmountIn(true);  // Set flag to indicate that amountOut is being updated
+      }
+    } else if (!sourceAssetDenom || !sourceAssetChainID) {
+      setAmountIn('');
+    }
+  }, [amountInUSD, amountIn]);
+
+  // Convert amountOut to amountIn using the fetched USD prices
+  useEffect(() => {
+    if (destAssetDenom && destAssetChainID && amountOutUSD && !updatingFromAmountIn) {
+      if (amountOut && amountOutUSD && amountInUSD) {
+        const convertedAmountIn = (amountOut * amountOutUSD) / amountInUSD;
+        // console.log('Converted amountIn:', convertedAmountIn)
+        setUpdatingFromAmountOut(true);  // Set flag to indicate that amountIn is being updated
+      }
+    } else if (!destAssetDenom || !destAssetChainID) {
+      setAmountOut('');
+    }
+  }, [amountOutUSD, amountOut]);
+
+  // Reset the updating flags after state updates
+  useEffect(() => {
+    if (updatingFromAmountIn) {
+      setUpdatingFromAmountIn(false);
+    }
+  }, [amountOut]);
+
+  useEffect(() => {
+    if (updatingFromAmountOut) {
+      setUpdatingFromAmountOut(false);
+    }
+  }, [amountIn]);
+
+  // Load Keplr on page load
   useEffect(() => {
     const loadKeplr = async () => {
       if (typeof window !== 'undefined') {
@@ -133,6 +230,7 @@ export default function SwapForm() {
     });
   }, []);
 
+  // Connect to Keplr
   const connectKeplr = async () => {
     if (!keplr) {
       setDisplayError("Please install Keplr extension");
@@ -163,6 +261,8 @@ export default function SwapForm() {
     }
   };
 
+  // Find route between source and destination chains for token transfer
+  // This function is called when the user submits the form and returns a route object
   const handleFindRoute = async (e) => {
     e.preventDefault();
 
@@ -201,6 +301,8 @@ export default function SwapForm() {
     }
   };
 
+  // Fetch route messages once route is found
+  // This function is called when the route state is updated and returns a list of messages
   useEffect(() => {
     // Runs once the route state has been updated
     if (route !== null) {
@@ -275,12 +377,15 @@ export default function SwapForm() {
     }
   };
 
+  // Execute route once route messages are fetched
   useEffect(() => {
     if (routeTxs) {
       handleSubmitRoute();
     }
   }, [routeTxs]);
 
+  // Execute route once route messages are fetched
+  // This function is called when the routeTxs state is updated and executes the route, it returns a transaction hash
   const handleSubmitRoute = async () => {
     if (!route) {
       setDisplayError('Please find a route first.');
@@ -340,12 +445,14 @@ export default function SwapForm() {
     return offlineSigner;
   }
 
+  // Get the Cosmos address from Keplr
   async function getCosmosAddress(chainID) {
     const signer = await getKeplrSigner(chainID);
     const accounts = await signer.getAccounts();
     return accounts[0].address;
   }
 
+  // Generate a human-readable route string for display / logging
   const generateReadableRoute = (route) => {
     if (!route || !route.operations) return '';
     const truncateDenom = (denom) => {
@@ -371,70 +478,107 @@ export default function SwapForm() {
     <div className={styles.container}>
       <div className={styles.left}>
         <form onSubmit={handleFindRoute} className={styles.form}>
-          <h1 style={{ fontSize: '1.75rem', fontWeight: 'bold', marginBottom: '10px', marginLeft: '5px' }}>From:</h1>
-          <div style={{ backgroundColor: "#222222", padding: '20px', borderRadius: '30px', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
-            <div className={styles.formGroup}>
-              <Select
-                styles={customStyles}
-                value={sourceAssetChainID}
-                onChange={setSourceAssetChainID}
-                options={chainOptions}
-                placeholder="SELECT NETWORK"
-              />
+          <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '10px', marginLeft: '5px' }}>From:</h1>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', backgroundColor: "#222222", padding: '20px', borderRadius: '30px', }}>
+            <div style={{ width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div className={styles.formGroup}>
+                <Select
+                  styles={customStyles}
+                  value={sourceAssetChainID}
+                  onChange={setSourceAssetChainID}
+                  options={chainOptions}
+                  placeholder="SELECT NETWORK"
+                />
+              </div>
+              <div className={styles.formGroup}>
+                <Select
+                  styles={customStyles}
+                  value={sourceAssetDenom}
+                  onChange={setSourceAssetDenom}
+                  options={assetOptionsSource}
+                  placeholder="SELECT TOKEN"
+                  isDisabled={!sourceAssetChainID}
+                />
+              </div>
             </div>
-            <div className={styles.formGroup}>
-              <Select
-                styles={customStyles}
-                value={sourceAssetDenom}
-                onChange={setSourceAssetDenom}
-                options={assetOptionsSource}
-                placeholder="SELECT TOKEN"
-                isDisabled={!sourceAssetChainID}
+            <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
+              <input
+                type="text"
+                value={amountIn}
+                placeholder="1000000"
+                onChange={(e) => setAmountIn(e.target.value)}
+                className={styles.amountInput}
+                isDisabled={!sourceAssetChainID && !sourceAssetDenom}
               />
+              {amountIn ? (
+                <input
+                  type="text"
+                  value={amountBaseUSD + " USD"}
+                  className={styles.amountUSDConversion}
+                  readOnly
+                />
+              ) : null}
             </div>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', width: '100%', marginTop: '1.5vh', marginBottom: '1.5vh' }}>
-            <h1 style={{ flex: 1, fontSize: '1.75rem', fontWeight: 'bold', margin: 0, textAlign: 'left' }}>To:</h1>
+            <h1 style={{ flex: 1, fontSize: '1.5rem', fontWeight: 'bold', margin: 0, textAlign: 'left' }}>To:</h1>
             <span style={{ flex: 1, fontSize: '1.75rem', fontWeight: '800', textAlign: 'center' }}>
               ⇵
             </span>
             <div style={{ flex: 1 }}></div>
           </div>
 
-          <div style={{ backgroundColor: "#222222", padding: '20px', borderRadius: '30px', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
-            <div className={styles.formGroup}>
-              <Select
-                styles={customStyles}
-                value={destAssetChainID}
-                onChange={setDestAssetChainID}
-                options={chainOptions}
-                placeholder="SELECT NETWORK"
-              />
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', backgroundColor: "#222222", padding: '20px', borderRadius: '30px', }}>
+            <div style={{ width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+
+              <div className={styles.formGroup}>
+                <Select
+                  styles={customStyles}
+                  value={destAssetChainID}
+                  onChange={setDestAssetChainID}
+                  options={chainOptions}
+                  placeholder="SELECT NETWORK"
+                />
+              </div>
+              <div className={styles.formGroup}>
+                <Select
+                  styles={customStyles}
+                  value={destAssetDenom}
+                  onChange={setDestAssetDenom}
+                  options={assetOptionsDest}
+                  placeholder="SELECT TOKEN"
+                  isDisabled={!destAssetChainID}
+                />
+              </div>
             </div>
-            <div className={styles.formGroup}>
-              <Select
-                styles={customStyles}
-                value={destAssetDenom}
-                onChange={setDestAssetDenom}
-                options={assetOptionsDest}
-                placeholder="SELECT TOKEN"
-                isDisabled={!destAssetChainID}
+
+            <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
+              <input
+                type="text"
+                value={amountOut}
+                placeholder="1000000"
+                onChange={(e) => setAmountOut(e.target.value)}
+                className={styles.amountInput}
               />
+              {amountOut ? (
+                <input
+                  type="text"
+                  value={amountBaseUSD + " USD"}
+                  className={styles.amountUSDConversion}
+                  isDisabled={!sourceAssetChainID && !sourceAssetDenom}
+                  readOnly
+                />
+              ) : null}
             </div>
+
+
           </div>
-          <div className={styles.formGroup}>
-            <label>Amount In:</label>
-            <input
-              type="text"
-              value={amountIn}
-              placeholder="1000000"
-              onChange={(e) => setAmountIn(e.target.value)}
-              className="w-full border border-gray-300 rounded p-2"
-            />
-          </div>
+
           <button type="submit">Transfer Tokens</button>
+
         </form>
+
       </div>
       {(route || displayError || routeTxs) && (
         <div className={styles.right}>

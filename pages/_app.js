@@ -2,7 +2,6 @@
 import { WalletProvider } from "@solana/wallet-adapter-react";
 import { PhantomWalletAdapter } from "@solana/wallet-adapter-phantom";
 import { useMemo } from 'react';
-import Footer from '../components/Footer';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
@@ -13,7 +12,6 @@ function MyApp({ Component, pageProps }) {
   return (
     <WalletProvider wallets={wallets} autoConnect>
       <Component {...pageProps} />
-      <Footer></Footer>
     </WalletProvider>
   );
 }

@@ -4,7 +4,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 150vh;
+    height: fit-content;
+    background-image: url('/swap-background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;  
+    height:fit-content;
+    min-height: 100vh;
 }
 
 .main {
@@ -15,13 +21,14 @@
 .mainHeading {
     margin-top: 4vh;
     font-size: 3rem;
-    color: #101019;
-    /* Indigo Noir */
+    color: white;
+    font-weight: 600;
+    line-height: 0;
 }
 
 .subHeading {
     font-size: 2rem;
-    color: #101019;
+    color: white;
     /* Indigo Noir */
 }
 

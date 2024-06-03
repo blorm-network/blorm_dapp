@@ -21,7 +21,7 @@ const NavBar = () => {
                 <Link href="/twitter" style={{ color: 'white', textDecoration: 'none', fontSize: '1rem', marginLeft: '2vw' }}>
                     TWITTER
                 </Link>
-                <Link href="/transfer/cosmos" style={{ color: 'white', textDecoration: 'none', fontSize: '1rem', marginLeft: '2vw' }}>
+                <Link href="/transfer" style={{ color: 'white', textDecoration: 'none', fontSize: '1rem', marginLeft: '2vw' }}>
                     <button style={{ color: 'white', width: '12vw', backgroundColor:'#5E9865', fontSize: '1rem', padding: '.5rem', boxSizing: 'border-box', borderRadius: '20px' }}>
                     ENTER BLORMSPACE
                     </button>

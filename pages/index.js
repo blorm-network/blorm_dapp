@@ -1,6 +1,7 @@
 import SwapForm from '../components/SwapForm';
 import styles from '../styles/Home.module.css';
 import NavBar from '@/components/NavBar';
+import Footer from '../components/Footer';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { auth, db } from '../lib/firebase';
@@ -68,7 +69,7 @@ export default function Home() {
         <h1 className={styles.section3subheading}>JOIN THE WAITLIST TO BE ONE OF THE FIRST TO<br />BLORM INFORMATION ONCHAIN.</h1>
         <form onSubmit={handleSubscribe} className={styles.waitlistInput}>
           <input className={styles.waitlistInput} value={email} onChange={(e) => setEmail(e.target.value)} required placeholder='EMAIL ADDRESS →'></input>
-          <button type="submit" className=" flex items-center justify-center p-2 bg-blue-500 text-white rounded-full hover:bg-blue-700">
+          <button type="submit" className="hidden flex items-center justify-center p-2 bg-blue-500 text-white rounded-full hover:bg-blue-700">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
             </svg>
@@ -79,7 +80,7 @@ export default function Home() {
           <span className={styles.section3link}>TWITTER</span>
         </div>
       </div>
-
+      <Footer />
     </div>
   );
 }
