@@ -133,17 +133,17 @@ export default function SwapForm() {
     } else {
       throw new Error(data.error);
     }
-  }
+  };
   
   // Fetch USD price for the source asset when amountIn or its denom/chainID changes
   useEffect(() => {
     const updateAmountInUSD = async () => {
       if (amountIn && sourceAssetDenom && sourceAssetChainID) {
-        const assetInfo = assets.chain_to_assets_map[sourceAssetChainID.value].assets.find(
-          (asset) => asset.denom === sourceAssetDenom.value
-        );
-        const coingeckoId = assetInfo.coingecko_id;
         try {
+          const assetInfo = assets.chain_to_assets_map[sourceAssetChainID.value].assets.find(
+            (asset) => asset.denom === sourceAssetDenom.value
+          );
+          const coingeckoId = assetInfo.coingecko_id;
           const usdPrice = await fetchPrice(coingeckoId);
           setAmountInUSD(usdPrice);
           setAmountBaseUSD(amountIn * usdPrice);
@@ -154,7 +154,7 @@ export default function SwapForm() {
     };
     updateAmountInUSD();
   }, [amountIn, sourceAssetDenom, sourceAssetChainID]);
-
+  
   // Fetch USD price for the destination asset when amountOut or its denom/chainID changes
   useEffect(() => {
     const updateAmountOutUSD = async () => {
@@ -174,45 +174,42 @@ export default function SwapForm() {
     };
     updateAmountOutUSD();
   }, [amountOut, destAssetDenom, destAssetChainID]);
-
+  
   // Convert amountIn to amountOut using the fetched USD prices
   useEffect(() => {
     if (sourceAssetDenom && sourceAssetChainID && amountInUSD && !updatingFromAmountOut) {
       if (amountIn && amountInUSD && amountOutUSD) {
         const convertedAmountOut = (amountIn * amountInUSD) / amountOutUSD;
-        // console.log('Converted amountOut:', convertedAmountOut)
         setUpdatingFromAmountIn(true);  // Set flag to indicate that amountOut is being updated
+        setAmountOut(convertedAmountOut);
       }
-    } else if (!sourceAssetDenom || !sourceAssetChainID) {
-      setAmountIn('');
-    }
+    } 
   }, [amountInUSD, amountIn]);
-
+  
   // Convert amountOut to amountIn using the fetched USD prices
   useEffect(() => {
     if (destAssetDenom && destAssetChainID && amountOutUSD && !updatingFromAmountIn) {
       if (amountOut && amountOutUSD && amountInUSD) {
         const convertedAmountIn = (amountOut * amountOutUSD) / amountInUSD;
-        // console.log('Converted amountIn:', convertedAmountIn)
         setUpdatingFromAmountOut(true);  // Set flag to indicate that amountIn is being updated
+        setAmountIn(convertedAmountIn);
       }
-    } else if (!destAssetDenom || !destAssetChainID) {
-      setAmountOut('');
-    }
+    } 
   }, [amountOutUSD, amountOut]);
-
+  
   // Reset the updating flags after state updates
   useEffect(() => {
     if (updatingFromAmountIn) {
       setUpdatingFromAmountIn(false);
     }
   }, [amountOut]);
-
+  
   useEffect(() => {
     if (updatingFromAmountOut) {
       setUpdatingFromAmountOut(false);
     }
   }, [amountIn]);
+  
 
   // Load Keplr on page load
   useEffect(() => {
@@ -508,7 +505,6 @@ export default function SwapForm() {
                 placeholder="1000000"
                 onChange={(e) => setAmountIn(e.target.value)}
                 className={styles.amountInput}
-                isDisabled={!sourceAssetChainID && !sourceAssetDenom}
               />
               {amountIn ? (
                 <input
@@ -566,7 +562,6 @@ export default function SwapForm() {
                   type="text"
                   value={amountBaseUSD + " USD"}
                   className={styles.amountUSDConversion}
-                  isDisabled={!sourceAssetChainID && !sourceAssetDenom}
                   readOnly
                 />
               ) : null}

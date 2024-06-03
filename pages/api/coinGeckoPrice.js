@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     const response = await fetch(url, {
       headers: {
         'accept': 'application/json',
-        'x-cg-demo-api-key': process.env.COINGECKO_API_KEY,
+        'x-cg-demo-api-key': process.env.NEXT_PUBLIC_COINGECKO_API_KEY,
       },
     });
 

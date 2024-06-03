@@ -181,7 +181,7 @@
     border-radius: 30px;
     padding: 10px;
     margin-top: 0.5vh;
-
+    text-align: right;
 }
 
 .amountUSDConversion:focus {
@@ -190,6 +190,11 @@
 
 .amountUSDConversion:hover {
     outline: none;
+}
+
+.amountUSDConversion:disabled {
+    cursor: not-allowed;
+    user-select: none;
 }
 
 .grey-placeholder {
