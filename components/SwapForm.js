@@ -5,6 +5,47 @@ import { SkipRouter } from "@skip-router/core";
 import styles from '../styles/SwapForm.module.css';
 import { OfflineSigner, SigningStargateClient, StargateClient } from '@cosmjs/stargate';
 
+const customStyles = {
+  control: (baseStyles) => ({
+    ...baseStyles,
+    backgroundColor: '#222222',
+    borderRadius: '30px',
+    color: 'white',
+    borderColor: '#222222',
+    '&:hover': {
+      borderColor: '#222222',
+    },
+  }),
+  placeholder: (baseStyles) => ({
+    ...baseStyles,
+    color: 'white',
+    textAlign: 'center',
+  }),
+  singleValue: (baseStyles) => ({
+    ...baseStyles,
+    color: 'white',
+    textAlign: 'center',
+  }),
+  menu: (baseStyles) => ({
+    ...baseStyles,
+    backgroundColor: '#222222',
+    borderRadius: '30px',
+  }),
+  option: (baseStyles, state) => ({
+    ...baseStyles,
+    color: 'white',
+    textAlign: 'center',
+    backgroundColor: state.isFocused ? '#444444' : '#222222',
+    '&:hover': {
+      backgroundColor: '#444444',
+    },
+  }),
+  valueContainer: (baseStyles) => ({
+    ...baseStyles,
+    justifyContent: 'center',
+  }),
+};
+
 export default function SwapForm() {
   const [keplr, setKeplr] = useState(null);
   const [sourceAssetDenom, setSourceAssetDenom] = useState(null);
@@ -141,7 +182,6 @@ export default function SwapForm() {
       destAssetDenom: destAssetDenom.value,
       destAssetChainID: destAssetChainID.value,
       amountIn,
-      smartSwapOptions: { splitRoutes: true },
     };
     const res = await fetch('/api/route/ibc', {
       method: 'POST',
@@ -331,45 +371,52 @@ export default function SwapForm() {
     <div className={styles.container}>
       <div className={styles.left}>
         <form onSubmit={handleFindRoute} className={styles.form}>
-          <div className={styles.formGroup}>
-            <label>Source Network:</label>
-            <Select
-              className="w-full"
-              value={sourceAssetChainID}
-              onChange={setSourceAssetChainID}
-              options={chainOptions}
-              placeholder="Search for a network ..."
-            />
+          <h1 style={{ fontSize: '1.75rem', fontWeight: 'bold', marginBottom: '10px', marginLeft: '5px' }}>From:</h1>
+          <div style={{ backgroundColor: "#222222", padding: '20px', borderRadius: '30px', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly'}}>
+            <div className={styles.formGroup}>
+              <Select
+                styles={customStyles}
+                value={sourceAssetChainID}
+                onChange={setSourceAssetChainID}
+                options={chainOptions}
+                placeholder="SELECT NETWORK"
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <Select
+                styles={customStyles}
+                value={sourceAssetDenom}
+                onChange={setSourceAssetDenom}
+                options={assetOptionsSource}
+                placeholder="SELECT TOKEN"
+                isDisabled={!sourceAssetChainID}
+              />
+            </div>
           </div>
-          <div className={styles.formGroup}>
-            <label>Source Token:</label>
-            <Select
-              className="w-full"
-              value={sourceAssetDenom}
-              onChange={setSourceAssetDenom}
-              options={assetOptionsSource}
-              placeholder="Search for a token ..."
-            />
+          <div style={{ fontSize: "1.75rem", fontWeight: '800', textAlign: 'center', width: "100%", alignItems: 'center', justifyContent: 'center', padding: '10px' }}>
+            ⇵
           </div>
-          <div className={styles.formGroup}>
-            <label>Destination Network:</label>
-            <Select
-              className="w-full"
-              value={destAssetChainID}
-              onChange={setDestAssetChainID}
-              options={chainOptions}
-              placeholder="Search for a network ..."
-            />
-          </div>
-          <div className={styles.formGroup}>
-            <label>Destination Token:</label>
-            <Select
-              className="w-full"
-              value={destAssetDenom}
-              onChange={setDestAssetDenom}
-              options={assetOptionsDest}
-              placeholder="Search for a token ..."
-            />
+          <h1 style={{ fontSize: '1.75rem', fontWeight: 'bold', marginBottom: '10px', marginLeft: '5px' }}>To:</h1>
+          <div style={{ backgroundColor: "#222222", padding: '20px', borderRadius: '30px', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly'}}>
+            <div className={styles.formGroup}>
+              <Select
+                styles={customStyles}
+                value={destAssetChainID}
+                onChange={setDestAssetChainID}
+                options={chainOptions}
+                placeholder="SELECT NETWORK"
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <Select
+                styles={customStyles}
+                value={destAssetDenom}
+                onChange={setDestAssetDenom}
+                options={assetOptionsDest}
+                placeholder="SELECT TOKEN"
+                isDisabled={!destAssetChainID}
+              />
+            </div>
           </div>
           <div className={styles.formGroup}>
             <label>Amount In:</label>
@@ -381,7 +428,7 @@ export default function SwapForm() {
               className="w-full border border-gray-300 rounded p-2"
             />
           </div>
-          <button type="submit">Find Route</button>
+          <button type="submit">Transfer Tokens</button>
         </form>
       </div>
       {(route || displayError || routeTxs) && (

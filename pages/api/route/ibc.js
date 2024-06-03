@@ -16,7 +16,6 @@ export default async function handler(req, res) {
         destAssetDenom,
         destAssetChainID,
         amountIn,
-        smartSwapOptions,
         cumulative_affiliate_fee_bps: '0',
         allow_unsafe: true,
         allow_multi_tx: true,

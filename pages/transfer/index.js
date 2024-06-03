@@ -1,10 +1,12 @@
 import SwapForm from '../../components/SwapForm';
 import styles from '../../styles/Transfer.module.css';
 import Link from 'next/link';
+import NavBarAlt from '../../components/NavBarAlt';
 
 export default function Transfer() {
   return (
     <div className={styles.container}>
+      <NavBarAlt />
       <h1 className={styles.mainHeading}>INTRODUCING BLORMSPACE</h1>
       <h2 className={styles.subHeading}>Decentralized Asset Courier </h2>
       <p className={styles.description}>
