@@ -10,9 +10,11 @@ export default function Transfer() {
           <img src="/blorm-logo-white.png" alt="BLORM LOGO" style={{ width: '5vw', height: 'auto' }} />
           <h1 className={styles.mainHeading}>BLORM</h1>
         </Link>
-        <h2 className={styles.subHeading}></h2>
-        <p className={styles.description}></p>
-        <SwapForm />
+
+        <div className={styles.swapFormContainer}>
+          <SwapForm />
+        </div>
+        
         <Footer/>
       </div>
   );

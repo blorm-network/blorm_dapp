@@ -8,6 +8,8 @@ import customStyles from '../lib/reactSelectStyles';
 import absoluteUrl from 'next-absolute-url';
 import { useRouter } from 'next/router';
 import chainsJson from '/lib/chains.json';
+import assetsJson from '/lib/assets.json';
+import Web3 from 'web3';
 
 export default function SwapForm() {
   const [keplr, setKeplr] = useState(null);
@@ -33,7 +35,8 @@ export default function SwapForm() {
   const [chainOptions, setChainOptions] = useState([]);
   const [displayError, setDisplayError] = useState(null);
   const [routeTxs, setRouteTxs] = useState(null);
-  const [keplrSigner, setKeplrSigner] = useState(null);
+  const [ethAddress, setEthAddress] = useState(null);
+  const [web3, setWeb3] = useState(null)
 
   const router = useRouter();
   const isServer = typeof window === 'undefined';
@@ -45,11 +48,13 @@ export default function SwapForm() {
       const resultChains = await skipClient.chains();
       // Merge fetched chains with the JSON chains
       const mergedChains = [...resultChains, ...Object.values(chainsJson)];
-      console.log("Fetched Chains:", mergedChains);
+      // console.log("Fetched Chains:", mergedChains);
       setChains(mergedChains);
     };
     fetchChains();
+  }, []);
 
+  useEffect(() => {
     const fetchAssets = async () => {
       const res = await fetch('/api/chains/ibc', {
         method: 'GET',
@@ -58,11 +63,21 @@ export default function SwapForm() {
         },
       });
       const data = await res.json();
-      
 
-      //console.log("Fetched Assets:", data);
-      setAssets(data);
+      // console.log("Fetched Assets:", data);
+
+      // Merge the fetched assets with the imported assetsJson
+      const mergedAssets = {
+        ...data,
+        chain_to_assets_map: {
+          ...data.chain_to_assets_map,
+          ...assetsJson.chain_to_assets_map
+        }
+      };
+
+      setAssets(mergedAssets);
     };
+
     fetchAssets();
   }, []);
 
@@ -71,7 +86,7 @@ export default function SwapForm() {
     if (chains) {
       setChainOptions(chains.map(chain => ({
         value: chain.chainID,
-        label: chain.chainName + " (" + chain.chainID + ")",
+        label: chain.chainName //+ " (" + chain.chainID + ")",
       })));
     }
   }, [chains]);
@@ -99,7 +114,7 @@ export default function SwapForm() {
 
         return {
           value: asset.denom,
-          label: `${asset.name} (${formattedSymbol} | ${formattedOriginDenom})`, // ${formattedDenom}
+          label: `${asset.name}`// (${formattedSymbol} | ${formattedOriginDenom})`, // ${formattedDenom}
         };
       }));
       // console.log("Source Asset Options set:", assetOptionsSource);
@@ -116,110 +131,123 @@ export default function SwapForm() {
 
         return {
           value: asset.denom,
-          label: `${asset.name} (${formattedSymbol} | ${formattedOriginDenom})`, // ${formattedDenom}
+          label: `${asset.name}` // (${formattedSymbol} | ${formattedOriginDenom})`, // ${formattedDenom}
         };
       }));
       // console.log("Destination Asset Options set:", assetOptionsdest);
     }
   }, [destAssetChainID, assets, setAssetOptionsDest]);
 
-// Function to fetch USD price for a given coingeckoId
-const fetchPrice = async (coingeckoId) => {
-  const url = '/api/coinGeckoPrice';
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ id: coingeckoId }),
-  });
-  const data = await response.json();
-  if (response.ok) {
-    return data[coingeckoId].usd;
-  } else {
-    throw new Error(data.error);
-  }
-};
-
-// Fetch USD price for the source asset when amountIn or its denom/chainID changes
-useEffect(() => {
-  const updateAmountInUSD = async () => {
-    if (amountIn && sourceAssetDenom && sourceAssetChainID) {
-      try {
-        const assetInfo = assets.chain_to_assets_map[sourceAssetChainID.value].assets.find(
-          (asset) => asset.denom === sourceAssetDenom.value
-        );
-        const coingeckoId = assetInfo.coingecko_id;
-        const usdPrice = await fetchPrice(coingeckoId);
-        setAmountInUSD(usdPrice);
-        setAmountBaseUSD(amountIn * usdPrice);
-      } catch (err) {
-        console.log(err.message);
-      }
+  // Function to fetch USD price for a given coingeckoId
+  const fetchPrice = async (coingeckoId) => {
+    const url = '/api/coinGeckoPrice';
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id: coingeckoId }),
+    });
+    const data = await response.json();
+    if (response.ok) {
+      return data[coingeckoId].usd;
+    } else {
+      throw new Error(data.error);
     }
   };
-  updateAmountInUSD();
-}, [amountIn, sourceAssetDenom, sourceAssetChainID]);
 
-// Fetch USD price for the destination asset when destAssetDenom or destAssetChainID changes
-useEffect(() => {
-  const updateAmountOutUSD = async () => {
-    if (destAssetDenom && destAssetChainID) {
-      try {
-        const assetInfo = assets.chain_to_assets_map[destAssetChainID.value].assets.find(
-          (asset) => asset.denom === destAssetDenom.value
-        );
-        const coingeckoId = assetInfo.coingecko_id;
-        const usdPrice = await fetchPrice(coingeckoId);
-        setAmountOutUSD(usdPrice);
-        if (amountInUSD) {
-          // Calculate amountOut using updated USD prices
-          const convertedAmountOut = (amountIn * amountInUSD) / usdPrice;
-          setUpdatingFromAmountIn(true);  // Set flag to indicate that amountOut is being updated
-          setAmountOut(convertedAmountOut);
+  // Fetch USD price for the source asset when amountIn or its denom/chainID changes
+  useEffect(() => {
+    const updateAmountInUSD = async () => {
+      if (amountIn && sourceAssetDenom && sourceAssetChainID) {
+        try {
+          const assetInfo = assets.chain_to_assets_map[sourceAssetChainID.value].assets.find(
+            (asset) => asset.denom === sourceAssetDenom.value
+          );
+          const coingeckoId = assetInfo.coingecko_id;
+          const usdPrice = await fetchPrice(coingeckoId);
+          setAmountInUSD(usdPrice);
+          setAmountBaseUSD(amountIn * usdPrice);
+        } catch (err) {
+          console.log(err.message);
         }
-      } catch (err) {
-        console.log(err.message);
+      }
+    };
+    updateAmountInUSD();
+  }, [amountIn, sourceAssetDenom, sourceAssetChainID]);
+
+  // Fetch USD price for the destination asset when destAssetDenom or destAssetChainID changes
+  useEffect(() => {
+    const updateAmountOutUSD = async () => {
+      if (destAssetDenom && destAssetChainID) {
+        try {
+          const assetInfo = assets.chain_to_assets_map[destAssetChainID.value].assets.find(
+            (asset) => asset.denom === destAssetDenom.value
+          );
+          const coingeckoId = assetInfo.coingecko_id;
+          const usdPrice = await fetchPrice(coingeckoId);
+          setAmountOutUSD(usdPrice);
+          if (amountInUSD) {
+            // Calculate amountOut using updated USD prices
+            const convertedAmountOut = (amountIn * amountInUSD) / usdPrice;
+            setUpdatingFromAmountIn(true);  // Set flag to indicate that amountOut is being updated
+            setAmountOut(convertedAmountOut);
+          }
+        } catch (err) {
+          console.log(err.message);
+        }
+      }
+    };
+    updateAmountOutUSD();
+  }, [destAssetDenom, destAssetChainID, amountInUSD]);
+
+  // Convert amountIn to amountOut using the fetched USD prices
+  useEffect(() => {
+    if (sourceAssetDenom && sourceAssetChainID && amountInUSD && !updatingFromAmountOut) {
+      if (amountIn && amountInUSD && amountOutUSD) {
+        const convertedAmountOut = (amountIn * amountInUSD) / amountOutUSD;
+        setUpdatingFromAmountIn(true);  // Set flag to indicate that amountOut is being updated
+        setAmountOut(String(convertedAmountOut));
       }
     }
-  };
-  updateAmountOutUSD();
-}, [destAssetDenom, destAssetChainID, amountInUSD]);
+  }, [amountInUSD, amountIn, amountOutUSD]);
 
-// Convert amountIn to amountOut using the fetched USD prices
-useEffect(() => {
-  if (sourceAssetDenom && sourceAssetChainID && amountInUSD && !updatingFromAmountOut) {
-    if (amountIn && amountInUSD && amountOutUSD) {
-      const convertedAmountOut = (amountIn * amountInUSD) / amountOutUSD;
-      setUpdatingFromAmountIn(true);  // Set flag to indicate that amountOut is being updated
-      setAmountOut(convertedAmountOut);
+  // Convert amountOut to amountIn using the fetched USD prices
+  useEffect(() => {
+    if (destAssetDenom && destAssetChainID && amountOutUSD && !updatingFromAmountIn) {
+      if (amountOut && amountOutUSD && amountInUSD) {
+        const convertedAmountIn = (amountOut * amountOutUSD) / amountInUSD;
+        setUpdatingFromAmountOut(true);  // Set flag to indicate that amountIn is being updated
+        setAmountIn(String(convertedAmountIn));
+      }
     }
-  }
-}, [amountInUSD, amountIn, amountOutUSD]);
+  }, [amountOutUSD, amountOut, amountInUSD]);
 
-// Convert amountOut to amountIn using the fetched USD prices
-useEffect(() => {
-  if (destAssetDenom && destAssetChainID && amountOutUSD && !updatingFromAmountIn) {
-    if (amountOut && amountOutUSD && amountInUSD) {
-      const convertedAmountIn = (amountOut * amountOutUSD) / amountInUSD;
-      setUpdatingFromAmountOut(true);  // Set flag to indicate that amountIn is being updated
-      setAmountIn(convertedAmountIn);
+  // Reset the updating flags after state updates
+  useEffect(() => {
+    if (updatingFromAmountIn) {
+      setUpdatingFromAmountIn(false);
     }
-  }
-}, [amountOutUSD, amountOut, amountInUSD]);
+  }, [amountOut]);
 
-// Reset the updating flags after state updates
-useEffect(() => {
-  if (updatingFromAmountIn) {
-    setUpdatingFromAmountIn(false);
-  }
-}, [amountOut]);
+  useEffect(() => {
+    if (updatingFromAmountOut) {
+      setUpdatingFromAmountOut(false);
+    }
+  }, [amountIn]);
 
-useEffect(() => {
-  if (updatingFromAmountOut) {
-    setUpdatingFromAmountOut(false);
-  }
-}, [amountIn]);
+
+  // Connect to the Ethereum provider on page load
+  useEffect(() => {
+    window.ethereum ?
+      ethereum.request({ method: "eth_requestAccounts" }).then((accounts) => {
+        setEthAddress(accounts[0])
+        let w3 = new Web3(ethereum)
+        setWeb3(w3)
+      }).catch((err) => console.log(err))
+      : console.log("Please install MetaMask")
+  }, [])
+
   // Load Keplr on page load
   useEffect(() => {
     const loadKeplr = async () => {
@@ -235,37 +263,6 @@ useEffect(() => {
       setDisplayError("Key store in Keplr is changed. You may need to refetch the account info.");
     });
   }, []);
-
-  // Connect to Keplr
-  const connectKeplr = async () => {
-    if (!keplr) {
-      setDisplayError("Please install Keplr extension");
-      return;
-    }
-    try {
-      const chainIds = route?.requiredChainAddresses || [sourceAssetChainID?.value, destAssetChainID?.value].filter(Boolean);
-      if (chainIds.length < 2) {
-        setDisplayError("Please select both source and destination chains or find a route first.");
-        return;
-      }
-      await keplr.enable(chainIds);
-      const addressMap = {};
-      for (let chainId of chainIds) {
-        const offlineSigner = keplr.getOfflineSigner(chainId);
-        if (!offlineSigner) {
-          setDisplayError(`Failed to get offline signer for chain ${chainId}`);
-          return;
-        }
-        const accounts = await offlineSigner.getAccounts();
-        addressMap[chainId] = accounts[0].address;
-      }
-      setAddresses(addressMap);
-      setConnected(true);
-    } catch (error) {
-      console.error(error);
-      setDisplayError("Failed to connect to Keplr");
-    }
-  };
 
   // Find route between source and destination chains for token transfer
   // This function is called when the user submits the form and returns a route object
@@ -311,10 +308,22 @@ useEffect(() => {
   // This function is called when the route state is updated and returns a list of messages
   useEffect(() => {
     // Runs once the route state has been updated
-    if (route !== null) {
+    if (route !== null && addresses !== null && addresses.length > 0) {
       handleGetRouteMessages();
     }
   }, [route]);
+
+  const getWeb3Provider = () => {
+    if ('phantom' in window) {
+      const provider = window.phantom?.solana;
+
+      if (provider?.isPhantom) {
+        return provider;
+      }
+    }
+
+    console.log("Phantom not installed");
+  };
 
   const handleGetRouteMessages = async () => {
     if (!route) {
@@ -326,24 +335,62 @@ useEffect(() => {
       return;
     }
 
-    await connectKeplr();
-
     try {
       const chainIds = route.requiredChainAddresses;
-      await keplr.enable(chainIds);
+      console.log(chainIds);
+
+      const toKeplrChainIds = chainIds.filter(chainId => chainId !== "1" && chainId !== "8453" && chainId !== "solana");
+      if (toKeplrChainIds.length > 0) {
+        await keplr.enable(toKeplrChainIds);
+      }
 
       const addressMap = {};
       const signers = {};
       const chainData = {};
       for (let chainId of chainIds) {
-        const offlineSigner = keplr.getOfflineSigner(chainId);
-        const accounts = await offlineSigner.getAccounts();
-        addressMap[chainId] = accounts[0].address;
-        signers[chainId] = offlineSigner; // Store the offline signer
-        chainData[chainId] = {
-          address: accounts[0].address,
-          signer: offlineSigner
-        };
+        if (chainId === "1" || chainId === "8453") {
+          if (!web3) {
+            setDisplayError("Please install MetaMask");
+            return;
+          } else if (!ethAddress) {
+            if (window.ethereum) {
+              ethereum.request({ method: "eth_requestAccounts" })
+                .then((accounts) => {
+                  setEthAddress(accounts[0]);
+                  let w3 = new Web3(ethereum);
+                  setWeb3(w3);
+                })
+                .catch((err) => console.log(err));
+            } else {
+              console.log("Please install MetaMask");
+            }
+          }
+          addressMap[chainId] = ethAddress;
+
+        } else if (chainId === "solana") {
+          const isPhantomInstalled = window.phantom?.solana?.isPhantom;
+          if (!isPhantomInstalled) {
+            setDisplayError("Please install Phantom wallet");
+            return;
+          }
+          const provider = getWeb3Provider();
+          try {
+            const resp = await provider.connect();
+            addressMap[chainId] = resp.publicKey.toString();
+          } catch (err) {
+            console.log(err);
+          }
+
+        } else {
+          const offlineSigner = keplr.getOfflineSigner(chainId);
+          const accounts = await offlineSigner.getAccounts();
+          addressMap[chainId] = accounts[0].address;
+          signers[chainId] = offlineSigner; // Store the offline signer
+          chainData[chainId] = {
+            address: accounts[0].address,
+            signer: offlineSigner
+          };
+        }
       }
 
       // console.log(addressMap, signers);
@@ -355,7 +402,7 @@ useEffect(() => {
         },
       };
 
-      // console.log('Route object sending to API:', routeWithAddresses);
+      console.log('Route object sending to API:', routeWithAddresses);
 
       const res = await fetch('/api/execute/messages', {
         method: 'POST',
@@ -367,7 +414,6 @@ useEffect(() => {
 
       if (res.ok) {
         const data = await res.json();
-        console.log('Fetched messages:', data);
         setRouteTxs(data.txs);
 
       }
@@ -385,8 +431,14 @@ useEffect(() => {
 
   // Execute route once route messages are fetched
   useEffect(() => {
-    if (routeTxs) {
+    if (routeTxs && routeTxs.length > 0 && addresses && addresses.length > 0) {
       handleSubmitRoute();
+    } else {
+      if (routeTxs && routeTxs.length === 0) {
+        setDisplayError('Cannot submit transaction. No route messages found.');
+      } else if (addresses && addresses.length === 0) {
+        setDisplayError('Cannot submit transaction. Error fetching addresses. Please connect to provider.');
+      }
     }
   }, [routeTxs]);
 
@@ -400,7 +452,11 @@ useEffect(() => {
       setDisplayError('Please request route messages first.');
       return;
     }
-
+    if (!addresses || addresses.length === 0) {
+      setDisplayError('Error fetching addresses. Please connect to provider.');
+      return;
+    }
+    console.log("Submitting route with these details:", { route, addresses });
     const transformedAddresses = Object.entries(addresses).map(([chainID, address]) => ({ chainID, address }));
     // console.log(transformedAddresses);
 
@@ -480,117 +536,128 @@ useEffect(() => {
     return routeParts.join(' -> ');
   };
 
+  // swap source and destination assets
+  const handleSwitchSourceDest = () => {
+    setSourceAssetDenom(prev => {
+      setDestAssetDenom(prev);
+      return destAssetDenom;
+    });
+    setSourceAssetChainID(prev => {
+      setDestAssetChainID(prev);
+      return destAssetChainID;
+    });
+    setAmountIn(prev => {
+      setAmountOut(prev);
+      return amountOut;
+    });
+    setAmountInUSD(prev => {
+      setAmountOutUSD(prev);
+      return amountOutUSD;
+    });
+  };
+
   return (
     <div className={styles.container}>
-      <div className={styles.left}>
-        <form onSubmit={handleFindRoute} className={styles.form}>
-          <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '10px', marginLeft: '5px' }}>From:</h1>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', backgroundColor: "#222222", padding: '20px', borderRadius: '30px', }}>
-            <div style={{ width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-              <div className={styles.formGroup}>
-                <Select
-                  styles={customStyles}
-                  value={sourceAssetChainID}
-                  onChange={setSourceAssetChainID}
-                  options={chainOptions}
-                  placeholder="SELECT NETWORK"
-                />
-              </div>
-              <div className={styles.formGroup}>
-                <Select
-                  styles={customStyles}
-                  value={sourceAssetDenom}
-                  onChange={setSourceAssetDenom}
-                  options={assetOptionsSource}
-                  placeholder="SELECT TOKEN"
-                  isDisabled={!sourceAssetChainID}
-                />
-              </div>
+      <form onSubmit={handleFindRoute} className={styles.form}>
+        <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '10px', marginLeft: '5px' }}>From:</h1>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', backgroundColor: "#222222", padding: '20px', borderRadius: '30px', }}>
+          <div style={{ width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div className={styles.formGroup}>
+              <Select
+                styles={customStyles}
+                value={sourceAssetChainID}
+                onChange={setSourceAssetChainID}
+                options={chainOptions}
+                placeholder="SELECT NETWORK"
+              />
             </div>
-            <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
+            <div className={styles.formGroup}>
+              <Select
+                styles={customStyles}
+                value={sourceAssetDenom}
+                onChange={setSourceAssetDenom}
+                options={assetOptionsSource}
+                placeholder="SELECT TOKEN"
+                isDisabled={!sourceAssetChainID}
+              />
+            </div>
+          </div>
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
+            <input
+              type="text"
+              value={amountIn}
+              placeholder="1000000"
+              onChange={(e) => setAmountIn(e.target.value)}
+              className={styles.amountInput}
+            />
+            {amountIn ? (
               <input
                 type="text"
-                value={amountIn}
-                placeholder="1000000"
-                onChange={(e) => setAmountIn(e.target.value)}
-                className={styles.amountInput}
+                value={amountBaseUSD + " USD"}
+                className={styles.amountUSDConversion}
+                readOnly
               />
-              {amountIn ? (
-                <input
-                  type="text"
-                  value={amountBaseUSD + " USD"}
-                  className={styles.amountUSDConversion}
-                  readOnly
-                />
-              ) : null}
+            ) : null}
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', width: '100%', marginTop: '1.5vh', marginBottom: '1.5vh' }}>
+          <h1 style={{ flex: 1, fontSize: '1.5rem', fontWeight: 'bold', margin: 0, textAlign: 'left' }}>To:</h1>
+          <span style={{ flex: 1, fontSize: '1.75rem', fontWeight: '800', textAlign: 'center', userSelect: 'none', cursor: 'pointer' }} className={styles.shake} onClick={handleSwitchSourceDest}>
+            ⇵
+          </span>
+          <div style={{ flex: 1 }}></div>
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', backgroundColor: "#222222", padding: '20px', borderRadius: '30px', }}>
+          <div style={{ width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+
+            <div className={styles.formGroup}>
+              <Select
+                styles={customStyles}
+                value={destAssetChainID}
+                onChange={setDestAssetChainID}
+                options={chainOptions}
+                placeholder="SELECT NETWORK"
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <Select
+                styles={customStyles}
+                value={destAssetDenom}
+                onChange={setDestAssetDenom}
+                options={assetOptionsDest}
+                placeholder="SELECT TOKEN"
+                isDisabled={!destAssetChainID}
+              />
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', width: '100%', marginTop: '1.5vh', marginBottom: '1.5vh' }}>
-            <h1 style={{ flex: 1, fontSize: '1.5rem', fontWeight: 'bold', margin: 0, textAlign: 'left' }}>To:</h1>
-            <span style={{ flex: 1, fontSize: '1.75rem', fontWeight: '800', textAlign: 'center' }}>
-              ⇵
-            </span>
-            <div style={{ flex: 1 }}></div>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', backgroundColor: "#222222", padding: '20px', borderRadius: '30px', }}>
-            <div style={{ width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-
-              <div className={styles.formGroup}>
-                <Select
-                  styles={customStyles}
-                  value={destAssetChainID}
-                  onChange={setDestAssetChainID}
-                  options={chainOptions}
-                  placeholder="SELECT NETWORK"
-                />
-              </div>
-              <div className={styles.formGroup}>
-                <Select
-                  styles={customStyles}
-                  value={destAssetDenom}
-                  onChange={setDestAssetDenom}
-                  options={assetOptionsDest}
-                  placeholder="SELECT TOKEN"
-                  isDisabled={!destAssetChainID}
-                />
-              </div>
-            </div>
-
-            <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
+            <input
+              type="text"
+              value={amountOut}
+              placeholder="1000000"
+              onChange={(e) => setAmountOut(e.target.value)}
+              className={styles.amountInput}
+            />
+            {amountOut ? (
               <input
                 type="text"
-                value={amountOut}
-                placeholder="1000000"
-                onChange={(e) => setAmountOut(e.target.value)}
-                className={styles.amountInput}
+                value={amountBaseUSD + " USD"}
+                className={styles.amountUSDConversion}
+                readOnly
               />
-              {amountOut ? (
-                <input
-                  type="text"
-                  value={amountBaseUSD + " USD"}
-                  className={styles.amountUSDConversion}
-                  readOnly
-                />
-              ) : null}
-            </div>
-
-
+            ) : null}
           </div>
+        </div>
+        <button type="submit">Transfer Tokens</button>
 
-          <button type="submit">Transfer Tokens</button>
-
-        </form>
-
-      </div>
-      {(route || displayError || routeTxs) && (
-        <div className={styles.right}>
-          <div className={styles.rightInner}>
+        {(route || displayError || routeTxs) && (
+          <>
             {route && (
-              <div className={styles.results}>
-                <h2 className="text-black text-left font-bold text-2xl">We found a route! 🙌</h2>
-                <br />
+              <div>
+                <h2 className="text-white text-left font-bold text-l">We found a route! 🙌</h2>
                 <p>{generateReadableRoute(route)}</p>
                 <button onClick={() => setIsRawOutputVisible(!isRawOutputVisible)}>
                   {isRawOutputVisible ? 'Hide' : 'Show'} Raw Output
@@ -602,40 +669,15 @@ useEffect(() => {
                 </div>
               </div>
             )}
-            <div className={styles.displayMessage}>
-              <h2 className="text-black text-left font-bold text-2xl">Details</h2>
-              {connected && addresses && (
-                <div>
-                  <h2 className="text-black text-left font-bold text-xl">Connected Addresses</h2>
-                  <span className="text-black text-left text-xs break-words">{JSON.stringify(addresses, null, 2)}</span>
-                </div>
-              )}
-              {routeTxs && (
-                <div>
-                  <h2 className="text-black text-left font-bold text-xl">Route</h2>
-                  <div className="text-black text-left text-xs">
-                    {routeTxs.map((tx, index) => (
-                      <div key={index} className="tx">
-                        {tx.cosmos_tx.path.map((item, index) => (
-                          <div key={index}>
-                            {item}
-                          </div>
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-              {displayError && (
-                <div>
-                  <h2 className="text-black text-left font-bold text-xl">Error</h2>
-                  <span className={styles.errorMessage}>{displayError}</span>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+            {displayError && (
+              <div>
+                <h2 className="text-black text-left font-bold text-xl">Error</h2>
+                <span className={styles.errorMessage}>{displayError}</span>
+              </div>
+            )}
+          </>
+        )}
+      </form>
     </div>
   );
 }

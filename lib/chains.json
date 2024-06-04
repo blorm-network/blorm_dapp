@@ -1,52 +1,107 @@
 {
     "solana": {
-        "denom": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
-        "chainId": "solana",
-        "originDenom": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
-        "originChainId": "solana",
-        "trace": "",
-        "isCw20": false,
-        "isEvm": false,
-        "isSvm": true,
-        "symbol": "USDC",
-        "name": "USD Coin",
-        "logoUri": "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v/logo.png",
-        "decimals": 6,
-        "coingeckoId": "usd-coin",
-        "recommendedSymbol": "USDC"
+      "denom": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "chainID": "solana",
+      "chainName": "Solana",
+      "chainType": "svm",
+      "cosmosModuleSupport": null,
+      "cosmosSDKVersion": null,
+      "feeAssets": [
+        {
+          "denom": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+          "gasPrice": {
+            "average": "0.00001",
+            "high": "0.00002",
+            "low": "0.000005"
+          }
+        }
+      ],
+      "isTestnet": false,
+      "logoURI": "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v/logo.png",
+      "modules": null,
+      "pfmEnabled": false,
+      "supportsMemo": false,
+      "originDenom": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "originChainID": "solana",
+      "trace": "",
+      "isCw20": false,
+      "isEvm": false,
+      "isSvm": true,
+      "symbol": "USDC",
+      "name": "USD Coin",
+      "decimals": 6,
+      "coingeckoID": "usd-coin",
+      "recommendedSymbol": "USDC"
     },
     "1": {
-        "denom": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
-        "chainId": "1",
-        "originDenom": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
-        "originChainId": "1",
-        "trace": "",
-        "isCw20": false,
-        "isEvm": true,
-        "isSvm": false,
-        "symbol": "USDC",
-        "name": "USD Coin",
-        "logoUri": "https://raw.githubusercontent.com/axelarnetwork/axelar-configs/main/images/tokens/usdc.svg",
-        "decimals": 6,
-        "tokenContract": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
-        "coingeckoId": "usd-coin",
-        "recommendedSymbol": "USDC"
+      "denom": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+      "chainID": "1",
+      "chainName": "ethereum",
+      "chainType": "evm",
+      "cosmosModuleSupport": null,
+      "cosmosSDKVersion": null,
+      "feeAssets": [
+        {
+          "denom": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+          "gasPrice": {
+            "average": "50",
+            "high": "100",
+            "low": "20"
+          }
+        }
+      ],
+      "isTestnet": false,
+      "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-configs/main/images/tokens/usdc.svg",
+      "modules": null,
+      "pfmEnabled": false,
+      "supportsMemo": false,
+      "originDenom": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+      "originChainID": "1",
+      "trace": "",
+      "isCw20": false,
+      "isEvm": true,
+      "isSvm": false,
+      "symbol": "USDC",
+      "name": "USD Coin",
+      "decimals": 6,
+      "tokenContract": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+      "coingeckoID": "usd-coin",
+      "recommendedSymbol": "USDC"
     },
     "8453": {
-        "denom": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
-        "chainId": "8453",
-        "originDenom": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
-        "originChainId": "8453",
-        "trace": "",
-        "isCw20": false,
-        "isEvm": true,
-        "isSvm": false,
-        "symbol": "USDC",
-        "name": "Base USDC",
-        "logoUri": "https://raw.githubusercontent.com/cosmostation/chainlist/main/chain/ethereum/asset/usdc.png",
-        "decimals": 6,
-        "tokenContract": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
-        "coingeckoId": "usd-coin",
-        "recommendedSymbol": "USDC"
+      "denom": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "chainID": "8453",
+      "chainName": "base",
+      "chainType": "evm",
+      "cosmosModuleSupport": null,
+      "cosmosSDKVersion": null,
+      "feeAssets": [
+        {
+          "denom": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+          "gasPrice": {
+            "average": "0.1",
+            "high": "0.2",
+            "low": "0.05"
+          }
+        }
+      ],
+      "isTestnet": false,
+      "logoURI": "https://raw.githubusercontent.com/cosmostation/chainlist/main/chain/ethereum/asset/usdc.png",
+      "modules": null,
+      "pfmEnabled": false,
+      "supportsMemo": false,
+      "originDenom": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "originChainID": "8453",
+      "trace": "",
+      "isCw20": false,
+      "isEvm": true,
+      "isSvm": false,
+      "symbol": "USDC",
+      "name": "Base USDC",
+      "decimals": 6,
+      "tokenContract": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "coingeckoID": "usd-coin",
+      "recommendedSymbol": "USDC"
     }
-}
+  }
+  

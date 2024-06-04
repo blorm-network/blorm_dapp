@@ -8,6 +8,8 @@ import { auth, db } from '../lib/firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import { v4 as uuid } from 'uuid';
 import Head from 'next/head';
+import bg3 from '../public/background-3.png'
+import Link from 'next/link';
 
 export default function Home() {
   const [email, setEmail] = useState('');
@@ -57,11 +59,9 @@ export default function Home() {
         </div>
       </div>
 
-      <hr style={{ width: '50%', backgroundColor: 'grey' }} />
-
-      <div className="h-screen w-screen bg-white flex flex-col items-center justify-evenly">
+      <div className={styles.section2}>
         <h1 className={styles.section2heading}>HOW BLORM WORKS</h1>
-        <img src="/blormdiagram.png" style={{ height: 'auto', width: '30vw' }} alt="diagram" className={styles.diagram} />
+        <img src="/howblormworks.png" style={{ height: 'auto', width: '80vw' }} alt="diagram" className={styles.diagram} />
       </div>
 
       <div style={{
@@ -71,11 +71,12 @@ export default function Home() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        background: 'radial-gradient(circle, #1A3F2D 0%, #12231D 100%)'
+        backgroundImage: `url(${bg3.src})`,
+        backgroundSize: 'cover',
       }}>
         <h1 className={styles.section3heading}>WELCOME TO<br />BLORM</h1>
         <h1 className={styles.section3subheading}>JOIN THE WAITLIST TO BE ONE OF THE FIRST TO<br />BLORM INFORMATION ONCHAIN.</h1>
-        <form onSubmit={handleSubscribe} className={styles.waitlistInput}>
+        <form onSubmit={handleSubscribe} className={styles.waitlistInputMessage}>
           <input className={styles.waitlistInput} value={email} onChange={(e) => setEmail(e.target.value)} required placeholder='EMAIL ADDRESS →'></input>
           <button type="submit" className="hidden flex items-center justify-center p-2 bg-blue-500 text-white rounded-full hover:bg-blue-700">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -85,7 +86,13 @@ export default function Home() {
           <p>{message}</p>
         </form>
         <div className={styles.section3linkcontainer}>
-          <span className={styles.section3link}>TWITTER</span>
+          <Link href="https://x.com">
+            <img
+              className={styles.xlogo}
+              src="/x-logo-white.png"
+              alt="x logo"
+            />
+          </Link>
         </div>
       </div>
       <Footer />

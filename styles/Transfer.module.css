@@ -4,18 +4,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: fit-content;
     background-image: url('/swap-background.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;  
-    height:fit-content;
-    min-height: 100vh;
-}
-
-.main {
-    text-align: center;
-    margin-top: 1.25rem;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
 }
 
 .mainHeading {
@@ -26,16 +21,10 @@
     line-height: 0;
 }
 
-.subHeading {
-    font-size: 2rem;
-    color: white;
-    /* Indigo Noir */
-}
-
-.description {
-    font-size: 1.2rem;
-    margin: 1.5rem 0;
-    color: #666;
+.swapFormContainer {
+    margin-top: 5vh;
+    width: 100vw;
+    display: flex;
     align-items: center;
-    text-align: center;
+    justify-content: center; 
 }

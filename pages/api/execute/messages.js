@@ -51,18 +51,18 @@ export default async function handler(req, res) {
       delete routeFormatted.swap_price_impact_percent;
       routeFormatted.address_list = routeFormatted["addresses"]["address_list"];
       delete routeFormatted.addresses;
-      // console.log('routeFormatted:', routeFormatted);
       delete routeFormatted.is_c_w20;
+      delete routeFormatted.estimated_fees;
 
       routeFormatted.slippage_tolerance_percent = "1";
 
-      // console.log('routeFormatted:', routeFormatted);
+      console.log('routeFormatted:', routeFormatted);
 
       const { data } = await sdk.getMsgsV2(routeFormatted);
       res.status(200).json(data);
     } catch (error) {
       console.log('Error:', error);
-      res.status(500).json({ error: error || 'Internal server error' });
+      res.status(500).json({ error: error.message || 'Internal server error' });
     }
   } else {
     res.status(405).json({ error: 'Method not allowed' });
