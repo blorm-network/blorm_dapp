@@ -94,8 +94,11 @@ export default function Home() {
             />
           </Link>
         </div>
+        <hr></hr>
+        <br></br>
+        <Footer />
       </div>
-      <Footer />
+
     </div>
   </>
   );
